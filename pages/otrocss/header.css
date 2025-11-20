@@ -1,0 +1,19 @@
+
+html{
+    --fontTitle:"Montserrat", sans-serif; 
+    --fontText: "Nunito Sans", sans-serif;
+    --bgColor:  #FFF9F2;
+    --primaryColor:  #FFD275;
+    --secondaryColor: #5DC1B9;
+    --bottonColor: #FF8360;
+}
+a {
+    color: #000 !important;
+    text-decoration: none !important;
+    font-family: var(--fontTitle);
+}
+
+a:hover {
+    color: var(--secondaryColor)!important;
+}
+
