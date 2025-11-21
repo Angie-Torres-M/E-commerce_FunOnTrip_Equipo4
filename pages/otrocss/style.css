@@ -1,8 +1,7 @@
-@import url("./carrusel.css");
 @import url("./header.css");
 @import url("./footer.css");
-@import url("./agencia.css");
-@import url("./valores.css");
-@import url("./cards.css");
-@import url("./productos_y_promociones.css");
+@import url("./aboutStyles/agencia.css");
+@import url("./aboutStyles/valores.css");
+@import url("./aboutStyles/teamCards.css");
+@import url("./productos/productos_y_promociones.css");
 

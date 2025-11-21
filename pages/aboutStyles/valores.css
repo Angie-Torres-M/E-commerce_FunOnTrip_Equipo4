@@ -1,0 +1,33 @@
+.valores-box{
+display: grid;
+grid-template-columns: 40% 60%;
+    border: 3px solid #000;
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 900px;
+}
+
+.valores-left{
+    background-color: #f4c542;
+    padding: 40px;
+    text-align: center;
+}
+.titulo{
+    font-weight: 700;
+    font-size: 2rem;
+}
+.texto-descripcion{
+    margin-top: 20px;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+ .valores-right{
+ background-color: #fff;
+    padding: 40px 50px;
+ }
+
+ .valor-item{
+ font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+ }

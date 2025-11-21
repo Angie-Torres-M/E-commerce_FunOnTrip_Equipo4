@@ -1,3 +1,5 @@
+
+
 // Inicializar los componentes html
 // Incluir fragmentos HTML
 async function includeHTML(selector, url) {
@@ -13,19 +15,23 @@ async function includeHTML(selector, url) {
   host.innerHTML = await res.text();
 }
 
+
+
 document.addEventListener("DOMContentLoaded", async () => {
-  // 1) Inserta HEADER
+  // 1) Header y footer
   await includeHTML("#site-header", "./header.html");
-
-  // 2) Inserta FOOTER
   await includeHTML("#site-footer", "./footer.html");
-//3) Inserta secciones de about
- await includeHTML("#site-agencia", "./sections/about/agencia.html");
-await includeHTML("#site-valores", "./sections/about/valores.html");
-await includeHTML("#site-cards", "./sections/about/cards.html");
 
-//4) Inserta secciones de productos y promociones previstas para el futuro 
+  // 2) Secciones de about
+  await includeHTML("#site-agencia", "./sections/about/agencia.html");
+  await includeHTML("#site-valores", "./sections/about/valores.html");
+  await includeHTML("#site-teamCards", "./sections/about/teamCards.html");
 
-await includeHTML("#site-productos_y_promociones", "./sections/productos/productos_y_promociones.html");
+  // 3) Secciones de productos
+  await includeHTML("#site-productos_y_promociones", "./sections/productos/productos_y_promociones.html");
 
-  });
+  // 👇 aquí ya existen las cards en el DOM
+  if (typeof initTeamCards === "function") {
+    initTeamCards();
+  }
+});

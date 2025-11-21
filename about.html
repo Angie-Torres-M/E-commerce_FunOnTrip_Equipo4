@@ -7,7 +7,7 @@
   <!-- Configura el conjunto de caracteres -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Hace la página responsive -->
-  <title>FuonOnTrip</title>
+  <title>Conocenos - FuonOnTrip</title>
   <!-- Título que aparece en la pestaña -->
 
   <!-- Carga anticipada de fuentes de Google para mejorar rendimiento -->
@@ -24,6 +24,7 @@
 
   <!-- Icono que aparece en la pestaña (favicon) -->
   <link rel="icon" type="image/jpg" href="./images/funOnLog.jpg" />
+
 </head>
 
 <body>
@@ -39,10 +40,10 @@
     <div id="site-agencia"></div>
 
     <!-- Seccion Valores-->
- <div id="site-valores"></div>
+    <div id="site-valores"></div>
 
     <!-- Seccion Cards-->
-    <div id="site-cards"></div>
+    <div id="site-teamCards"></div>
 
 
 
@@ -50,25 +51,26 @@
 
 
 
-  <!-- Contenedor donde se insertará el footer mediante JS -->
-  <div id="site-footer"></div>
+< <div id="site-footer"></div>
 
-  <!-- Script de Bootstrap para funcionalidad interactiva -->
+  <!-- Script de Bootstrap -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Bootstrap JS con integridad y CORS (versión duplicada pero funcional) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-    crossorigin="anonymous"></script>
-
-
-  <!-- Lógica del carrusel y sección Quiénes Somos -->
+  <!-- Lógica de includes (header, agencia, valores, cards, productos) -->
   <script src="./scripts/main.js"></script>
 
+  <!-- Lógica específica de las tarjetas -->
+  <script src="./scripts/about/teamCards.js"></script>
 
-
-  <!-- Archivo CSS principal del sitio -->
+  <!-- Estilos -->
   <link rel="stylesheet" href="./pages/otrocss/style.css" />
-</body>
+  <link rel="stylesheet" href="./pages/aboutStyles/teamCards.css" />
 
+
+  <link rel="stylesheet" href="./pages/otrocss/style.css" />
+<link rel="stylesheet" href="./pages/aboutStyles/teamCards.css" />
+
+
+</body>
 </html>
+
