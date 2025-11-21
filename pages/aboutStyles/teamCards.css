@@ -13,6 +13,7 @@
   height: 360px; /* Altura fija para que no se mueva al voltear */
   perspective: 1000px;
   margin: auto;
+  border: none;
 }
 
 .card-inner {
@@ -100,14 +101,10 @@
   margin: 6px 0 12px;
   font-size: 14px;
   text-decoration: none;
-  color: #0a66c2;
+  color: #0a66c2 !important;
   font-weight: 600;
-  transition: opacity 0.2s ease;
-  transition: all 0.3 ease;
+  transition: all 0.3s ease;
 
-  &:hover {
-    opacity: 0.7;
-  }
   &:active {
     transform: scale(0.9);
   }
