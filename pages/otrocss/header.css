@@ -1,4 +1,8 @@
-
+/* ===========================
+   VARIABLES GLOBALES DEL TEMA
+   Aquí se definen las fuentes y colores
+   que usará todo el sitio FunOnTrip.
+=========================== */
 html{
     --fontTitle:"Montserrat", sans-serif; 
     --fontText: "Nunito Sans", sans-serif;
@@ -7,6 +11,11 @@ html{
     --secondaryColor: #5DC1B9;
     --bottonColor: #FF8360;
 }
+
+/* ===========================
+   ESTILOS GENERALES DE ENLACES
+   Controlan color y comportamiento del hover
+=========================== */
 a {
     color: #000 !important;
     text-decoration: none !important;
@@ -17,3 +26,46 @@ a:hover {
     color: var(--secondaryColor)!important;
 }
 
+/* ===========================
+   LÍNEA DE SEPARACIÓN BAJO EL HEADER
+   Una línea amarilla fija que aparece justo
+   debajo del header como detalle visual.
+=========================== */
+.header-separador {
+    width: 100%;
+    height: 2px;
+    background-color: #FFD275;
+    position: fixed;
+    top: 85px;
+    z-index: 999;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+/* ===========================
+   HEADER: VERSIONES STICKY Y FIXED
+   .header → se pega arriba solo al hacer scroll
+   .header-fijo → permanece fijo siempre
+=========================== */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: white;
+}
+
+.header-fijo {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: #ffffff;
+}
+
+/* ===========================
+   ESPACIADO DEL BODY
+   Evita que el contenido se esconda
+   debajo del header fijo.
+=========================== */
+body {
+    padding-top: 80px;
+}

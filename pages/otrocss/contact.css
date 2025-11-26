@@ -1,0 +1,132 @@
+/* ===========================
+   VARIABLES GLOBALES
+=========================== */
+html {
+    --fontTitle: "Montserrat", sans-serif;
+    --fontText: "Nunito Sans", sans-serif;
+    --primaryColor: #FFD275;
+    --secondaryColor: #5DC1B9;
+    --bottonColor: #FF8360;
+}
+
+/* ===========================
+   TÍTULO
+=========================== */
+.titulo-contacto {
+    font-family: var(--fontTitle);
+    font-weight: 700;
+    font-size: 2.3rem;
+    text-align: center;
+    border-bottom: 3px solid var(--primaryColor);
+    display: inline-block;
+    padding-bottom: 8px;
+    color: #222;
+    margin-bottom: 2rem;
+}
+
+/* ===========================
+   COLUMNA IZQUIERDA: FORMULARIO
+=========================== */
+.formulario-columna {
+    padding-right: 2rem;
+    font-family: var(--fontText);
+}
+
+.formulario-columna input,
+.formulario-columna textarea {
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* ===========================
+   COLUMNA DERECHA: INFO + IMAGEN
+=========================== */
+.contenido-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 3rem;
+    border-left: 1px solid #e0e0e0; /* línea separadora */
+    font-family: var(--fontText);
+}
+
+/* Bloque de info (dirección, teléfono...) */
+.info-contacto {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+/* Cada fila */
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+/* Iconos */
+.info-icon {
+    width: 28px;
+    height: auto;
+    flex-shrink: 0;
+    margin-top: 4px;
+}
+
+/* Textos */
+.info-texto h3 {
+    font-size: 1rem;
+    margin: 0;
+    font-weight: 700;
+    color: #222;
+}
+
+.info-texto p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+/* ===========================
+   IMAGEN DERECHA
+=========================== */
+.imagen-contacto img {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 40px;
+    object-fit: cover;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+/* Laptop / Desktop ancho */
+@media (min-width: 992px) {
+    .formulario-columna {
+        padding-left: 3rem;
+    }
+}
+
+/* Tablets y móviles */
+@media (max-width: 991.98px) {
+    .contenido-info {
+        border-left: none;
+        padding: 2rem 1rem 0 1rem;
+        align-items: flex-start;
+    }
+
+    .imagen-contacto img {
+        max-width: 100%;
+        margin: 1.5rem auto 0 auto;
+    }
+}
+
+/* Ajuste adicional mobile */
+@media (max-width: 992px) {
+    .imagen-contacto {
+        margin-top: 2rem;
+    }
+}
