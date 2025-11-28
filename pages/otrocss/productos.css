@@ -1,0 +1,44 @@
+
+
+.productos-grid {
+  display: grid;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.producto-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.producto-imagen {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.producto-info {
+  padding: 1.5rem;
+}
+
+.producto-titulo {
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.producto-precio {
+  font-weight: 800;
+  color: #ffd275;
+  margin-bottom: 1rem;
+}
+
+.btn-agregar {
+  width: 100%;
+  padding: 0.75rem;
+  background: #ffd275;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
