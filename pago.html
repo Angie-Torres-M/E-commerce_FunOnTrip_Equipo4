@@ -51,6 +51,82 @@
           <h4>IVA incluido (99,99 MXN)</h4>
         </div>
       </div>
+      <form class="pago__form">
+        <div>
+          <label for="email"
+            >Tu correo electronico
+            <input type="email" placeholder="tu@ejemplo.com" id="email" />
+          </label>
+          <label for="email"
+            >Confirma tu correo electronico
+            <input type="email-2" placeholder="tu@ejemplo.com" id="email-2" />
+          </label>
+          <label for="name"
+            >Tu nombre completo
+            <input type="text" placeholder="Tu nombre completo" id="name" />
+          </label>
+          <label for="numero"
+            >Número
+            <input type="email-2" placeholder="Tu número" id="numero" />
+          </label>
+        </div>
+        <div class="pago__container-buttons">
+          <button>
+            <img src="./images/card.png" alt="" class="pago__icon-1" />Crédito/
+            Débito</button
+          ><button>
+            <img src="./images/oxxo.png" alt="" class="pago__icon-2" /></button
+          ><button>
+            <img
+              src="./images/mercado.png"
+              alt=""
+              class="pago__icon-3"
+            />Mercado Pago
+          </button>
+        </div>
+        <label for="number-tarjeta">
+          Número de tarjeta
+          <input
+            type="number"
+            placeholder="0000 0000 0000 0000"
+            id="number-tarjeta"
+          />
+        </label>
+        <div class="pago__container-date">
+          <label for="date"
+            >Fecha de vencimiento
+            <input type="date" placeholder="MM / AA" id="date" />
+          </label>
+          <label for="cvv"
+            >CVV
+            <input type="number" placeholder="Cód. de 3 o 4 dígitos" id="cvv" />
+          </label>
+        </div>
+        <label for="name-tarjeta">
+          Nombre del titular
+          <input
+            type="number"
+            placeholder="Introduce el nombre impreso en la tarjeta"
+            id="name-tarjeta"
+          />
+        </label>
+        <div class="pago__details">Detalles de la compra</div>
+        <div class="pago__details">
+          <div class="pago__details-text">
+            <h3>Paris</h3>
+            <h4>900,00 MXN</h4>
+          </div>
+          <div class="pago__details-text">
+            <h3>IVA</h3>
+            <h4>+ 99,99 MXN</h4>
+          </div>
+        </div>
+        <div class="pago__details-text" style="margin: 32px 0 60px 0">
+          <h3>Total a pagar</h3>
+          <h4>999,99 MXN</h4>
+        </div>
+        <button class="pago__button">Comprar ahora</button>
+      </form>
     </main>
 
     <!-- Footer -->

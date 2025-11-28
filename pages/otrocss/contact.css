@@ -168,12 +168,28 @@
 }
 
 @media (max-width: 645px) {
+  .contacto {
+    padding: 15px;
+  }
+
   .contacto__container {
     div {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
+    }
+  }
+
+  .contacto__form {
+    max-width: 470px;
+
+    input {
+      max-width: 470px;
+    }
+
+    textarea {
+      max-width: 470px;
     }
   }
 

@@ -7,6 +7,7 @@
 .pago__container-card {
   width: 100%;
   display: flex;
+  margin-bottom: 62px;
 
   img {
     max-width: 385px;
@@ -29,5 +30,356 @@
   h3 {
     font-size: 48px;
     margin-bottom: 15px;
+  }
+}
+
+.pago__form {
+  width: 100%;
+
+  div {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 54px;
+    column-gap: 80px;
+  }
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-size: 32px;
+    font-weight: 600;
+    gap: 10px;
+  }
+
+  input {
+    padding: 22px 28px;
+    font-size: 28px;
+    border-radius: 20px;
+    width: 100%;
+  }
+}
+
+.pago__container-buttons {
+  display: flex !important;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 62px;
+  margin-bottom: 48px;
+
+  button {
+    width: 362px;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    font-size: 24px;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.pago__container-date {
+  margin: 37px 0 37px 0;
+}
+
+.pago__details {
+  font-size: 32px;
+  color: #6f6f6f;
+  font-weight: 600;
+  margin-top: 50px;
+  border-bottom: #6f6f6f 3px solid;
+  padding-bottom: 30px;
+  display: flex !important;
+  flex-direction: column;
+  row-gap: 14px !important;
+}
+
+.pago__details-text {
+  display: flex !important;
+  justify-content: space-between;
+  font-size: 32px;
+  color: #6f6f6f;
+
+  h4 {
+    color: #000;
+  }
+}
+
+.pago__button {
+  width: 100%;
+  border: none;
+  padding: 19px 0 19px 0;
+  font-size: 32px;
+  color: #fff;
+  font-weight: 600;
+  background-color: #24ac2f;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.pago__icon-1 {
+  width: 72px;
+}
+
+.pago__icon-2 {
+  width: 137px;
+}
+
+.pago__icon-3 {
+  width: 105px;
+}
+
+@media (max-width: 1170px) {
+  .pago__form {
+    label {
+      font-size: 25px;
+      gap: 8px;
+    }
+
+    input {
+      padding: 20px 26px;
+      font-size: 24px;
+    }
+  }
+
+  .pago__container-buttons {
+    button {
+      font-size: 14px;
+    }
+  }
+
+  .pago__icon-1 {
+    width: 42px;
+  }
+
+  .pago__icon-2 {
+    width: 107px;
+  }
+
+  .pago__icon-3 {
+    width: 75px;
+  }
+}
+
+@media (max-width: 960px) {
+  .pago__container-card {
+    width: 100%;
+    display: flex;
+    margin-bottom: 62px;
+
+    img {
+      max-width: 355px;
+    }
+
+    h2 {
+      font-size: 45px;
+      margin-bottom: 10px;
+    }
+
+    p,
+    h4 {
+      font-size: 22px;
+    }
+
+    h3 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+  }
+
+  .pago__form {
+    label {
+      font-size: 20px;
+      gap: 5px;
+    }
+
+    input {
+      padding: 15px 21px;
+      font-size: 18px;
+    }
+
+    div {
+      row-gap: 34px;
+      column-gap: 60px;
+    }
+  }
+
+  .pago__details-text {
+    font-size: 20px;
+  }
+
+  .pago__details {
+    font-size: 20px;
+  }
+
+  .pago__icon-1 {
+    width: 32px;
+  }
+
+  .pago__icon-2 {
+    width: 77px;
+  }
+
+  .pago__icon-3 {
+    width: 45px;
+  }
+
+  .pago__button {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 790px) {
+  .pago {
+    /* Reducir el padding horizontal para usar más espacio */
+    padding: 30px 20px;
+  }
+
+  /* Formulario: Pasa de dos columnas a una sola columna */
+  .pago__form div {
+    grid-template-columns: 1fr; /* Una columna */
+    row-gap: 30px; /* Reducir el espacio */
+    column-gap: 0;
+  }
+
+  .pago__form label {
+    font-size: 18px;
+    gap: 5px;
+  }
+
+  .pago__form input {
+    font-size: 16px;
+    padding: 12px 15px;
+  }
+
+  /* Botones de Navegación */
+  .pago__container-buttons {
+    flex-direction: column; /* Pasa a ser vertical */
+    margin-top: 40px;
+    margin-bottom: 30px;
+    gap: 15px;
+  }
+
+  .pago__container-buttons button {
+    width: 100%; /* Ocupa el ancho completo */
+    font-size: 16px;
+    padding: 15px 0;
+  }
+
+  .pago__icon-1,
+  .pago__icon-2,
+  .pago__icon-3 {
+    width: auto; /* Dejamos que CSS ajuste el tamaño */
+    height: 24px; /* O un tamaño fijo pequeño */
+  }
+
+  /* Detalles y Botón de Pago */
+  .pago__details,
+  .pago__details-text {
+    font-size: 16px;
+  }
+
+  .pago__button {
+    font-size: 24px;
+    padding: 15px 0;
+  }
+}
+
+@media (max-width: 320px) {
+  .pago {
+    /* Padding mínimo para los bordes */
+    padding: 20px 10px;
+  }
+
+  .pago__container-card img {
+    /* Reducir aún más la imagen */
+    max-width: 150px;
+  }
+
+  .pago__container-card h2 {
+    font-size: 24px;
+  }
+
+  .pago__container-card h3 {
+    font-size: 20px;
+  }
+
+  .pago__container-card p,
+  .pago__container-card h4 {
+    font-size: 16px;
+  }
+
+  .pago__details,
+  .pago__details-text {
+    font-size: 14px;
+  }
+
+  .pago__button {
+    font-size: 18px;
+    padding: 10px 0;
+  }
+
+  .pago__container-date {
+    margin: 20px 0;
+  }
+}
+
+@media (max-width: 630px) {
+  .pago {
+    /* Padding mínimo para los bordes */
+    padding: 20px 10px;
+  }
+
+  .pago__container-card {
+    flex-direction: column;
+  }
+
+  .pago__container-card img {
+    /* Reducir aún más la imagen */
+    max-width: 350px;
+    margin: auto;
+  }
+
+  .pago__container-card h2 {
+    font-size: 34px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+
+  .pago__container-card h3 {
+    font-size: 25px;
+    text-align: center;
+  }
+
+  .pago__container-card p,
+  .pago__container-card h4 {
+    font-size: 21px;
+    text-align: center;
+  }
+
+  .pago__details,
+  .pago__details-text {
+    font-size: 14px;
+  }
+
+  .pago__button {
+    font-size: 18px;
+    padding: 10px 0;
+  }
+
+  .pago__container-date {
+    margin: 20px 0;
   }
 }
