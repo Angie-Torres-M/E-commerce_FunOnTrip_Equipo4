@@ -1,0 +1,10 @@
+/* Ajuste para que el scroll respete el fixed-header */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px; /* ajusta según la altura real de tu navbar */
+}
+
+section,
+[id] {
+  scroll-margin-top: 100px;
+}
