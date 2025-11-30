@@ -1,0 +1,72 @@
+/* Carrusel*/
+.carrusel-img {
+    height: 350px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+/* Flechas carrusel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.8); 
+    background-size: 60%; 
+    border-radius: 50%;
+    padding: 20px; 
+}
+
+.carousel-control-prev-icon:hover,
+.carousel-control-next-icon:hover {
+    background-color: #ffc107; 
+}
+
+/* Tarjetas de viaje */
+.destino-card,
+.promo-card {
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    transition: transform .3s, box-shadow .3s, background-color .3s;
+}
+
+/* Efecto  */
+.destino-card:hover,
+.promo-card:hover {
+    transform: scale(1.05);
+    background-color: #ffc107; 
+    box-shadow: 0 0 20px #ffc107 (255, 193, 7, 0.6);
+}
+
+/* Imagen de las tarjetas */
+.destino-card img,
+.promo-card img {
+    height: 170px;
+    object-fit: cover;
+}
+
+.promo-card {
+    background: transparent;
+}
+
+/* Título */
+.card-body h5 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+/* Botones rojos */
+.btn-danger,
+.btn-warning {
+    background-color: #dc3545 !important; 
+    border-color: #dc3545 !important;
+    color: white !important;
+    font-weight: 500;
+}
+
+/* Hover Amarillo */
+.btn-danger:hover,
+.btn-warning:hover {
+    background-color: #ffc107 !important; 
+    border-color: #ffc107 !important;
+    color: black !important;
+    transform: scale(1.05);
+    transition: all .2s ease-in-out;
+}
