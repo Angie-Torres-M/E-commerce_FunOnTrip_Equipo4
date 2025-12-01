@@ -55,25 +55,46 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
   });
 
-  // === HEADER QUE SE ESCONDE AL BAJAR Y APARECE AL SUBIR ===
-document.addEventListener("DOMContentLoaded", () => {
-  const header = document.querySelector(".header-dinamico");
-  if (!header) return;
 
-  let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
+// Heder dinamico
+function initHeader() {
+    const header = document.querySelector(".header-dinamico");
+    if (header) {
+        let lastScroll = 0;
 
-  window.addEventListener("scroll", () => {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+        window.addEventListener("scroll", () => {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-    // Si baja y ya pasó un poco del top → ocultar
-    if (currentScroll > lastScrollY && currentScroll > 80) {
-      header.classList.add("header-hidden");
-    } else {
-      // Si sube → mostrar
-      header.classList.remove("header-hidden");
+            if (currentScroll > lastScroll && currentScroll > 80) {
+                header.classList.add("header-hidden");
+            } else {
+                header.classList.remove("header-hidden");
+            }
+
+            lastScroll = currentScroll <= 0 ? 0 : currentScroll;
+        });
     }
 
-    // Evitar valores negativos
-    lastScrollY = currentScroll <= 0 ? 0 : currentScroll;
-  });
+    const toggle = document.getElementById("navToggle");
+    const menu = document.getElementById("navMenu");
+
+    if (toggle && menu) {
+        toggle.addEventListener("click", () => {
+            menu.classList.toggle("active");
+        });
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const headerContainer = document.getElementById("site-header");
+    if (!headerContainer) return;
+
+    fetch("./header.html")
+        .then(res => res.text())
+        .then(html => {
+            headerContainer.innerHTML = html;
+            initHeader();    // Muy importante: aquí ya existen navToggle y navMenu
+        })
+        .catch(err => console.error("Error al cargar el header:", err));
 });
+
