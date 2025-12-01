@@ -34,7 +34,7 @@ a {
   color: #000 !important;
   text-decoration: none !important;
   font-family: var(--fontTitle);
-  size: ;
+  
 }
 
 a:hover {
@@ -112,10 +112,7 @@ body {
    - Fila 1: brand + redes
    - Fila 2: hamburguesa + carrito + perfil
 =========================== */
-.mobile-header-top,
-.mobile-header-bottom {
-  /* ya son flex vía HTML (d-flex), aquí solo dejamos por si acaso */
-}
+
 
 .social-icons-mobile i {
   font-size: 1.4rem;
