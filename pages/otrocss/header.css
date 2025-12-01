@@ -1,114 +1,190 @@
 /* ===========================
    VARIABLES GLOBALES DEL TEMA
-   Aquí se definen las fuentes y colores
-   que usará todo el sitio FunOnTrip.
 =========================== */
 html{
-    --fontTitle:"Montserrat", sans-serif; 
-    --fontText: "Nunito Sans", sans-serif;
-    --bgColor:  #FFF9F2;
-    --primaryColor:  #FFD275;
-    --secondaryColor: #5DC1B9;
-    --bottonColor: #FF8360;
+  --fontTitle:"Montserrat", sans-serif; 
+  --fontText: "Nunito Sans", sans-serif;
+  --bgColor:  #FFF9F2;
+  --primaryColor:  #FFD275;
+  --secondaryColor: #5DC1B9;
+  --bottonColor: #FF8360;
 }
 
 /* ===========================
-   LOGO FUNONTRIP — Más grande y estilizado
+   LOGO FUNONTRIP
 =========================== */
-
 .brand-logo {
-    font-size: 1.2rem;        /* tamaño más grande */
-    font-weight: 600;         /* más grueso */
-    letter-spacing: 0.5px;    /* un toque más elegante */
-    font-family: var(--fontTitle);
-    color: #000 !important;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: var(--fontTitle);
+  color: #000 !important;
 }
 
 .brand-logo:hover {
-    color: var(--secondaryColor) !important;
-    transition: 0.2s ease-in-out;
-    cursor: pointer;
+  color: var(--secondaryColor) !important;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-
 /* ===========================
-   ESTILOS GENERALES DE ENLACES
-   Controlan color y comportamiento del hover
+   ENLACES
 =========================== */
 a {
-    color: #000 !important;
-    text-decoration: none !important;
-    font-family: var(--fontTitle);
+  color: #000 !important;
+  text-decoration: none !important;
+  font-family: var(--fontTitle);
+  size: ;
 }
 
 a:hover {
-    color: var(--secondaryColor)!important;
+  color: var(--secondaryColor)!important;
 }
 
-
 /* ===========================
-   NAVBAR — Estilo de enlaces principales
-   Aumenta tamaño, grosor y espacio entre opciones
+   NAVBAR — enlaces principales
 =========================== */
 
+
 .navbar-nav .nav-link {
-    font-size: 1.15rem;       /* tamaño más grande */
-    font-weight: 600;         /* un poco más grueso */
-    padding: 0.6rem 1rem;     /* más aire */
-    font-family: var(--fontTitle);
-    color: #000 !important;
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  font-family: var(--fontTitle);
+  color: #000 !important;
 }
 
 .navbar-nav .nav-link:hover {
-    color: var(--secondaryColor) !important;
-    transition: 0.2s ease-in-out;
+  color: var(--secondaryColor) !important;
+  transition: 0.2s ease-in-out;
 }
 
 .navbar-nav .nav-item {
-    margin: 0 4px;            /* pequeño espaciado entre elementos */
+  margin: 0 4px;
 }
 
-
 /* ===========================
-   LÍNEA DE SEPARACIÓN BAJO EL HEADER
-   Una línea amarilla fija que aparece justo
-   debajo del header como detalle visual.
+   LÍNEA SEPARADORA (si la usas en otras páginas)
 =========================== */
 .header-separador {
-    width: 100%;
-    height: 2px;
-    background-color: #FFD275;
-    position: fixed;
-    top: 85px;
-    z-index: 999;
-    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+  width: 100%;
+  height: 2px;
+  background-color: #FFD275;
+  position: fixed;
+  top: 85px;
+  z-index: 999;
+  box-shadow: 0 2px 3px rgba(0,0,0,0.1);
 }
 
 /* ===========================
-   HEADER: VERSIONES STICKY Y FIXED
-   .header → se pega arriba solo al hacer scroll
-   .header-fijo → permanece fijo siempre
+   HEADER DINÁMICO
 =========================== */
-.header {
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    background: white;
+.header-dinamico {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  background-color: #ffffff;
+  transition: transform 0.3s ease;
 }
 
-.header-fijo {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-    background-color: #ffffff;
+/* se oculta al bajar */
+.header-dinamico.header-hidden {
+  transform: translateY(-100%);
 }
 
 /* ===========================
    ESPACIADO DEL BODY
-   Evita que el contenido se esconda
-   debajo del header fijo.
 =========================== */
 body {
-    padding-top: 80px;
+  padding-top: 80px;
+}
+
+/* ===========================
+   ICONOS DERECHA (desktop)
+=========================== */
+.header-icons i {
+  font-size: 1.4rem;
+}
+
+/* ===========================
+   MOBILE LAYOUT
+   - Fila 1: brand + redes
+   - Fila 2: hamburguesa + carrito + perfil
+=========================== */
+.mobile-header-top,
+.mobile-header-bottom {
+  /* ya son flex vía HTML (d-flex), aquí solo dejamos por si acaso */
+}
+
+.social-icons-mobile i {
+  font-size: 1.4rem;
+}
+
+.header-actions-mobile i {
+  font-size: 1.4rem;
+}
+
+/* Estilo del menú desplegable móvil */
+@media (max-width: 991.98px) {
+
+  .navbar {
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+  }
+
+  .navbar .container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .mobile-header-top {
+    margin-top: .25rem;
+  }
+
+  .navbar-collapse {
+    width: 100%;
+    background-color: #ffffff;
+    padding-bottom: 0.75rem;
+  }
+
+  .navbar-nav {
+    align-items: flex-start;
+    gap: .15rem;
+  }
+
+  .navbar-nav .nav-link {
+    padding-left: 0;
+  }
+}
+
+/* ===========================
+   DESKTOP LAYOUT
+=========================== */
+@media (min-width: 992px) {
+
+  .navbar {
+    padding-top: .4rem;
+    padding-bottom: .4rem;
+  }
+
+  .desktop-header {
+    display: flex;
+  }
+
+  .navbar-nav {
+    align-items: center;
+  }
+
+  .header-icons {
+    margin-left: 1.5rem;
+  }
+
+  /* ocultar estructuras mobile */
+  .mobile-header-top,
+  .mobile-header-bottom,
+  .navbar-collapse.d-lg-none {
+    display: none !important;
+  }
 }

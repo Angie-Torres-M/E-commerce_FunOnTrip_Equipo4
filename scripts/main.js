@@ -28,7 +28,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   await includeHTML("#site-teamCards", "./sections/about/teamCards.html");
 
   // 3) Secciones de productos
-  await includeHTML("#site-productos_y_promociones", "./sections/productos/productos_y_promociones.html");
+  await includeHTML("#site-home", "./sections/home.html");
 
   // 👇 aquí ya existen las cards en el DOM
   if (typeof initTeamCards === "function") {
@@ -54,3 +54,26 @@ document.addEventListener("DOMContentLoaded", async () => {
       }
     }
   });
+
+  // === HEADER QUE SE ESCONDE AL BAJAR Y APARECE AL SUBIR ===
+document.addEventListener("DOMContentLoaded", () => {
+  const header = document.querySelector(".header-dinamico");
+  if (!header) return;
+
+  let lastScrollY = window.pageYOffset || document.documentElement.scrollTop;
+
+  window.addEventListener("scroll", () => {
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Si baja y ya pasó un poco del top → ocultar
+    if (currentScroll > lastScrollY && currentScroll > 80) {
+      header.classList.add("header-hidden");
+    } else {
+      // Si sube → mostrar
+      header.classList.remove("header-hidden");
+    }
+
+    // Evitar valores negativos
+    lastScrollY = currentScroll <= 0 ? 0 : currentScroll;
+  });
+});

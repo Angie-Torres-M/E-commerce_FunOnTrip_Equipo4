@@ -62,3 +62,10 @@ a.btn.btn-pago:hover {
   background-color: #e3b043;
   border-color: #e3b043;
 }
+
+#carrito-container {
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+}
+

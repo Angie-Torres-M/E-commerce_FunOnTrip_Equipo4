@@ -12,6 +12,11 @@ body {
   flex-direction: column;
 }
 
+/* El contenido del carrito debe ocupar el espacio disponible */
+main {
+  flex: 1;
+}
+
 /* El header no se estira */
 #site-header {
   flex-shrink: 0;
@@ -25,7 +30,8 @@ body {
 /* El contenedor del footer siempre va al final */
 #site-footer {
   flex-shrink: 0;
-  margin-top: auto;  /* esta línea lo “pega” al final cuando hay poco contenido */
+  margin-top: auto;  /* esta línea lo “pega” al final cuando hay poco contenido */  
+  flex-shrink: 0;
 }
 
 
@@ -89,6 +95,7 @@ body {
 .email-icon-link i {
   color: #000;
   transition: 0.2s ease-in-out;
+  
 }
 
 .email-icon-link i:hover {
@@ -118,7 +125,41 @@ body {
   background-color: #e6e6e6 !important;  /* << fuerza el gris */
   padding: 0.7rem 1rem;
   font-size: 0.85rem;
+  
 }
+
+.footer-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+
+
+/* Footer full width */
+.site-footer {
+  width: 100%;
+}
+
+.contactanos {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  transition: 0.2s ease-in-out;
+}
+
+.contactanos:hover {
+  color: var(--secondaryColor) !important;
+}
+  
+
+@media (min-width: 768px) {
+  .footer-logo {
+    flex-direction: row;
+    gap: 10px;
+  }
+}
+
 
 
 /* RESPONSIVE */

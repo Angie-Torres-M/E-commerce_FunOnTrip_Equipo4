@@ -1,72 +1,230 @@
-/* Carrusel*/
+body {
+    padding-top: 50px;
+}
+
+/* ============================
+   CARRUSEL
+============================ */
+
+.carrusel-section h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+}
+
+/* Imagen del carrusel */
 .carrusel-img {
-    height: 350px;
-    object-fit: cover;
-    border-radius: 15px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 15px;
 }
 
 /* Flechas carrusel */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 0.8); 
-    background-size: 60%; 
-    border-radius: 50%;
-    padding: 20px; 
+  background-color: rgba(0, 0, 0, 0.8);
+  background-size: 60%;
+  border-radius: 50%;
+  padding: 20px;
+  transition: background-color 0.3s;
 }
 
 .carousel-control-prev-icon:hover,
 .carousel-control-next-icon:hover {
-    background-color: #ffc107; 
+  background-color: #ffc107;
 }
 
-/* Tarjetas de viaje */
+/* ============================
+   TARJETAS DE VIAJE
+============================ */
+
 .destino-card,
 .promo-card {
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid #ddd;
-    transition: transform .3s, box-shadow .3s, background-color .3s;
+  border: none;                 /* ❌ Quita el borde que crea el doble contenedor */
+  border-radius: 15px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.08);  /* sombra limpia */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+  display: block;        /* ❗ quita espacios fantasmas */
+  border-bottom: none;   /* evita doble borde */
 }
 
-/* Efecto  */
+
+/* Tarjetas separadas */    
+.card-sep {
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+  padding: 5px;
+}
+
+/* Hover general de cards */
 .destino-card:hover,
 .promo-card:hover {
-    transform: scale(1.05);
-    background-color: #ffc107; 
-    box-shadow: 0 0 20px #ffc107 (255, 193, 7, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
 }
 
 /* Imagen de las tarjetas */
 .destino-card img,
 .promo-card img {
-    height: 170px;
-    object-fit: cover;
+  height: 170px;
+  object-fit: cover;
 }
 
-.promo-card {
-    background: transparent;
-}
-
-/* Título */
 .card-body h5 {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-/* Botones rojos */
-.btn-danger,
-.btn-warning {
-    background-color: #dc3545 !important; 
-    border-color: #dc3545 !important;
-    color: white !important;
-    font-weight: 500;
+  font-size: 1.1rem;
+  font-weight: 700;
+  font-family: "Montserrat", sans-serif;
 }
 
-/* Hover Amarillo */
-.btn-danger:hover,
-.btn-warning:hover {
-    background-color: #ffc107 !important; 
+.card-price {
+  font-family: "Nunito Sans", sans-serif;
+  color: #444;
+}
+
+/* ============================
+   BOTONES
+============================ */
+
+/* Botón rojo (detalles normales) */
+.btn-fun-primary {
+  background-color: #ffc107c5;
+  border-color: #ffc107f3;
+  color: #000000;
+  font-weight: 600;
+}
+
+.btn-fun-primary:hover {
+  background-color: #ff9b7f;
+  border-color: #ff9b7f;
+  color: #000;
+  transform: scale(1.03);
+}
+
+/* Botón amarillo (promoción) */
+.btn-fun-promo {
+  background-color: #fec74a;
+  border-color: #fec74a;
+  color: #000;
+  font-weight: 600;
+}
+
+.btn-fun-promo:hover {
+  background-color: #ffdd7a;
+  border-color: #ffdd7a;
+  color: #000;
+  transform: scale(1.03);
+}
+
+.btn-active {
+    background-color: #ffc107 !important;
     border-color: #ffc107 !important;
     color: black !important;
     transform: scale(1.05);
+}
+ 
+/* ============================
+   PROMO ESPECIAL
+============================ */
+
+.promo-card {
+  background-color: #ffe29b;
+  border-color: #f1c96b;
+  position: relative;
+}
+
+.promo-badge {
+  position: absolute;
+  top: 10px;
+  left: 12px;
+  background-color: #ff8360;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 2;
+}
+
+/* ===== Texto de dudas dentro de las cards ===== */
+.card-dudas {
+    color: #555;
+    font-family: "Nunito Sans", sans-serif;
+}
+
+.link-escribenos {
+    color: #ff7575 !important;          /* Amarillo FunOnTrip */
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+
+/* ===== Enlace "Ver todos los productos" ===== */
+.link-ver-productos {
+    display: inline-block;
+    font-family: "Montserrat", sans-serif;
+    font-weight: 600;
+    color: #ff8360;
+    text-decoration: none;
+    border-bottom: 2px solid rgba(255, 131, 96, 0.4);
+    padding-bottom: 2px;
+}
+
+.link-ver-productos:hover {
+    color: #e36947;
+    border-bottom-color: #e36947;
+}
+
+
+/* ===== Botón icono para agregar al carrito ===== */
+.btn-add-cart-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background-color: #37d344; /* Coral FunOnTrip */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
     transition: all .2s ease-in-out;
+}
+
+.btn-add-cart-icon:hover {
+    background-color: #ffa68a;
+    transform: scale(1.12);
+}
+
+/* Ícono */
+.btn-add-cart-icon i {
+    pointer-events: none; /* evita que el click se quede en el icono */
+}
+
+
+/* ============================
+   RESPONSIVE
+============================ */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .carrusel-img {
+    height: 260px;
+  }
+}
+
+/* Móvil */
+@media (max-width: 576px) {
+  .carrusel-img {
+    height: 200px;
+  }
+
+  .destino-card img,
+  .promo-card img {
+    height: 150px;
+  }
 }

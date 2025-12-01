@@ -110,6 +110,19 @@
   }
 }
 
+.card {
+  perspective: 1000px;
+}
+
+.card-inner {
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
 /* --- RESPONSIVE MANTENER TU MISMO SISTEMA --- */
 @media (max-width: 1260px) {
   .cards-container {
