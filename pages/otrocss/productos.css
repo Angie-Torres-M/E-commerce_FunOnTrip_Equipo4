@@ -1,44 +1,130 @@
+/* GRID GENERAL */
 
-
-.productos-grid {
+.productos-grid,
+#productos-nacionales,
+#productos-internacionales,
+#productos-petfriendly {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 2rem;
-  margin: 2rem 0;
 }
+
+
+/* CARD PRODUCTO */
 
 .producto-card {
-  border-radius: 12px;
+  background: #fff;
+  border-radius: 14px;
   overflow: hidden;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 6px 14px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
-.producto-imagen {
+.producto-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.12);
+}
+
+
+/* IMAGEN */
+
+.producto-img-wrapper {
   width: 100%;
-  height: 200px;
+  height: 210px;
+  overflow: hidden;
+}
+
+.producto-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
+  transition: scale 0.4s ease;
 }
 
-.producto-info {
-  padding: 1.5rem;
+.producto-card:hover .producto-img {
+  scale: 1.05;
 }
 
+
+/* CONTENIDO */
+
+.producto-content {
+  padding: 1.3rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  flex-grow: 1;
+}
+
+
+/* Título */
 .producto-titulo {
+  font-size: 1.1rem;
   font-weight: 700;
   margin-bottom: 0.5rem;
+  line-height: 1.3;
+  min-height: 45px; /* Evita saltos bruscos entre cards */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.producto-precio {
-  font-weight: 800;
-  color: #ffd275;
+
+/* Descripción */
+.producto-descripcion {
+  font-size: 0.9rem;
+  color: #6c757d;
   margin-bottom: 1rem;
+  line-height: 1.4;
+  min-height: 48px; /* Mantiene alineación perfecta entre cards */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+
+/* Precio */
+.producto-precio {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #ffc04c;
+  margin: 0.5rem 0 1rem 0;
+}
+
+
+/* BOTÓN AGREGAR */
 
 .btn-agregar {
   width: 100%;
-  padding: 0.75rem;
-  background: #ffd275;
+  background-color: #ffd275;
   border: none;
+  padding: 0.75rem;
   border-radius: 8px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
+  transition: background 0.25s;
+}
+
+.btn-agregar:hover {
+  background-color: #ffbe3b;
+}
+
+.btn-agregar i {
+  margin-right: 6px;
+}
+
+
+/* SPINNER Y MENSAJES */
+
+.spinner-border {
+  width: 3rem;
+  height: 3rem;
+}
+
+.alert {
+  text-align: center;
+  font-size: 1rem;
 }
