@@ -123,6 +123,7 @@
   transform: rotateY(180deg);
 }
 
+
 /* --- RESPONSIVE MANTENER TU MISMO SISTEMA --- */
 @media (max-width: 1260px) {
   .cards-container {
