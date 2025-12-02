@@ -54,3 +54,126 @@
   cursor: pointer;
   font-size: 1rem;
 }
+/* AGREGAR AL FINAL DE TU CSS EXISTENTE */
+
+.login-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 1200px;
+    width: 100%;
+}
+
+.login-form-section {
+    padding: 50px 40px;
+}
+
+.login-form-section h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #212529;
+    margin-bottom: 10px;
+}
+
+.login-form-section p {
+    color: #6c757d;
+    margin-bottom: 30px;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 25px 0;
+}
+
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #dee2e6;
+}
+
+.divider span {
+    padding: 0 15px;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.register-link {
+    text-align: center;
+    color: #6c757d;
+    margin-top: 20px;
+}
+
+.register-link a {
+    color: #FF8360;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    color: #FFD275;
+    text-decoration: underline;
+}
+
+.image-section {
+    position: relative;
+    min-height: 600px;
+    background-image: url('ruta-a-tu-imagen.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+.image-overlay h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.image-overlay p {
+    font-size: 1.25rem;
+    max-width: 400px;
+}
+
+@media (max-width: 991px) {
+    .image-section {
+        display: none;
+    }
+    
+    .login-form-section {
+        padding: 40px 30px;
+    }
+    
+    .login-form-section h1 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .login-form-section {
+        padding: 30px 20px;
+    }
+    
+    .login-form-section h1 {
+        font-size: 1.75rem;
+    }
+}
