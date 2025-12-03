@@ -222,3 +222,33 @@ body {
     display: none !important;
   }
 }
+/* BOTÓN modo nocturno */
+.dark-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background-color: #222;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    transition: 0.3s ease;
+    z-index: 9999;
+}
+
+.dark-btn:hover {
+    background-color: #333;
+}
+
+/* MODO OSCURO */
+.dark-mode {
+    background-color: #121212 !important;
+    color: white !important;
+}
