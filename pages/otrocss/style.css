@@ -5,9 +5,9 @@
 @import url("../aboutStyles/teamCards.css");
 @import url("../otrocss/contact.css");
 @import url("../otrocss/productos.css");
-@import url("../otrocss/login.css");
-@import url("../otrocss/registro.css");
 @import url("../otrocss/carrito.css");
 @import url("../global.css");
 @import url("../pago/pago.css");
 @import url("../otrocss/home.css");
+@import url("./login.css");
+@import url("./registro.css");

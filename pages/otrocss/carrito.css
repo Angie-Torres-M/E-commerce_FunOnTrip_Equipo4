@@ -1,71 +1,126 @@
-
-
-#carrito-container {
-  padding: 2rem;
-  margin-bottom: 2rem;
-  border-radius: 12px;
+/* CONTENEDOR DEL CARRITO */
+#contenido-principal {
+  max-width: 1100px;
 }
 
-.carrito-item {
-  display: flex;
-  justify-content: space-between;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid #eee;
+
+
+/* Resumen del pedido */
+.resumen-card {
+  background: #f8f8f8;
+  border-radius: 20px;
 }
 
-.item-info {
-  flex: 1;
-}
-
-.item-titulo {
-  font-weight: 700;
-}
-
-.item-precio {
-  color: #ffd275;
+/* BOTÓN DE PAGO AMARILLO FUNONTRIP */
+/* ESTADO NORMAL */
+.btn-pago {
+  background-color: #FEC74A !important; /* amarillo */
+  color: #000 !important;               /* texto negro */
+  border: 2px solid #FEC74A !important;    /* borde negro */
+  border-radius: 6px !important;        /* igual a los filtros */
   font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  transition: all 0.2s ease-in-out;
 }
 
-.item-acciones {
-  display: flex;
-  gap: 1rem;
+/* ESTADO HOVER / FOCUS / ACTIVE */
+.btn-pago:hover,
+.btn-pago:focus,
+.btn-pago:active,
+.btn-pago:focus-visible {
+  background-color: #e3b043 !important; /* amarillo más oscuro */
+  color: #000 !important;
+  border-color: #000 !important;
 }
 
-#resumen-carrito {
-  padding: 2rem;
-  max-width: 400px;
-  margin-left: auto;
+/* ======= TARJETA DE VIAJE ======= */
+.viaje {
+  background: #f8f8f8;         /* off-white bonito */
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.resumen-item {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
+/* Hover suave */
+.viaje:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.12);
 }
 
-.btn-checkout {
+/* Imagen */
+.viaje-img {
   width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Contenido */
+.viaje-body {
   padding: 1rem;
-  background: #ffd275;
-  border: none;
-  border-radius: 8px;
+}
+
+.viaje-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.viaje-price {
   font-weight: 600;
-  cursor: pointer;
-}
-a.btn.btn-pago {
-  background-color: #fec74a;
-  border-color: #fec74a;
   color: #000;
+  margin-bottom: 0.5rem;
 }
 
-a.btn.btn-pago:hover {
-  background-color: #e3b043;
-  border-color: #e3b043;
+/* Botón eliminar u otras acciones */
+.viaje-actions {
+  margin-top: 0.5rem;
 }
 
-#carrito-container {
-  padding: 2rem;
-  margin-bottom: 2rem;
-  border-radius: 12px;
+
+/* ==========================
+   RESPONSIVE
+========================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 991.98px) {
+  #contenido-principal {
+    padding-inline: 1.5rem;
+  }
+
+  .resumen-card {
+    margin-top: 0.5rem;
+  }
 }
 
+/* Móviles */
+@media (max-width: 767.98px) {
+
+  /* que no se vea tan ancha la tarjeta en móvil */
+  .carrito-card {
+    padding: 0.5rem;
+  }
+
+  .carrito-img {
+    height: 80px;
+  }
+
+  .carrito-card .card-body {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .resumen-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 575.98px) {
+  #contenido-principal {
+    padding-inline: 1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+}
