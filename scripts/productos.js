@@ -4,98 +4,200 @@ document.addEventListener("DOMContentLoaded", function () {
   console.log("JS de productos cargado correctamente");
 
   // CONFIGURACIÓN DE LA API
-  const API_URL = "https://api.jsonbin.io/v3/b/692e6dbcd0ea881f400d0cc1/latest";
-
-  let productos = [];
-
-  // FUNCIÓN PARA OBTENER PRODUCTOS
-  async function obtenerProductos() {
-    try {
-      mostrarCargando(true);
-
-      const response = await fetch(API_URL);
-
-      if (!response.ok) {
-        throw new Error(`Error HTTP: ${response.status}`);
-      }
-
-      const data = await response.json();
-
-      // JSONBin: record → { productos: [...] }
-      productos = data.record.productos;
-
-      console.log(`✅ Productos cargados: ${productos.length}`);
-
-      renderizarProductos();
-      inicializarFiltros();
-      inicializarBotonesCarrito();
-
-      mostrarCargando(false);
-
-    } catch (error) {
-      console.error("❌ Error al obtener productos:", error);
-      mostrarError("No se pudieron cargar los productos. Intenta más tarde.");
-      mostrarCargando(false);
-    }
+const productos = [
+  {
+    id: 1,
+    nombre: "Escapada Romántica en Cancún",
+    precio: 8999,
+    descripcion: "4 días, 3 noches · Hotel frente al mar · Cena romántica incluida",
+    imagen: "./images/productos/cancun-romantico.jpg",
+    ubicacion: "nacional",
+    tipo: "romantico"
+  },
+  {
+    id: 2,
+    nombre: "Aventura en San Miguel de Allende",
+    precio: 5499,
+    descripcion: "3 días, 2 noches · Tour gastronómico · Recorrido histórico",
+    imagen: "./images/productos/sanmiguel.jpg",
+    ubicacion: "nacional",
+    tipo: "gastronomico"
+  },
+  {
+    id: 3,
+    nombre: "Relax en Playa del Carmen",
+    precio: 7299,
+    descripcion: "5 días, 4 noches · Spa incluido · Yoga frente al mar",
+    imagen: "./images/productos/relax-playa.jpeg",
+    ubicacion: "nacional",
+    tipo: "relax"
+  },
+  {
+    id: 4,
+    nombre: "Familia en Riviera Maya",
+    precio: 12999,
+    descripcion: "7 días, 6 noches · Todo incluido · Actividades para niños",
+    imagen: "./images/productos/familiar-riviera.jpg",
+    ubicacion: "nacional",
+    tipo: "familiar"
+  },
+  {
+    id: 5,
+    nombre: "París Romántico",
+    precio: 24999,
+    descripcion: "6 días, 5 noches · Torre Eiffel · Crucero por el Sena",
+    imagen: "./images/productos/romantic-paris.jpg",
+    ubicacion: "internacional",
+    tipo: "romantico"
+  },
+  {
+    id: 6,
+    nombre: "Aventura en Japón",
+    precio: 35999,
+    descripcion: "10 días, 9 noches · Tokio, Kyoto, Osaka · Guía incluido",
+    imagen: "./images/productos/japan-adventure.jpg",
+    ubicacion: "internacional",
+    tipo: "aventura"
+  },
+  {
+    id: 7,
+    nombre: "Roma Gastronómica",
+    precio: 19999,
+    descripcion: "5 días, 4 noches · Clases de cocina · Tour de vinos",
+    imagen: "./images/productos/rome-gastronomy.jpg",
+    ubicacion: "internacional",
+    tipo: "gastronomico"
+  },
+  {
+    id: 8,
+    nombre: "Santorini Relax",
+    precio: 28999,
+    descripcion: "7 días, 6 noches · Hotel con vista al mar · Spa de lujo",
+    imagen: "./images/productos/santorini-relax.jpg",
+    ubicacion: "internacional",
+    tipo: "relax"
+  },
+  {
+    id: 9,
+    nombre: "Pet Friendly en Valle de Bravo",
+    precio: 4999,
+    descripcion: "3 días, 2 noches · Hotel pet friendly · Actividades con tu mascota",
+    imagen: "./images/productos/petfriendly-valle.jpg",
+    ubicacion: "petfriendly",
+    tipo: "aventura"
+  },
+  {
+    id: 10,
+    nombre: "Pet Friendly en Puerto Vallarta",
+    precio: 8499,
+    descripcion: "5 días, 4 noches · Playa dog-friendly · Servicios veterinarios",
+    imagen: "./images/productos/petfriendly-vallarta.jpg",
+    ubicacion: "petfriendly",
+    tipo: "relax"
+  },
+  {
+    id: 11,
+    nombre: "Aventura en Barrancas del Cobre",
+    precio: 6999,
+    descripcion: "4 días, 3 noches · Tren Chepe · Senderismo y tirolesa",
+    imagen: "./images/productos/barrancas-adventure.jpg",
+    ubicacion: "nacional",
+    tipo: "aventura"
+  },
+  {
+    id: 12,
+    nombre: "Relax en Bacalar",
+    precio: 5799,
+    descripcion: "4 días, 3 noches · Laguna de 7 colores · Masajes incluidos",
+    imagen: "./images/productos/relax-bacalar.jpg",
+    ubicacion: "nacional",
+    tipo: "relax"
+  },
+  {
+    id: 13,
+    nombre: "Gastronómico en Oaxaca",
+    precio: 4999,
+    descripcion: "3 días, 2 noches · Tour de mezcal · Clases de cocina tradicional",
+    imagen: "./images/productos/oaxaca-gastronomy.jpg",
+    ubicacion: "nacional",
+    tipo: "gastronomico"
+  },
+  {
+    id: 14,
+    nombre: "Aventura en Nueva Zelanda",
+    precio: 42999,
+    descripcion: "12 días, 11 noches · Fiordos y glaciares · Deportes extremos",
+    imagen: "./images/productos/new-zealand-adventure.jpg",
+    ubicacion: "internacional",
+    tipo: "aventura"
+  },
+  {
+    id: 15,
+    nombre: "Familiar en Disney Orlando",
+    precio: 28999,
+    descripcion: "7 días, 6 noches · 4 parques incluidos · Hotel resort",
+    imagen: "./images/productos/disney-orlando.jpg",
+    ubicacion: "internacional",
+    tipo: "familiar"
+  },
+  {
+    id: 16,
+    nombre: "Romántico en Venecia",
+    precio: 26999,
+    descripcion: "5 días, 4 noches · Paseo en góndola · Cena en el Gran Canal",
+    imagen: "./images/productos/venecia-romantic.jpg",
+    ubicacion: "internacional",
+    tipo: "romantico"
+  },
+  {
+    id: 17,
+    nombre: "Gastronómico en Barcelona",
+    precio: 22999,
+    descripcion: "6 días, 5 noches · Tour tapas · Visita a mercado La Boquería",
+    imagen: "./images/productos/barcelona-gastronomy.jpg",
+    ubicacion: "internacional",
+    tipo: "gastronomico"
+  },
+  {
+    id: 18,
+    nombre: "Familiar en Costa Rica",
+    precio: 18999,
+    descripcion: "8 días, 7 noches · Volcanes y playas · Actividades para niños",
+    imagen: "./images/productos/costarica-family.jpg",
+    ubicacion: "internacional",
+    tipo: "familiar"
+  },
+  {
+    id: 19,
+    nombre: "Pet Friendly en Tequisquiapan",
+    precio: 3999,
+    descripcion: "2 días, 1 noche · Viñedos pet friendly · Parque canino",
+    imagen: "./images/productos/petfriendly-tequis.jpg",
+    ubicacion: "petfriendly",
+    tipo: "relax"
+  },
+  {
+    id: 20,
+    nombre: "Pet Friendly en Tulum",
+    precio: 9999,
+    descripcion: "5 días, 4 noches · Playas dog-friendly · Spa pet friendly",
+    imagen: "./images/productos/petfriendly-tulum.jpg",
+    ubicacion: "petfriendly",
+    tipo: "aventura"
   }
+];
 
-  // INDICADOR DE CARGA
-  function mostrarCargando(mostrar) {
-    const contenedores = [
-      document.getElementById("productos-nacionales"),
-      document.getElementById("productos-internacionales"),
-      document.getElementById("productos-petfriendly")
-    ];
 
-    contenedores.forEach(contenedor => {
-      if (!contenedor) return;
-
-      if (mostrar) {
-        contenedor.innerHTML = `
-          <div class="col-12 text-center py-5">
-            <div class="spinner-border text-primary" role="status"></div>
-            <p class="mt-3">Cargando productos...</p>
-          </div>
-        `;
-      }
-    });
-  }
-
-  // FUNCIÓN PARA MOSTRAR ERRORES
-  function mostrarError(mensaje) {
-    const contenedores = [
-      document.getElementById("productos-nacionales"),
-      document.getElementById("productos-internacionales"),
-      document.getElementById("productos-petfriendly")
-    ];
-
-    contenedores.forEach(contenedor => {
-      if (!contenedor) return;
-
-      contenedor.innerHTML = `
-        <div class="col-12">
-          <div class="alert alert-danger" role="alert">
-            ${mensaje}
-          </div>
-        </div>
-      `;
-    });
-  }
-
-  
-  // NUEVA CARD ADAPTADA A productos.css
-
+  // ===========================
+  //   CREAR CARD
+  // ===========================
   function crearCardProducto(producto) {
     return `
-      <article class="producto-card" 
-               data-tipo="${producto.tipo}" 
-               data-ubicacion="${producto.ubicacion}">
+      <article class="col-12 col-sm-6 col-md-4 col-lg-3 producto-card" 
+               data-tipo="${producto.tipo}">
         
         <div class="producto-img-wrapper">
-          <img src="${producto.imagen}" 
-               class="producto-img" 
-               alt="${producto.nombre}"
-               onerror="this.src='https://via.placeholder.com/400x300?text=Imagen+no+disponible'">
+          <img src="${producto.imagen}" class="producto-img" alt="${producto.nombre}">
         </div>
 
         <div class="producto-content">
@@ -111,101 +213,55 @@ document.addEventListener("DOMContentLoaded", function () {
     `;
   }
 
-  //  RENDERIZACIÓN DE PRODUCTOS
+  //   RENDERIZAR PRODUCTOS
+
   function renderizarProductos() {
-    const contenedorNacional = document.getElementById("productos-nacionales");
-    const contenedorInternacional = document.getElementById("productos-internacionales");
-    const contenedorPetFriendly = document.getElementById("productos-petfriendly");
+    const contenedorN = document.getElementById("productos-nacionales");
+    const contenedorI = document.getElementById("productos-internacionales");
+    const contenedorP = document.getElementById("productos-petfriendly");
 
-    if (contenedorNacional) contenedorNacional.innerHTML = "";
-    if (contenedorInternacional) contenedorInternacional.innerHTML = "";
-    if (contenedorPetFriendly) contenedorPetFriendly.innerHTML = "";
+    contenedorN.innerHTML = "";
+    contenedorI.innerHTML = "";
+    contenedorP.innerHTML = "";
 
-    productos.forEach(producto => {
-      const card = crearCardProducto(producto);
+    productos.forEach(p => {
+      const card = crearCardProducto(p);
 
-      if (producto.ubicacion === "nacional") {
-        contenedorNacional.innerHTML += card;
-      } 
-      else if (producto.ubicacion === "internacional") {
-        contenedorInternacional.innerHTML += card;
-      } 
-      else if (producto.ubicacion === "petfriendly") {
-        contenedorPetFriendly.innerHTML += card;
-      }
-    });
-
-    if (productos.length === 0) {
-      mostrarError("No hay productos disponibles.");
-    }
-  }
-
-  // ============ FILTROS ============
-  function inicializarFiltros() {
-    const botonesFiltro = document.querySelectorAll('[data-filtro]');
-    const textoFiltroActivo = document.getElementById('texto-filtro-activo');
-
-    botonesFiltro.forEach(boton => {
-      boton.addEventListener('click', function () {
-        const filtroSeleccionado = this.getAttribute('data-filtro');
-
-        botonesFiltro.forEach(btn => btn.classList.remove('active'));
-        this.classList.add('active');
-
-        const cards = document.querySelectorAll('.producto-card');
-
-        cards.forEach(card => {
-          const tipo = card.getAttribute('data-tipo');
-          card.style.display =
-            filtroSeleccionado === 'todos' || tipo === filtroSeleccionado
-              ? 'block'
-              : 'none';
-        });
-
-        if (textoFiltroActivo) {
-          textoFiltroActivo.textContent =
-            filtroSeleccionado === 'todos'
-              ? 'Mostrando: todos los tipos de experiencia.'
-              : `Mostrando: ${filtroSeleccionado}.`;
-        }
-      });
+      if (p.ubicacion === "nacional") contenedorN.innerHTML += card;
+      if (p.ubicacion === "internacional") contenedorI.innerHTML += card;
+      if (p.ubicacion === "petfriendly") contenedorP.innerHTML += card;
     });
   }
 
-  // CARRITO
-  function inicializarBotonesCarrito() {
-    document.addEventListener('click', function (e) {
-      const boton = e.target.closest('.btn-agregar');
-      if (!boton) return;
-
-      const idProducto = parseInt(boton.getAttribute('data-id'));
-      const producto = productos.find(p => p.id === idProducto);
-      if (!producto) return;
-
-      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-
-      const index = carrito.findIndex(item => item.id === idProducto);
-
-      if (index !== -1) {
-        carrito[index].cantidad += 1;
-      } else {
-        carrito.push({ ...producto, cantidad: 1 });
-      }
-
-      localStorage.setItem('carrito', JSON.stringify(carrito));
-
-      boton.textContent = '✓ Agregado';
-      boton.style.background = "#6abf69";
-
-      setTimeout(() => {
-        boton.innerHTML = '<i class="fas fa-shopping-cart"></i> Agregar al carrito';
-        boton.style.background = "#ffd275";
-      }, 1200);
-
-      console.log(`🛒 Agregado: ${producto.nombre}`);
-    });
-  }
-
-  // INICIALIZACIÓN
-  obtenerProductos();
+  // ===========================
+  //     INICIALIZACIÓN
+  // ===========================
+  renderizarProductos();
 });
+
+// ===========================
+//     FILTRO POR TIPO
+// ===========================
+const botonesFiltro = document.querySelectorAll(".btn-filtro");
+
+botonesFiltro.forEach(btn => {
+  btn.addEventListener("click", () => {
+    const filtro = btn.dataset.filtro;
+
+    // Marcar botón activo
+    botonesFiltro.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    // Ocultar o mostrar productos según filtro
+    document.querySelectorAll(".producto-card").forEach(card => {
+      const tipo = card.dataset.tipo;
+
+      if (filtro === "todos" || filtro === tipo) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  });
+});
+

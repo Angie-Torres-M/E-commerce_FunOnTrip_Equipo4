@@ -1,13 +1,13 @@
 /* GRID GENERAL */
 
-.productos-grid,
 #productos-nacionales,
 #productos-internacionales,
 #productos-petfriendly {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 2rem;
 }
+
 
 
 /* CARD PRODUCTO */
@@ -141,3 +141,12 @@
   background-color: #FEC74A;
   color: #1a1a1a; /* Negro para contraste */
 }
+
+.subtitulo-centrado {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 2rem auto;
+  font-size: 1rem;
+  color: #555;
+}
+
