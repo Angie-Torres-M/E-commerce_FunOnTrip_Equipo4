@@ -1,14 +1,13 @@
+
 .contacto {
   padding-top: 50px !important;
-  display: flex;
   width: 100%;
-  margin: auto;
-  padding: 0 70px 0 70px;
-
-  &:first-child {
-    margin-right: #565656 1px solid;
-  }
 }
+
+.contacto__container {
+  padding-right: 15px;
+}
+
 
 .contacto__title {
   font-size: 32px;
@@ -16,25 +15,9 @@
   margin-bottom: 43px;
 }
 
-.contacto__container {
-  width: 50%;
-  padding-right: 15px;
-
-  div {
-    display: flex;
-  }
-}
-
-.contacto__container:nth-child(2) {
-  display: flex;
-  justify-content: center;
-  border-left: #a5a5a5 2px solid;
-
-  img {
-    border-radius: 70px;
-    max-width: 480px;
-    height: auto;
-  }
+.contacto__container-img img {
+  max-width: 100%;
+  border-radius: 24px;
 }
 
 .contacto__form {
@@ -128,85 +111,172 @@
 .email-text {
   word-break: break-all;
 }
+/* Caja blanca general del contacto */
+
+.box-contact {
+  background-color: #fff;
+  border-radius: 24px;
+  padding: 40px 40px 50px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  max-width: 1100px;
+  margin: 0 auto 60px;
+}
+
+/* Formulario + info dentro de la col-8 */
+.contacto__container-form {
+  display: flex;
+  flex-wrap: wrap;        /* para que no se desborde */
+  gap: 32px;
+}
+
+/* Formulario: que ocupe una “mitad” flexible */
+.contacto__form {
+  flex: 1 1 260px;        /* crece y encoge dentro de la col-8 */
+  max-width: 420px;
+}
+
+/* Bloque de info: que ocupe la otra parte, pero sin salirse */
+.contacto__container-sections {
+  flex: 1 1 220px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+}
+.btn-contacto {
+  display: inline-block;
+  min-width: 180px;   /* para que no “salte” al cambiar de texto */
+  padding: 12px 40px;
+  border-radius: 18px;
+  border: none;
+  background-color: #fec74a;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-contacto:hover:enabled {
+  transform: scale(1.05);
+}
 
 
+/* Botón grande y ANCHO completo */
+.btn-contacto-enviar {
+  display: block;
+  width: 60% !important;               /* ahora ocupa todo el ancho del form */
+  max-width: 420px;          /* no se deforma en pantallas grandes */
+  margin: 25px auto 0;       /* centrado */
+  padding: 16px 0;           /* más alto */
+  
+  background-color: #fec74a;
+  border: none;
+  border-radius: 18px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  color: #000;
+  cursor: pointer;
 
-@media (max-width: 1300px) {
-  .contacto__container:nth-child(2) {
-    img {
-      max-width: 400px;
-    }
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+
+.btn-contacto-enviar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ===== Ajustes para la alerta de estado del envío ===== */
+#estado-envio .alert {
+  margin-top: 20px;
+  text-align: center;
+}
+
+/* Quitar estilos de botón amarillo a la X de cerrar */
+#estado-envio .btn-close {
+  width: auto;
+  height: auto;
+  padding: 0.4rem;
+  background: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+
+/* Contenedor principal de la columna izquierda (form + info) */
+.contacto__container.col-lg-8 {
+  position: sticky;
+}
+/* ================================
+   LÍNEA ENTRE FORM + INFO  (DESKTOP)
+   ================================ */
+@media (min-width: 992px) {
+  .contacto__container.col-lg-8 {
+    position: relative;
   }
 
-  .contacto__form {
-    max-width: 280px;
+  .contacto__container.col-lg-8::after {
+    content: "";
+    position: absolute;
+    right: 20px;          /* distancia hacia la imagen */
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #e0e0e0;
+    border-radius: 2px;
   }
 }
 
-@media (max-width: 1160px) {
-  .contacto {
-    flex-direction: column;
+/* ================================
+   TABLET Y CEL ( < 992px )
+   - Sin imagen
+   - Sin línea divisora
+   - Form centrado
+   ================================ */
+@media (max-width: 991.98px) {
+
+  /* Un poco menos padding en la caja blanca */
+  .box-contact {
+    padding: 25px 20px;
   }
 
-  .contacto__container:nth-child(2) {
-    display: none;
+  /* Ocultar la columna de la imagen en SM y MD */
+  .contacto__container.col-lg-4 {
+    display: none !important;
   }
 
-  .contacto__container {
+  /* Quitar la línea divisora cuando ya no hay imagen */
+  .contacto__container.col-lg-8::after {
+    content: none;
+  }
+
+  /* Form centrado y un poco más ancho */
+  .contacto__form {
+    max-width: 470px;
     width: 100%;
-
-    div {
-      width: 100%;
-    }
+    margin: 0 auto 25px;
   }
 
-  .contacto__form {
-    max-width: 470px;
-
-    input {
-      max-width: 410px;
-    }
-
-    textarea {
-      max-width: 410px;
-    }
+  /* Info de contacto debajo del form */
+  .contacto__container-sections {
+    margin-top: 20px;
+    align-items: flex-start;
   }
 }
 
-@media (max-width: 645px) {
-  .contacto {
-    padding: 15px;
-  }
-
-  .contacto__container {
-    div {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+/* ================================
+   EXTRA PEQUEÑAS (CEL CHICO)
+   ================================ */
+@media (max-width: 576px) {
+  .box-contact {
+    padding: 20px 15px;
   }
 
   .contacto__form {
-    max-width: 470px;
-
-    input {
-      max-width: 470px;
-    }
-
-    textarea {
-      max-width: 470px;
-    }
-  }
-
-  .contacto__container-info {
-    height: 90px;
-    div > p {
-      text-align: center;
-    }
-  }
-
-  .contacto__container-sections {
-    height: 380px;
+    max-width: 100%;
   }
 }

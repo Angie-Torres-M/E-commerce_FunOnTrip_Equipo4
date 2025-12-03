@@ -19,9 +19,9 @@
   <link rel="icon" type="image/jpg" href="./images/funOnLog.jpg" />
 
   <!-- ESTILOS GENERALES DEL PROYECTO -->
-  <link rel="stylesheet" href="./pages/otrocss/style.css" >
-  <link rel="stylesheet" href="./pages/otrocss/contacto.css" >
-  <link rel="stylesheet" href="./pages/global.css" >
+  <link rel="stylesheet" href="./pages/otrocss/style.css">
+  <link rel="stylesheet" href="./pages/otrocss/contacto.css">
+  <link rel="stylesheet" href="./pages/global.css">
 </head>
 
 <body>
@@ -32,84 +32,99 @@
 
   <!-- MAIN con diseño RESPONSIVO -->
   <main id="contenido-principal" aria-labelledby="titulo-home" class="main container mt-5">
-    <section class="contacto container">
-      <div class="contacto__container">
-        <h2 class="contacto__title">
-          <span>Contáctanos</span> para tu próxima aventura
-        </h2>
+    <section class="contacto">
 
-
-        <!-- =============== FORMULARIO ADAPTADO =============== -->
+      <!-- Caja blanca -->
+      <section class="box-contact row">
         <div>
-          <form id="form-contacto" class="contacto__form">
-            <label for="nombre">
-              Nombre
-              <input type="text" placeholder="Tu nombre" required id="nombre" />
-              <small id="error-nombre" class="text-danger"></small>
-            </label>
+          <!-- Título -->
+          <h2 class="contacto__title text-center mb-4">
+            <span>Contáctanos</span> para tu próxima aventura
+          </h2>
 
-            <label for="correo">
-              Email
-              <input type="email" placeholder="Tu email" required id="correo" />
-              <small id="error-correo" class="text-danger"></small>
-            </label>
+          <!-- ROW para 8 / 4 dentro de la caja -->
+          <div class="row align-items-start">
 
-            <label for="telefono">
-              Número
-              <input type="number" placeholder="Tu número" required id="telefono" />
-              <small id="error-telefono" class="text-danger"></small>
-            </label>
+            <!-- ====== COLUMNA 1: FORM + INFO (8 GRILLAS EN DESKTOP) ====== -->
+            <div class="contacto__container col-12 col-lg-8 mb-4 mb-lg-0">
+              <div class="contacto__container-form d-flex">
 
-            <label for="mensaje">
-              Mensaje
-              <textarea placeholder="Mensaje" required id="mensaje"></textarea>
-              <small id="error-mensaje" class="text-danger"></small>
-            </label>
+                <!-- FORMULARIO -->
+                <form id="form-contacto" class="contacto__form ">
+                  <div class=" col-12">
+                    <label for="nombre">
+                      Nombre
+                      <input type="text" placeholder="Tu nombre" required id="nombre" />
+                      <small id="error-nombre" class="text-danger"></small>
+                    </label>
 
-            <!-- Estado del envío -->
-            <div id="estado-envio"></div>
+                    <label for="correo">
+                      Email
+                      <input type="email" placeholder="Tu email" required id="correo" />
+                      <small id="error-correo" class="text-danger"></small>
+                    </label>
 
-            <!-- Botón con ID -->
-            <button id="btn-enviar">Enviar</button>
-          </form>
+                    <label for="telefono">
+                      Número
+                      <input type="number" placeholder="Tu número" required id="telefono" />
+                      <small id="error-telefono" class="text-danger"></small>
+                    </label>
 
-          <!-- INFO DE CONTACTO -->
-          <div class="contacto__container-sections">
-            <div class="contacto__container-info">
-              <img src="./images/istockphoto-1193451471-612x612 1.svg" alt="" class="contacto__icon" />
-              <div>
-                <h2>Dirección</h2>
-                <p>Calle 123, Ciudad, País</p>
+                    <label for="mensaje">
+                      Mensaje
+                      <textarea placeholder="Mensaje" required id="mensaje"></textarea>
+                      <small id="error-mensaje" class="text-danger"></small>
+                    </label>
+
+                    <div id="estado-envio" class="mt-3 text-center"></div>
+
+                    <div class="text-center mt-3">
+                      <button id="btn-enviar" type="submit" class="btn-contacto">
+                        Enviar
+                      </button>
+                    </div>
+
+
+                  </div>
+                </form>
+
+                <!-- INFO DE CONTACTO -->
+                <div class="contacto__container-sections ms-4 mt-4 mt-lg-0 ">
+                  <div class="contacto__container-info">
+                    <img src="./images/istockphoto-1193451471-612x612 1.svg" alt="" class="contacto__icon" />
+                    <div>
+                      <h2>Dirección</h2>
+                      <p>Calle 123, Ciudad, País</p>
+                    </div>
+                  </div>
+
+                  <div class="contacto__container-info">
+                    <img src="./images/phone-icon-telephone-icon-symbol-for-app-and-messenger-vector 1.svg" alt=""
+                      class="contacto__icon" />
+                    <div>
+                      <h2>Teléfono</h2>
+                      <p>+52 55 1234 5678</p>
+                    </div>
+                  </div>
+
+
+                </div>
+
               </div>
             </div>
 
-            <div class="contacto__container-info">
-              <img src="./images/phone-icon-telephone-icon-symbol-for-app-and-messenger-vector 1.svg" alt=""
-                class="contacto__icon" />
-              <div>
-                <h2>Teléfono</h2>
-                <p>+52 55 1234 5678</p>
-              </div>
+            <!-- ====== COLUMNA 2: IMAGEN (4 GRILLAS EN DESKTOP) ====== -->
+            <div class="contacto__container-img contacto__container col-12 col-lg-4 mt-4 mt-lg-0 d-none d-lg-block  ">
+              <img src="./images/contacto/pareja-playa.png" alt="Pareja en la playa" class="img-fluid" />
             </div>
 
-            <div class="contacto__container-info">
-              <img src="./images/email-icon-sign-symbol-logo-vector 1.svg" alt="" class="contacto__icon" />
-              <div>
-                <h2>Correo electrónico</h2>
-                <p class="email-text">funontrip.pixelnomads@gmail.com</p>
-
-              </div>
-            </div>
           </div>
-        </div>
-      </div>
+      </section>
 
-      <!-- Imagen -->
-      <div class="contacto__container">
-        <img src="./images/contacto/pareja-playa.png" alt="" />
-      </div>
     </section>
   </main>
+
+
 
   <!-- Footer -->
   <div id="site-footer"></div>

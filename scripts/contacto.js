@@ -1,8 +1,7 @@
 // contacto.js
-// Validación + envío con EmailJS (usando send)
 // Servicio: service_dtto90b
-// Template: template_lnoju47
-// Public Key: ptwOV_PK8Dnx4KZyG
+// Template notificación: template_lnoju47
+// Template auto-reply:  template_xnenq1c
 
 document.addEventListener("DOMContentLoaded", function () {
   console.log("JS de contacto cargado");
@@ -25,10 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault();
     console.log("Submit del formulario capturado");
 
-    // Limpiar estado previo
-    estadoEnvio.innerHTML = "";
+    if (estadoEnvio) estadoEnvio.innerHTML = "";
 
-    // Obtener valores
     const nombre = document.getElementById("nombre").value.trim();
     const correo = document.getElementById("correo").value.trim();
     const telefono = document.getElementById("telefono").value.trim();
@@ -86,19 +83,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (errores) {
       console.log("Formulario con errores. No se envía.");
-
-      estadoEnvio.innerHTML = `
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <strong>Corrige los campos marcados.</strong> No se pudo enviar el mensaje.
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-      `;
+      if (estadoEnvio) {
+        estadoEnvio.innerHTML = `
+          <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <strong>Corrige los campos marcados.</strong> No se pudo enviar el mensaje.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        `;
+      }
       return;
     }
 
     // ===== ENVIAR CON EMAILJS =====
     const SERVICE_ID = "service_dtto90b";
-    const TEMPLATE_ID = "template_lnoju47";
+    const TEMPLATE_CONTACTO = "template_lnoju47"; // notificación a FunOnTrip
+    const TEMPLATE_AUTOREPLY = "template_xnenq1c"; // correo de confirmación
 
     const templateParams = {
       name: nombre,
@@ -107,46 +106,72 @@ document.addEventListener("DOMContentLoaded", function () {
       message: mensaje,
     };
 
-    console.log("Enviando a EmailJS...", templateParams);
+    console.log("Enviando ", templateParams);
 
-    btnEnviar.disabled = true;
-    btnEnviar.textContent = "Enviando...";
+    if (btnEnviar) {
+      btnEnviar.disabled = true;
+      btnEnviar.textContent = "Enviando...";
+    }
 
+    // 1) Enviar correo a FunOnTrip
     emailjs
-      .send(SERVICE_ID, TEMPLATE_ID, templateParams)
+      .send(SERVICE_ID, TEMPLATE_CONTACTO, templateParams)
       .then(function (response) {
-        console.log("EmailJS OK:", response);
+        console.log("EmailJS (Contact Us) OK:", response);
 
-        estadoEnvio.innerHTML = `
-          <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>¡Mensaje enviado! 🎉</strong> Gracias por contactarte. Te responderemos muy pronto.
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          </div>
-        `;
+        // 2) Enviar auto-reply al usuario (no rompemos la UX si falla)
+        emailjs
+          .send(SERVICE_ID, TEMPLATE_AUTOREPLY, templateParams)
+          .then((res) => {
+            console.log("EmailJS (Auto-Reply) OK:", res);
+          })
+          .catch((err) => {
+            console.warn("Auto-Reply falló, pero el contacto sí se envió:", err);
+          });
 
-        // Ocultar después de 4 segundos
-        setTimeout(() => {
-          estadoEnvio.innerHTML = "";
-        }, 4000);
+        if (estadoEnvio) {
+          estadoEnvio.innerHTML = `
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+              <strong>¡Mensaje enviado! </strong> Gracias por contactarte.
+              Te responderemos muy pronto.
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          `;
+        }
 
+        // Botón → Enviado y se oculta mientras está el mensaje
+        btnEnviar.textContent = "Enviado";
+        btnEnviar.disabled = true;
+        btnEnviar.style.visibility = "hidden";
+
+        // Limpiar campos
         form.reset();
         ["nombre", "correo", "telefono", "mensaje"].forEach((id) => {
           document.getElementById(id).classList.remove("is-invalid");
         });
+
+        // Después de 4s, quitamos el mensaje y restauramos el botón
+        setTimeout(() => {
+          if (estadoEnvio) estadoEnvio.innerHTML = "";
+          btnEnviar.style.visibility = "visible";
+          btnEnviar.disabled = false;
+          btnEnviar.textContent = "Enviar";
+        }, 4000);
       })
       .catch(function (error) {
-        console.error(" Error al enviar con EmailJS:", error);
+        console.error("Error al enviar con EmailJS:", error);
 
-        estadoEnvio.innerHTML = `
-          <div class="alert alert-danger alert-dismissible fade show" role="alert">
-            <strong>¡Error al enviar! </strong> Inténtalo de nuevo más tarde.
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-          </div>
-        `;
-      })
-      .finally(function () {
+        if (estadoEnvio) {
+          estadoEnvio.innerHTML = `
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+              <strong>¡Error al enviar!</strong> Inténtalo de nuevo más tarde.
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+          `;
+        }
+
         btnEnviar.disabled = false;
-        btnEnviar.textContent = "Enviar mensaje";
+        btnEnviar.textContent = "Enviar";
       });
   });
 });
