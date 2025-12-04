@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
   const cartPanel = document.getElementById('cart-panel');   // panel flotante (productos.html)
   const cartIcon = document.getElementById('cart-icon');    // botón flotante
   const cartItems = document.getElementById('cart-items');   // tbody (flotante y carrito.html)
-  const cartTotalNoImpEl = document.getElementById('cart-total-no-impuestos');
+  const cartTotalNoImpEl = document.getElementById('cart-total-no-impuestos'); // total sin impuestos (flotante)
   const cartCountEl = document.querySelector('.cart-count');   // burbuja (solo flotante)
   const checkoutBtn = document.getElementById('checkout-btn'); // <a href="./pago.html">
   const goToCartBtn = document.getElementById('go-to-cart');   // <a href="./carrito.html">
