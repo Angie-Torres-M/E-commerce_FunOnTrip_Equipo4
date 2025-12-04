@@ -1,10 +1,11 @@
 // scripts/productos.js
 
-document.addEventListener("DOMContentLoaded", function () {
-  console.log("JS de productos cargado correctamente");
+console.log("JS de productos cargado correctamente");
 
-  // CONFIGURACIÓN DE LA API
-const productos = [
+// ===========================
+//   CONFIGURACIÓN DE LA API
+// ===========================
+window.productos = [
   {
     id: 1,
     nombre: "Escapada Romántica en Cancún",
@@ -187,10 +188,10 @@ const productos = [
   }
 ];
 
-
-  // ===========================
-  //   CREAR CARD
-  // ===========================
+// ===========================
+//   RENDERIZAR PRODUCTOS
+// ===========================
+document.addEventListener("DOMContentLoaded", function () {
   function crearCardProducto(producto) {
     return `
       <article class="col-12 col-sm-6 col-md-4 col-lg-3 producto-card" 
@@ -213,18 +214,18 @@ const productos = [
     `;
   }
 
-  //   RENDERIZAR PRODUCTOS
-
   function renderizarProductos() {
     const contenedorN = document.getElementById("productos-nacionales");
     const contenedorI = document.getElementById("productos-internacionales");
     const contenedorP = document.getElementById("productos-petfriendly");
 
+    if (!contenedorN || !contenedorI || !contenedorP) return;
+
     contenedorN.innerHTML = "";
     contenedorI.innerHTML = "";
     contenedorP.innerHTML = "";
 
-    productos.forEach(p => {
+    window.productos.forEach(p => {
       const card = crearCardProducto(p);
 
       if (p.ubicacion === "nacional") contenedorN.innerHTML += card;
@@ -233,35 +234,29 @@ const productos = [
     });
   }
 
-  // ===========================
-  //     INICIALIZACIÓN
-  // ===========================
   renderizarProductos();
-});
 
-// ===========================
-//     FILTRO POR TIPO
-// ===========================
-const botonesFiltro = document.querySelectorAll(".btn-filtro");
+  // ===========================
+  //     FILTRO POR TIPO
+  // ===========================
+  const botonesFiltro = document.querySelectorAll(".btn-filtro");
 
-botonesFiltro.forEach(btn => {
-  btn.addEventListener("click", () => {
-    const filtro = btn.dataset.filtro;
+  botonesFiltro.forEach(btn => {
+    btn.addEventListener("click", () => {
+      const filtro = btn.dataset.filtro;
 
-    // Marcar botón activo
-    botonesFiltro.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
+      botonesFiltro.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
 
-    // Ocultar o mostrar productos según filtro
-    document.querySelectorAll(".producto-card").forEach(card => {
-      const tipo = card.dataset.tipo;
+      document.querySelectorAll(".producto-card").forEach(card => {
+        const tipo = card.dataset.tipo;
 
-      if (filtro === "todos" || filtro === tipo) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
+        if (filtro === "todos" || filtro === tipo) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
     });
   });
 });
-
