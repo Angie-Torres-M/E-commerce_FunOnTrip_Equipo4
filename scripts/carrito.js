@@ -27,6 +27,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let total = 0;
     let totalCount = 0;
 
+
+
     cart.forEach((product, index) => {
       const subtotal = product.price * product.quantity;
       total += subtotal;
@@ -35,23 +37,24 @@ document.addEventListener('DOMContentLoaded', function () {
       if (cartItems) {
         const tr = document.createElement('tr');
         tr.innerHTML = `
-        <td>${product.name}</td>
-        <td>$${product.price.toFixed(2)}</td>
-        <td>
-          <input 
-            type="number" 
-            value="${product.quantity}" 
-            min="1" 
-            class="quantity" 
-            data-index="${index}">
-        </td>
-        <td>$${subtotal.toFixed(2)}</td>
-        <td>
-          <button class="btn btn-danger remove-from-cart" data-index="${index}">
-            Eliminar
-          </button>
-        </td>
-      `;
+  <td data-label="Paquete">${product.name}</td>
+  <td data-label="Precio">$${product.price.toFixed(2)}</td>
+  <td data-label="Cant.">
+    <input 
+      type="number" 
+      value="${product.quantity}" 
+      min="1" 
+      class="quantity" 
+      data-index="${index}">
+  </td>
+  <td data-label="Subtotal">$${subtotal.toFixed(2)}</td>
+  <td data-label="">
+    <button class="btn btn-danger remove-from-cart" data-index="${index}">
+      Eliminar
+    </button>
+  </td>
+`;
+
         cartItems.appendChild(tr);
       }
     });
@@ -199,3 +202,4 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+console.log("Carrito flotante JS cargado");

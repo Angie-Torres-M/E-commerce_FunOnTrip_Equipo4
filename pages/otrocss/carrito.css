@@ -127,11 +127,11 @@ body {
 main {
   padding: 24px 16px;
 }
-
+/*Boton pago finalizar compra carrito*/
 .btn-pago {
   margin-top: 12px;
   width: 40%;
-  background-color: #FEC74A !important;
+  background-color: #e5a309 !important;
   /* amarillo */
   color: #000 !important;
   /* texto negro */
@@ -161,7 +161,6 @@ main {
   border-radius: 6px !important;
   font-weight: 600;
   padding: 0.8rem 1.2rem;
-
   cursor: pointer;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
   transition: all 0.2s ease-in-out;
@@ -174,6 +173,9 @@ main {
   border: 2px solid #56b3ac !important;
   color: #000000 !important;
 }
+
+
+
 
 .btn-pago-carrito {
   margin-top: 12px;
@@ -352,6 +354,8 @@ main {
   background: #ffffff;
 }
 
+
+
 #cart-panel .cart-table {
   width: 100%;
   border-collapse: collapse;
@@ -405,6 +409,70 @@ main {
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 }
 
+
+/* --- Tabla responsiva para móvil --- */
+.carrito-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* En móvil la tabla se vuelve formato "card" */
+@media (max-width: 576px) {
+  .cart-table thead {
+    display: none; /* Ocultamos encabezados */
+  }
+
+  .cart-table tr {
+    display: block;
+    margin-bottom: 14px;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .cart-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.9rem;
+  }
+
+  .cart-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #444;
+  }
+
+  /* Ajuste del input de cantidad */
+  .cart-table input.quantity {
+    width: 60px;
+    padding: 4px;
+  }
+
+  /* Botón eliminar ocupa todo el ancho */
+  .cart-table .btn-danger {
+    width: auto;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+
+
+
+
+/* ----- Botones más pequeños en móvil carrito flotante ------ */
+@media (max-width: 576px) {
+  .btn-pago,
+  .btn-shop {
+    width: 40%;              /* más pequeños que 100% */
+    padding: 0.5rem 0.8rem;  /* reduce la altura */
+    font-size: 0.9rem;       /* texto más pequeño */
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
 
 
 
