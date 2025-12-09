@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       renderizarProductos();
     }
 
-    // Mostrar mensaje de éxito
+    // Mostrar mensaje de éxito ...
     alertSuccess.classList.remove("d-none");
   });
 });
