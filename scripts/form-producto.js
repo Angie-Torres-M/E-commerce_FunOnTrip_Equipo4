@@ -51,10 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
       tipo,
     };
 
-    console.log("Objeto producto:", nuevoProducto);
-    console.log("JSON:", JSON.stringify(nuevoProducto));
+    // Agregar el nuevo producto al array global
+    window.productos.push(nuevoProducto);
 
+    // Guardar en localStorage
+    localStorage.setItem("productos", JSON.stringify(window.productos));
+
+    // Si estás en productos.html, vuelve a renderizar
+    if (typeof renderizarProductos === "function") {
+      renderizarProductos();
+    }
+
+    // Mostrar mensaje de éxito
     alertSuccess.classList.remove("d-none");
-    // form.reset(); // si quieren limpiar el formulario
   });
 });
