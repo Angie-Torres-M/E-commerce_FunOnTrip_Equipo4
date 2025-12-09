@@ -1,0 +1,546 @@
+
+#contenido-principal {
+  max-width: 1100px;
+}
+
+/* Puntito verde estilo "notificación" 
+.cart-has-items {
+  position: relative;
+}
+
+.cart-has-items::after {
+  content: "";
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  width: 20px;
+  height: 20px;
+  background: #47d662;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 4px rgba(0,0,0,0.2);
+}
+*/
+
+main {
+ margin: 80px;
+}
+
+/* Resumen del pedido */
+.resumen-card {
+  background: #f8f8f8;
+  border-radius: 20px;
+}
+
+/* BOTÓN DE PAGO AMARILLO FUNONTRIP */
+/* ESTADO NORMAL */
+.btn-pago {
+  background-color: #FEC74A !important;
+  /* amarillo */
+  color: #000 !important;
+  /* texto negro */
+  border: 2px solid #FEC74A !important;
+  /* borde negro */
+  border-radius: 6px !important;
+  /* igual a los filtros */
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  transition: all 0.2s ease-in-out;
+}
+
+/* ESTADO HOVER / FOCUS / ACTIVE */
+.btn-pago:hover,
+.btn-pago:focus,
+.btn-pago:active,
+.btn-pago:focus-visible {
+  background-color: #e3b043 !important;
+  /* amarillo más oscuro */
+  color: #000 !important;
+  border-color: #000 !important;
+}
+
+/* ======= TARJETA DE VIAJE ======= */
+.viaje {
+  background: #f8f8f8;
+  /* off-white bonito */
+  border-radius: 16px;
+  border: 1px solid #ddd;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover suave */
+.viaje:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+/* Imagen */
+.viaje-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Contenido */
+.viaje-body {
+  padding: 1rem;
+}
+
+.viaje-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 0.3rem;
+}
+
+.viaje-price {
+  font-weight: 600;
+  color: #000;
+  margin-bottom: 0.5rem;
+}
+
+/* Botón eliminar u otras acciones */
+.viaje-actions {
+  margin-top: 0.5rem;
+}
+
+
+
+
+/* CONTENEDOR DEL CARRITO FLOTANTE */
+:root {
+  --mf-gap: 16px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  /* Este padding-top se recalcula con JS según la altura real del header insertado */
+  padding-top: 0;
+  font-family: "Montserrat Alternates", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
+  background: #fff;
+}
+
+main {
+  padding: 24px 16px;
+}
+/*Boton pago finalizar compra carrito*/
+.btn-pago {
+  margin-top: 12px;
+  width: 40%;
+  background-color: #e5a309 !important;
+  /* amarillo */
+  color: #000 !important;
+  /* texto negro */
+  border: 2px solid #FEC74A !important;
+  /* borde negro */
+  border-radius: 6px !important;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  transition: all 0.2s ease-in-out;
+  margin: auto;
+}
+
+.btn-pago:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  border: 2px solid #FEC74A !important;
+}
+
+.btn-shop {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  margin: auto;
+  width: 40%;
+  background-color: #53b1a9 !important;
+  color: #000 !important;
+  border: 2px solid #56b3ac !important;
+  border-radius: 6px !important;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  transition: all 0.2s ease-in-out;
+}
+
+
+.btn-shop:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  border: 2px solid #56b3ac !important;
+  color: #000000 !important;
+}
+
+
+
+
+.btn-pago-carrito {
+  margin-top: 12px;
+  width: 60%;
+  background-color: #FEC74A !important;
+  color: #000 !important;
+  /* texto negro */
+  border: 2px solid #FEC74A !important;
+  border-radius: 6px !important;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+  transition: all 0.2s ease-in-out;
+  margin: auto;
+}
+
+.btn-pago-carrito:hover {
+  transform: scale(1.01);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  border: 2px solid #FEC74A !important;
+ color: #000 !important
+}
+
+#cart-panel .cart-close {
+  width: 10%;
+  background-color: #ff0000 !important;
+  /* amarillo */
+  color: #000 !important;
+  /* texto negro */
+  border: 2px solid #a11d1d !important;
+  /* borde negro */
+  border-radius: 6px !important;
+
+}
+
+#cart-panel .cart-close:hover {
+
+
+  transform: scale(1.01);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+  border: 2px solid #fd0909 !important;
+
+}
+
+/* TABLA DEL CARRITO (ESTILO FUNONTRIP) */
+.container-shopping-cart-float {
+  background-color: #000 !important;
+}
+
+/* Fondo sólido */
+#cart-panel table {
+  background: #ffffff;
+  border-radius: 10px;
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+
+}
+
+/* Encabezado */
+#cart-panel thead tr {
+  background: #5dc1b9;
+  /* verde FunOnTrip */
+  color: #ffffff;
+  font-weight: 900;
+}
+
+#cart-panel thead th {
+  padding: 10px 8px;
+  font-size: 0.85rem;
+  text-transform: capitalize;
+  border-bottom: 2px solid #56b3ac;
+}
+
+/* Celdas */
+#cart-panel tbody td {
+  padding: 10px 8px;
+  font-size: 0.85rem;
+  color: #333;
+  border-bottom: 1px solid #e7e7e7;
+  background: #ffffff;
+}
+
+/* Alternancia sutil */
+#cart-panel tbody tr:nth-child(even) td {
+  background: #f6fdfc;
+  /* verde MUY suave */
+}
+
+/* Inputs */
+#cart-panel input.quantity {
+  width: 40px;
+  padding: 4px;
+  border: 1px solid #c3eae5;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  background: #ffffff;
+}
+
+/* Botón eliminar productos.html */
+#cart-panel .btn-danger {
+  background: #ff8360 !important;
+  /* naranja FunOnTrip */
+  border: none !important;
+  font-size: 0.75rem;
+  padding: 3px 8px !important;
+  color: rgb(0, 0, 0) !important;
+  border-radius: 6px;
+}
+
+/* Hover del botón eliminar */
+/* Botón eliminar - compatible con carrito flotante y carrito.html */
+#cart-panel .btn-danger,
+.cart-table .btn-danger {
+  background: #ff8360 !important;     /* naranja FunOnTrip */
+  border: none !important;
+  font-size: 0.75rem;
+  padding: 3px 8px !important;
+  color: rgb(0, 0, 0) !important;
+  border-radius: 6px;
+}
+
+/* Hover */
+#cart-panel .btn-danger:hover,
+.cart-table .btn-danger:hover {
+  background: #e57455 !important;
+  color: #000 !important;
+}
+
+
+
+/* PANEL FLOTANTE DEL CARRITO */
+#cart-panel {
+  position: fixed;
+  bottom: 20vh;
+  right: 24px;
+  width: min(420px, 95vw);
+  max-height: 72vh;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  overflow: hidden;
+  z-index: 2100;
+  display: none;
+  /* el JS lo pasa a block */
+  margin: 0 !important;
+}
+
+.cart-drag-handle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  background: #5dc1b9;
+  color: #ffffff;
+  border-bottom: 1px solid #e9efb8;
+  user-select: none;
+}
+
+.cart-body {
+  padding: 10px 12px;
+  overflow-y: auto;
+  max-height: calc(72vh - 120px);
+  background: #ffffff;
+}
+
+#cart-panel .cart-footer {
+  padding: 10px 12px 12px;
+  border-top: 1px solid #eee;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  background: #ffffff;
+}
+
+
+
+#cart-panel .cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+}
+
+#cart-panel .cart-table thead tr {
+  background: #5dc1b9;
+  color: #ffffff;
+}
+
+#cart-panel .cart-table thead th {
+  padding: 8px 6px;
+  font-size: 0.82rem;
+}
+
+#cart-panel .cart-table tbody td {
+  padding: 8px 6px;
+  font-size: 0.82rem;
+  border-bottom: 1px solid #e6e6e6;
+  background: #ffffff;
+}
+
+#cart-panel .cart-table tbody tr:nth-child(even) td {
+  background: #f6fdfc;
+}
+
+#cart-panel .cart-table input.quantity {
+  width: 52px;
+  padding: 3px 4px;
+  border-radius: 6px;
+  border: 1px solid #c3eae5;
+  font-size: 0.8rem;
+}
+
+/* Botón flotante del carrito */
+#cart-icon {
+  position: fixed;
+  bottom: 16px;
+  right: 24px;
+  z-index: 2200;
+  background: #fffdf7;
+
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  transition: all 0.2s ease-in-out;
+}
+
+#cart-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+}
+
+
+/* --- Tabla responsiva para móvil --- */
+.carrito-responsive {
+  width: 100%;
+  overflow-x: auto;
+}
+
+/* En móvil la tabla se vuelve formato "card" */
+@media (max-width: 576px) {
+  .cart-table thead {
+    display: none; /* Ocultamos encabezados */
+  }
+
+  .cart-table tr {
+    display: block;
+    margin-bottom: 14px;
+    padding: 12px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+  }
+
+  .cart-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    font-size: 0.9rem;
+  }
+
+  .cart-table td::before {
+    content: attr(data-label);
+    font-weight: 700;
+    color: #444;
+  }
+
+  /* Ajuste del input de cantidad */
+  .cart-table input.quantity {
+    width: 60px;
+    padding: 4px;
+  }
+
+  /* Botón eliminar ocupa todo el ancho */
+  .cart-table .btn-danger {
+    width: auto;
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+}
+
+
+
+
+
+/* ----- Botones más pequeños en móvil carrito flotante ------ */
+@media (max-width: 576px) {
+  .btn-pago,
+  .btn-shop {
+    width: 40%;              /* más pequeños que 100% */
+    padding: 0.5rem 0.8rem;  /* reduce la altura */
+    font-size: 0.9rem;       /* texto más pequeño */
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+
+
+/* En móviles, que aparezca centrada */
+@media (max-width: 576px) {
+  .cart-float {
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    top: 90px;
+    width: 92vw;
+  }
+
+}
+
+
+/* En móviles: que se centre y ocupe casi todo el ancho */
+@media (max-width: 576px) {
+  #cart-panel {
+    left: 4vw;
+    right: 4vw;
+    bottom: 15vh;
+    width: auto;
+  }
+}
+/* ==========================
+   RESPONSIVE
+========================== */
+
+/* Tablets y pantallas medianas */
+@media (max-width: 991.98px) {
+  #contenido-principal {
+    padding-inline: 1.5rem;
+  }
+
+  .resumen-card {
+    margin-top: 0.5rem;
+  }
+}
+
+/* Móviles */
+@media (max-width: 767.98px) {
+
+  /* que no se vea tan ancha la tarjeta en móvil */
+  .carrito-card {
+    padding: 0.5rem;
+  }
+
+  .carrito-img {
+    height: 80px;
+  }
+
+  .carrito-card .card-body {
+    padding: 0.4rem 0.6rem;
+  }
+
+  .resumen-card {
+    padding: 1.25rem;
+  }
+}
+
+/* Móviles muy pequeños */
+@media (max-width: 575.98px) {
+  #contenido-principal {
+    padding-inline: 1rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+  }
+}
