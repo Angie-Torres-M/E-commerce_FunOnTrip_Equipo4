@@ -54,6 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Agregar el nuevo producto al array global
     window.productos.push(nuevoProducto);
 
+    console.log("Se agrego");
+
     // Guardar en localStorage
     localStorage.setItem("productos", JSON.stringify(window.productos));
 
