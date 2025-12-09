@@ -2,9 +2,9 @@
 
 console.log("JS de productos cargado correctamente");
 
-// ===========================
+
 //   CONFIGURACIÓN DE LA API
-// ===========================
+
 window.productos = [
   {
     id: 1,
@@ -188,9 +188,7 @@ window.productos = [
   }
 ];
 
-// ===========================
 //   RENDERIZAR PRODUCTOS
-// ===========================
 document.addEventListener("DOMContentLoaded", function () {
   function crearCardProducto(producto) {
     return `
@@ -236,9 +234,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
   renderizarProductos();
 
-  // ===========================
+  
   //     FILTRO POR TIPO
-  // ===========================
+
   const botonesFiltro = document.querySelectorAll(".btn-filtro");
 
   botonesFiltro.forEach(btn => {
