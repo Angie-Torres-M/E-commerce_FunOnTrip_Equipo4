@@ -78,7 +78,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     console.log("Objeto producto:", nuevoProducto);
+    // Agregar el nuevo producto al array global
+    window.productos.push(nuevoProducto);
 
+    // Guardar en localStorage
+    localStorage.setItem("productos", JSON.stringify(window.productos));
+
+    // Si estás en productos.html, vuelve a renderizar
+    if (typeof renderizarProductos === "function") {
+      renderizarProductos();
+    }
+
+    // Mostrar mensaje de éxito
     alertSuccess.classList.remove("d-none");
   });
 });
