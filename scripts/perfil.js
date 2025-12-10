@@ -73,6 +73,16 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  //mi perfil y perfil super usuario
+  const tituloPrincipal = document.getElementById("titulo-principal");
+
+// Cambiar título según rol
+if (user.role === "admin") {
+  tituloPrincipal.innerHTML = `Perfil <span>super usuario</span> `;
+} else {
+  tituloPrincipal.textContent = "Mi perfil";
+}
+
 
   // ========================================================================
   // FIN: Simulación de perfil y roles usando localStorage
