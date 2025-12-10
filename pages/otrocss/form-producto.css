@@ -1,0 +1,41 @@
+.btn-guardar {
+  background-color: #FEC74A !important;   /* Amarillo dorado */
+  border: 2px solid #e5a309 !important;    /* Borde más oscuro */
+  color: #000 !important;                  /* Texto negro */
+  font-weight: 700;
+  padding: 0.75rem 1.3rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* Hover */
+.btn-guardar:hover {
+  background-color: #e5a309 !important;   /* Dorado más fuerte */
+  color: #000 !important;
+}
+
+.contact-card {
+  background: #ffffff;
+  border-radius: 28px;        /* Bordes grandes y suaves */
+  padding: 3rem;              /* Espacio interior amplio */
+  box-shadow: 0px 12px 35px rgba(0, 0, 0, 0.08); /* Sombra suave */
+  max-width: 1200px;
+}
+
+.contact-card input,
+.contact-card textarea {
+  border-radius: 12px !important;
+  padding: 12px !important;
+  font-size: 1rem;
+}
+
+.contact-card h2 {
+  font-weight: 800;
+  text-align: center;
+}
+
+.contact-card .divider {
+  border-left: 1px solid #ddd;
+  height: 100%;
+}
+
