@@ -2,10 +2,10 @@
 
 console.log("JS de productos cargado correctamente");
 
-// ===========================
-//   CONFIGURACIÓN DE LA API
-// ===========================
-window.productos = [
+// ===============================
+// 1. CATÁLOGO POR DEFECTO
+// ===============================
+const productosPorDefecto = [
   {
     id: 1,
     nombre: "Escapada Romántica en Cancún",
@@ -188,75 +188,159 @@ window.productos = [
   }
 ];
 
-// ===========================
-//   RENDERIZAR PRODUCTOS
-// ===========================
+// ===============================
+// 2. CARGAR DESDE LOCALSTORAGE
+// ===============================
+const guardados = localStorage.getItem("productos");
+
+if (guardados) {
+  try {
+    window.productos = JSON.parse(guardados);
+    console.log("Productos cargados desde localStorage");
+  } catch (e) {
+    console.error("Error al parsear productos de localStorage, usando por defecto", e);
+    window.productos = productosPorDefecto;
+  }
+} else {
+  window.productos = productosPorDefecto;
+  localStorage.setItem("productos", JSON.stringify(window.productos));
+  console.log("Productos por defecto guardados en localStorage");
+}
+
+// ===============================
+// 3. CREAR CARD
+// ===============================
+function crearCardProducto(producto) {
+  return `
+    <article class="col-12 col-sm-6 col-md-4 col-lg-3 producto-card" 
+             data-tipo="${producto.tipo}"
+             data-ubicacion="${producto.ubicacion}"
+             data-precio="${producto.precio}">
+      
+      <div class="producto-img-wrapper">
+        <img src="${producto.imagen}" class="producto-img" alt="${producto.nombre}">
+      </div>
+
+      <div class="producto-content">
+        <h3 class="producto-titulo">${producto.nombre}</h3>
+        <p class="producto-descripcion">${producto.descripcion}</p>
+        <p class="producto-precio">$${producto.precio.toLocaleString('es-MX')} MXN</p>
+
+        <button class="btn-agregar" data-id="${producto.id}">
+          <i class="fas fa-shopping-cart"></i> Agregar al carrito
+        </button>
+      </div>
+    </article>
+  `;
+}
+
+// ===============================
+// 4. RENDERIZAR PRODUCTOS
+// ===============================
+function renderizarProductos() {
+  const contenedorN = document.getElementById("productos-nacionales");
+  const contenedorI = document.getElementById("productos-internacionales");
+  const contenedorP = document.getElementById("productos-petfriendly");
+
+  if (!contenedorN || !contenedorI || !contenedorP) return;
+
+  contenedorN.innerHTML = "";
+  contenedorI.innerHTML = "";
+  contenedorP.innerHTML = "";
+
+  window.productos.forEach(p => {
+    const card = crearCardProducto(p);
+
+    if (p.ubicacion === "nacional") contenedorN.innerHTML += card;
+    if (p.ubicacion === "internacional") contenedorI.innerHTML += card;
+    if (p.ubicacion === "petfriendly") contenedorP.innerHTML += card;
+  });
+}
+
+// ===============================
+// 5. FILTROS + TOGGLE (DOM READY)
+// ===============================
 document.addEventListener("DOMContentLoaded", function () {
-  function crearCardProducto(producto) {
-    return `
-      <article class="col-12 col-sm-6 col-md-4 col-lg-3 producto-card" 
-               data-tipo="${producto.tipo}">
-        
-        <div class="producto-img-wrapper">
-          <img src="${producto.imagen}" class="producto-img" alt="${producto.nombre}">
-        </div>
-
-        <div class="producto-content">
-          <h3 class="producto-titulo">${producto.nombre}</h3>
-          <p class="producto-descripcion">${producto.descripcion}</p>
-          <p class="producto-precio">$${producto.precio.toLocaleString('es-MX')} MXN</p>
-
-          <button class="btn-agregar" data-id="${producto.id}">
-            <i class="fas fa-shopping-cart"></i> Agregar al carrito
-          </button>
-        </div>
-      </article>
-    `;
-  }
-
-  function renderizarProductos() {
-    const contenedorN = document.getElementById("productos-nacionales");
-    const contenedorI = document.getElementById("productos-internacionales");
-    const contenedorP = document.getElementById("productos-petfriendly");
-
-    if (!contenedorN || !contenedorI || !contenedorP) return;
-
-    contenedorN.innerHTML = "";
-    contenedorI.innerHTML = "";
-    contenedorP.innerHTML = "";
-
-    window.productos.forEach(p => {
-      const card = crearCardProducto(p);
-
-      if (p.ubicacion === "nacional") contenedorN.innerHTML += card;
-      if (p.ubicacion === "internacional") contenedorI.innerHTML += card;
-      if (p.ubicacion === "petfriendly") contenedorP.innerHTML += card;
-    });
-  }
-
+  // Render inicial
   renderizarProductos();
 
-  // ===========================
-  //     FILTRO POR TIPO
-  // ===========================
-  const botonesFiltro = document.querySelectorAll(".btn-filtro");
+  // ---------- ESTADO DE LOS FILTROS ----------
+  let filtroUbicacion = "todos"; // nacional / internacional / petfriendly / todos
+  let filtroTipo = "todos";      // romantico / aventura / etc / todos
+  let maxPrecio = null;          // null = todos, 10000, 20000, 20001 (>20000)
 
-  botonesFiltro.forEach(btn => {
+  function aplicarFiltros() {
+    document.querySelectorAll(".producto-card").forEach(card => {
+      const ubicacion = card.dataset.ubicacion;
+      const tipo = card.dataset.tipo;
+      const precio = parseInt(card.dataset.precio, 10);
+
+      const coincideUbicacion =
+        (filtroUbicacion === "todos" || filtroUbicacion === ubicacion);
+
+      const coincideTipo =
+        (filtroTipo === "todos" || filtroTipo === tipo);
+
+      const coincidePrecio =
+        (maxPrecio === null ||
+         (maxPrecio === 20001 && precio > 20000) ||  // botón "> 20,000"
+         (maxPrecio !== 20001 && precio <= maxPrecio));
+
+      if (coincideUbicacion && coincideTipo && coincidePrecio) {
+        card.style.display = "block";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  function activarBoton(boton, selectorGrupo) {
+    document
+      .querySelectorAll(selectorGrupo)
+      .forEach(b => b.classList.remove("active"));
+    boton.classList.add("active");
+  }
+
+  // ---- Filtros de ubicación (Ubicación / Destino) ----
+  const botonesUbicacion = document.querySelectorAll("#filtros-ubicacion .filtro-destino");
+  botonesUbicacion.forEach(btn => {
     btn.addEventListener("click", () => {
-      const filtro = btn.dataset.filtro;
-
-      botonesFiltro.forEach(b => b.classList.remove("active"));
-      btn.classList.add("active");
-
-      document.querySelectorAll(".producto-card").forEach(card => {
-        const tipo = card.dataset.tipo;
-
-        if (filtro === "todos" || filtro === tipo) {
-          card.style.display = "block";
-        } else {
-          card.style.display = "none";
-        }
-      });
+      filtroUbicacion = btn.dataset.dest; // "todos", "nacional", "internacional", "petfriendly"
+      activarBoton(btn, "#filtros-ubicacion .filtro-destino");
+      aplicarFiltros();
     });
   });
+
+  // ---- Filtros de experiencia (tipo) ----
+  const botonesExperiencia = document.querySelectorAll("#filtros-experiencia .filtro-experiencia");
+  botonesExperiencia.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filtroTipo = btn.dataset.exp; // "todos", "romantico", "aventura", etc.
+      activarBoton(btn, "#filtros-experiencia .filtro-experiencia");
+      aplicarFiltros();
+    });
+  });
+
+  // ---- Filtros de precio ----
+  const botonesPrecio = document.querySelectorAll("#filtros-precio .filtro-precio");
+  botonesPrecio.forEach(btn => {
+    btn.addEventListener("click", () => {
+      maxPrecio = btn.dataset.maxprice
+        ? parseInt(btn.dataset.maxprice, 10)
+        : null; // vacío = todos
+
+      activarBoton(btn, "#filtros-precio .filtro-precio");
+      aplicarFiltros();
+    });
+  });
+
+  // ---- Botón para mostrar/ocultar panel flotante de filtros (móvil) ----
+  const toggleBtn = document.getElementById("toggle-filtros");
+  const panelFiltros = document.querySelector(".container-filtro-float");
+
+  if (toggleBtn && panelFiltros) {
+    toggleBtn.addEventListener("click", () => {
+      panelFiltros.classList.toggle("show");
+    });
+  }
 });

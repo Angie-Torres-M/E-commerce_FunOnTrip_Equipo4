@@ -60,9 +60,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const telefonoInput = document.getElementById("telefono");
     const errorTelefono = document.getElementById("error-telefono");
-    if (!/^\d{10}$/.test(telefono)) {
+   if (!/^\d{10}$/.test(telefono)) {
       errorTelefono.textContent =
         "El teléfono debe tener exactamente 10 dígitos numéricos.";
+      telefonoInput.classList.add("is-invalid");
+      errores = true;
+    } else if (/^0+$/.test(telefono)) {
+      errorTelefono.textContent =
+        "El teléfono no puede ser solo ceros. Ingresa un número válido.";
       telefonoInput.classList.add("is-invalid");
       errores = true;
     } else {
