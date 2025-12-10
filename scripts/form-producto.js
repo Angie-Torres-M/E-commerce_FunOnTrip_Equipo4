@@ -3,93 +3,144 @@ document.addEventListener("DOMContentLoaded", () => {
   const alertError = document.getElementById("alertError");
   const alertSuccess = document.getElementById("alertSuccess");
 
-  form.addEventListener("submit", (event) => {
-    event.preventDefault();
+  // crear/obtener feedback node
+  function ensureFeedback(el) {
+    let fb = el.parentElement.querySelector(".invalid-feedback");
+    if (!fb) {
+      fb = document.createElement("div");
+      fb.className = "invalid-feedback";
+      el.parentElement.appendChild(fb);
+    }
+    return fb;
+  }
+
+  function clearValidationStates() {
     alertError.classList.add("d-none");
     alertSuccess.classList.add("d-none");
     alertError.innerHTML = "";
 
-    const data = new FormData(form);
-    const errors = [];
+    Array.from(form.elements).forEach((el) => {
+      if (!(el instanceof HTMLInputElement || el instanceof HTMLSelectElement || el instanceof HTMLTextAreaElement)) return;
+      el.classList.remove("is-invalid", "is-valid");
+      const fb = el.parentElement.querySelector(".invalid-feedback");
+      if (fb) fb.textContent = "";
+    });
+  }
 
-    const nombre = data.get("nombre")?.trim();
-    const precioStr = data.get("precio")?.trim();
-    const precio = Number(precioStr);
-    const descripcion = data.get("descripcion")?.trim();
-    const imagen = data.get("imagen")?.trim();
-    const ubicacion = data.get("ubicacion");
-    const tipo = data.get("tipo");
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    clearValidationStates();
 
-    // --- VALIDACIONES ---
+    // referencias
+    const nombreEl = form.querySelector("#nombre");
+    const precioEl = form.querySelector("#precio");
+    const ubicacionEl = form.querySelector("#ubicacion");
+    const tipoEl = form.querySelector("#tipo");
+    const imagenEl = form.querySelector("#imagen");
+    const descripcionEl = form.querySelector("#descripcion");
 
-    // Nombre
-    if (!nombre) errors.push("El nombre del paquete es obligatorio.");
-    if (nombre === "00000" || /^0+$/.test(nombre))
-      errors.push("El nombre no puede ser solo ceros.");
+    const campos = [
+      { el: nombreEl, label: "Nombre del paquete" },
+      { el: precioEl, label: "Precio" },
+      { el: ubicacionEl, label: "Ubicación" },
+      { el: tipoEl, label: "Tipo de experiencia" },
+      { el: imagenEl, label: "URL de imagen" },
+      { el: descripcionEl, label: "Descripción" },
+    ];
 
-    // Precio
-    if (!precioStr) {
-      errors.push("El precio es obligatorio.");
-    } else if (!/^\d+(\.\d{1,2})?$/.test(precioStr)) {
-      errors.push("El precio solo puede contener números y hasta 2 decimales.");
-    } else if (Number(precioStr) <= 0) {
-      errors.push("El precio debe ser mayor a 0.");
-    } else if (/^0+$/.test(precioStr)) {
-      errors.push("El precio no puede ser solo ceros.");
-    }
+    const errores = [];
+    let firstInvalid = null;
 
-    // Imagen (URL)
-    try {
-      new URL(imagen);
-    } catch {
-      errors.push("La URL de la imagen no es válida.");
-    }
+    // 1) Validar campos vacíos / básicos y marcar
+    campos.forEach(({ el, label }) => {
+      const val = (el.value || "").toString().trim();
+      let fieldError = null;
 
-    // Descripción
-    if (!descripcion) {
-      errors.push("La descripción es obligatoria.");
-    } else if (/^0+$/.test(descripcion)) {
-      errors.push("La descripción no puede ser solo ceros.");
-    }
+      // Validaciones básicas por tipo
+      if (!val) {
+        fieldError = `${label} es obligatorio.`;
+      } else {
+        // reglas específicas
+        if (el === precioEl) {
+          if (!/^\d+(\.\d{1,2})?$/.test(val)) {
+            fieldError = "El precio solo puede contener números y hasta 2 decimales.";
+          } else if (Number(val) <= 0) {
+            fieldError = "El precio debe ser mayor a 0.";
+          }
+        }
 
-    // Selects
-    if (!ubicacion) errors.push("Selecciona una ubicación.");
-    if (!tipo) errors.push("Selecciona un tipo de experiencia.");
+        if (el === nombreEl) {
+          if (val === "00000" || /^0+$/.test(val)) {
+            fieldError = "El nombre no puede ser solo ceros.";
+          }
+        }
 
-    // Mostrar errores
-    if (errors.length > 0) {
+        if (el === descripcionEl) {
+          if (/^0+$/.test(val)) {
+            fieldError = "La descripción no puede ser solo ceros.";
+          }
+        }
+
+        if (el === imagenEl) {
+          // Validar URL
+          try {
+            new URL(val);
+          } catch {
+            // Aceptar rutas locales 
+            const looksLikeRelative = /^(\.\/|\/|[a-z0-9_\-]+\.)([a-z0-9_\-\/\.]+)?$/i.test(val);
+            if (!looksLikeRelative) {
+              fieldError = "La URL de la imagen no es válida.";
+            }
+          }
+        }
+      }
+
+      // aplicar estado visual
+      if (fieldError) {
+        errores.push(fieldError);
+        el.classList.add("is-invalid");
+        ensureFeedback(el).textContent = fieldError;
+        if (!firstInvalid) firstInvalid = el;
+      } else {
+        el.classList.add("is-valid");
+      }
+    });
+
+    // Si hay errores, mostrar lista y enfocar el primero
+    if (errores.length > 0) {
+      const unique = [...new Set(errores)];
       alertError.innerHTML =
-        "<strong>Revisa los siguientes campos:</strong><ul>" +
-        errors.map((e) => `<li>${e}</li>`).join("") +
+        "<strong>Revisa los siguientes errores:</strong><ul>" +
+        unique.map((m) => `<li>${m}</li>`).join("") +
         "</ul>";
       alertError.classList.remove("d-none");
+
+      // focus al primer inválido 
+      if (firstInvalid) {
+        firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+        firstInvalid.focus({ preventScroll: true });
+      }
       return;
     }
 
-    // Crear modelo
+    //Si no hay errores, proceder a crear el producto
     const nuevoProducto = {
       id: Date.now(),
-      nombre,
-      precio,
-      descripcion,
-      imagen,
-      ubicacion,
-      tipo,
+      nombre: nombreEl.value.trim(),
+      precio: Number(precioEl.value),
+      descripcion: descripcionEl.value.trim(),
+      imagen: imagenEl.value.trim(),
+      ubicacion: ubicacionEl.value,
+      tipo: tipoEl.value,
     };
 
-    console.log("Objeto producto:", nuevoProducto);
-    // Agregar el nuevo producto al array global
+    window.productos = window.productos || [];
     window.productos.push(nuevoProducto);
-
-    // Guardar en localStorage
     localStorage.setItem("productos", JSON.stringify(window.productos));
 
-    // Si estás en productos.html, vuelve a renderizar
-    if (typeof renderizarProductos === "function") {
-      renderizarProductos();
-    }
+    if (typeof renderizarProductos === "function") renderizarProductos();
 
-    // Mostrar mensaje de éxito
     alertSuccess.classList.remove("d-none");
+    // clearValidationStates();
   });
 });
