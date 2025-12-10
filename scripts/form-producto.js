@@ -1,5 +1,3 @@
-// scripts/form-producto.js
-
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("formProducto");
   const alertError = document.getElementById("alertError");
@@ -15,22 +13,50 @@ document.addEventListener("DOMContentLoaded", () => {
     const errors = [];
 
     const nombre = data.get("nombre")?.trim();
-    const precio = Number(data.get("precio"));
+    const precioStr = data.get("precio")?.trim();
+    const precio = Number(precioStr);
     const descripcion = data.get("descripcion")?.trim();
     const imagen = data.get("imagen")?.trim();
     const ubicacion = data.get("ubicacion");
     const tipo = data.get("tipo");
 
+    // --- VALIDACIONES ---
+
+    // Nombre
     if (!nombre) errors.push("El nombre del paquete es obligatorio.");
-    if (!descripcion) errors.push("La descripción es obligatoria.");
-    if (!imagen) errors.push("La URL de la imagen es obligatoria.");
-    if (!ubicacion) errors.push("Selecciona una ubicación.");
-    if (!tipo) errors.push("Selecciona un tipo de experiencia.");
-    if (!precio || precio <= 0) {
-      errors.push("El precio debe ser un número mayor a 0.");
+    if (nombre === "00000" || /^0+$/.test(nombre))
+      errors.push("El nombre no puede ser solo ceros.");
+
+    // Precio
+    if (!precioStr) {
+      errors.push("El precio es obligatorio.");
+    } else if (!/^\d+(\.\d{1,2})?$/.test(precioStr)) {
+      errors.push("El precio solo puede contener números y hasta 2 decimales.");
+    } else if (Number(precioStr) <= 0) {
+      errors.push("El precio debe ser mayor a 0.");
+    } else if (/^0+$/.test(precioStr)) {
+      errors.push("El precio no puede ser solo ceros.");
     }
 
-    // Si hay errores, muestra alerta Bootstrap
+    // Imagen (URL)
+    try {
+      new URL(imagen);
+    } catch {
+      errors.push("La URL de la imagen no es válida.");
+    }
+
+    // Descripción
+    if (!descripcion) {
+      errors.push("La descripción es obligatoria.");
+    } else if (/^0+$/.test(descripcion)) {
+      errors.push("La descripción no puede ser solo ceros.");
+    }
+
+    // Selects
+    if (!ubicacion) errors.push("Selecciona una ubicación.");
+    if (!tipo) errors.push("Selecciona un tipo de experiencia.");
+
+    // Mostrar errores
     if (errors.length > 0) {
       alertError.innerHTML =
         "<strong>Revisa los siguientes campos:</strong><ul>" +
@@ -40,9 +66,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Si todo está bien, crear el objeto del modelo
+    // Crear modelo
     const nuevoProducto = {
-      id: Date.now(), // o productos.length + 1
+      id: Date.now(),
       nombre,
       precio,
       descripcion,
@@ -52,9 +78,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     console.log("Objeto producto:", nuevoProducto);
-    console.log("JSON:", JSON.stringify(nuevoProducto));
+    // Agregar el nuevo producto al array global
+    window.productos.push(nuevoProducto);
 
+    // Guardar en localStorage
+    localStorage.setItem("productos", JSON.stringify(window.productos));
+
+    // Si estás en productos.html, vuelve a renderizar
+    if (typeof renderizarProductos === "function") {
+      renderizarProductos();
+    }
+
+    // Mostrar mensaje de éxito
     alertSuccess.classList.remove("d-none");
-    // form.reset(); // si quieren limpiar el formulario
   });
 });
