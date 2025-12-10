@@ -10,7 +10,7 @@
 /* --- TARJETA CON FLIP --- */
 .card {
   width: 340px;
-  height: 600px;   
+  height: 600px;
   perspective: 1000px;
   margin: auto;
   border: none;
@@ -47,7 +47,8 @@
 
   font-family: Arial, Helvetica, sans-serif;
   background-color: #ffffff;
-  }
+}
+
 /* --- REVERSO DE LA TARJETA --- */
 .card-back {
   background-color: #222;
@@ -56,8 +57,10 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: center;   /* centra vertical */
-  align-items: center;       /* centra horizontal */
+  justify-content: center;
+  /* centra vertical */
+  align-items: center;
+  /* centra horizontal */
 
   text-align: center;
   padding: 30px 25px !important;
@@ -66,14 +69,16 @@
 
 
 .card-back h3 {
-  font-size: 1.8rem;            /* título más grande */
+  font-size: 1.8rem;
+  /* título más grande */
   font-weight: 700;
   margin-bottom: 18px;
   color: #ffffffd9;
 }
 
 .card-back p {
-  font-size: 1.15rem;           /* texto más grande */
+  font-size: 1.15rem;
+  /* texto más grande */
   line-height: 1.6;
   margin-bottom: 35px;
   color: #ffffffeb;
@@ -140,6 +145,7 @@
 .card.flipped .card-inner {
   transform: rotateY(180deg);
 }
+
 /* --- Fotos más amplias y que NO corten la cabeza --- */
 .card-front img {
   width: 250px;
@@ -150,7 +156,7 @@
   object-position: top center;
 
   border-radius: 16px;
-  box-shadow: 0px 4px 16px rgba(0,0,0,0.15);
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.15);
   margin-bottom: 15px;
   transition: transform 0.25s ease;
 }
@@ -178,43 +184,37 @@
 
 @media (max-width: 420px) {
   .card {
-    width: 280px;
+       width: 280px;
+      height: 450px;
   }
 
   .card-front img {
-  width: 120px;
+    width: 120px;
     height: 120px;
     object-position: top center;
-   
-  }
-}
 
-@media (max-width: 420px) {
-  .card {
-    width: 280px;
-    height: 420px;   
+    }
+
+    .card-front img {
+      width: 180px;
+      height: 240px;
+      object-position: top center;
+    }
   }
 
-  .card-front img {
-    width: 180px;
-    height: 240px;
-    object-position: top center;
-  }
-}
+  /* --- BOTÓN "VER MÁS" --- */
+  #verMasBtn {
+    margin: 20px auto;
 
-/* --- BOTÓN "VER MÁS" --- */
-#verMasBtn {
-  margin: 20px auto;
-  
-  padding: 10px 20px;
-  border: none;
-  background: black;
-  color: white;
-  border-radius: 30px;
-  cursor: pointer;
-  font-size: 50px;
+    padding: 10px 20px;
+    border: none;
+    background: black;
+    color: white;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 50px;
 
-  &:active {
-    transform: scale(0.9);
+    &:active {
+      transform: scale(0.9);
+    }
   }
-}

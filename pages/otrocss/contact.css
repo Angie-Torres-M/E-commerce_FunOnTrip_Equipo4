@@ -207,10 +207,38 @@
 }
 
 
-/* Contenedor principal de la columna izquierda (form + info) */
-.contacto__container.col-lg-8 {
-  position: sticky;
+/* Contenedor icono + texto */
+.contacto__container-info {
+  display: flex;
+  align-items: flex-start;      /* Alinear icono con inicio del texto */
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 24px;
 }
+
+/* Columna de texto */
+.contacto__container-text {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+/* Evitar márgenes raros */
+.contacto__container-text h2,
+.contacto__container-text p {
+  margin: 0;
+  padding: 0;
+}
+
+/* Centrar toda la columna en la grid */
+.contacto__container-sections {
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
 /* ================================
    LÍNEA ENTRE FORM + INFO  (DESKTOP)
    ================================ */

@@ -21,6 +21,13 @@ document.addEventListener('DOMContentLoaded', function () {
   // ==========================
   //   RENDER / ACTUALIZAR TABLA
   // ==========================
+
+  function formatear(valor) {
+  return valor.toLocaleString("es-MX", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
   function updateCart() {
     if (cartItems) cartItems.innerHTML = '';
 
@@ -38,7 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const tr = document.createElement('tr');
         tr.innerHTML = `
   <td data-label="Paquete">${product.name}</td>
-  <td data-label="Precio">$${product.price.toFixed(2)}</td>
+  <td data-label="Precio">$${formatear(product.price)} MXN</td>
+
   <td data-label="Cant.">
     <input 
       type="number" 
@@ -47,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
       class="quantity" 
       data-index="${index}">
   </td>
-  <td data-label="Subtotal">$${subtotal.toFixed(2)}</td>
+  <td data-label="Subtotal">$${formatear(subtotal)} MXN</td>
   <td data-label="">
     <button class="btn btn-danger remove-from-cart" data-index="${index}">
       Eliminar
@@ -61,16 +69,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //  Total antes de impuestos en el flotante
     if (cartTotalNoImpEl) {
-      const textoTotal = cart.length > 0
-        ? total.toLocaleString('es-MX', {
-          minimumFractionDigits: 2,
-          maximumFractionDigits: 2
-        })
-        : '0.00';
-
-      cartTotalNoImpEl.textContent = textoTotal;
-    }
-
+      const textoTotal = cart.length > 0 ? formatear(total) : '0.00';
+   cartTotalNoImpEl.textContent = textoTotal;
+        }
+    
 
     //  Guardar carrito
     localStorage.setItem('cart', JSON.stringify(cart));
@@ -78,9 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
     //  Avisar al resto de scripts que el carrito cambió
     document.dispatchEvent(new CustomEvent('cartUpdated'));
   }
-
-
-
 
   // ==========================
   //   TOGGLE DEL PANEL FLOTANTE

@@ -818,3 +818,40 @@ main {
     padding: 0.3rem 0.5rem;
   }
 }
+/* Estilos generales (desktop / tablet) */
+.btn-pago,
+.btn-carrito {
+  width: 40%;
+  font-weight: 600;
+  padding: 0.8rem 1.2rem;
+}
+
+/* Contenedor de botones abajo del carrito */
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+/* --------- AJUSTE RESPONSIVE PARA MÓVIL --------- */
+@media (max-width: 576px) {
+  .cart-floating {
+    width: 95vw;              /* que no se salga de la pantalla */
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .cart-actions {
+    flex-direction: row;   /* botones uno debajo del otro */
+    align-items: center;
+    height: 10vh;
+  }
+
+  .btn-pago,
+  .btn-carrito {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.55rem 0.8rem;
+
+  }
+}
