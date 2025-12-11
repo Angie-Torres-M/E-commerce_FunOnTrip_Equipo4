@@ -35,6 +35,25 @@
   border-radius: 12px 0 0 12px;
 }
 
+.password-container {
+  position: relative;
+}
+
+.password-container input {
+  width: 100%;
+  padding-right: 40px; /* espacio para el ícono */
+}
+
+.password-container .toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #666;
+}
+
+
 @media (max-width: 994px) {
   /* Es crucial que esta clase apunte al contenedor de la imagen de Registro */
   .image-section-register {

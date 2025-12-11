@@ -136,10 +136,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     window.productos = window.productos || [];
     window.productos.push(nuevoProducto);
+
+    console.log("Se agrego");
+
+    // Guardar en localStorage
     localStorage.setItem("productos", JSON.stringify(window.productos));
 
     if (typeof renderizarProductos === "function") renderizarProductos();
 
+    // Mostrar mensaje de éxito ...
     alertSuccess.classList.remove("d-none");
     // clearValidationStates();
   });
