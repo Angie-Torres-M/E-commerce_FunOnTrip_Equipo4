@@ -36,17 +36,47 @@ document.addEventListener("DOMContentLoaded", () => {
     return re.test(email);
   };
 
-  const esTelefonoValido = (telefono) => {
-    // Solo 10 dígitos por ahora
-    return /^\d{10}$/.test(telefono);
+  const esTelefonoValido = (tel) => {
+    // Quitar espacios, guiones, paréntesis, etc.
+    const telefono = tel.replace(/\D/g, "");
+
+    // 1. Debe ser exactamente de 10 dígitos
+    if (!/^\d{10}$/.test(telefono)) return false;
+
+    // 2. No permitir todos los dígitos iguales (0000000000, 1111111111, etc.)
+    if (/^(\d)\1{9}$/.test(telefono)) return false;
+
+    // 3. No permitir secuencias muy obvias
+    const secuenciasInvalidas = [
+      "1234567890",
+      "0123456789",
+      "2345678901",
+      "3456789012",
+      "4567890123",
+      "5678901234",
+      "6789012345",
+      "7890123456",
+      "8901234567",
+      "0987654321",
+      "9876543210",
+      "8765432109",
+      "7654321098",
+      "6543210987",
+      "5432109876",
+      "4321098765",
+      "3210987654",
+      "0000000009",
+    ];
+    if (secuenciasInvalidas.includes(telefono)) return false;
+
+    return true;
   };
 
   // Contraseña:
   // mínimo 6 caracteres,
   // al menos 1 minúscula, 1 mayúscula, 1 número y 1 carácter especial
   const esPasswordValido = (password) => {
-    const regexPassword =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
     return regexPassword.test(password);
   };
 
@@ -64,8 +94,8 @@ document.addEventListener("DOMContentLoaded", () => {
       nombre,
       email,
       telefono,
-      password,        // ⚠️ Solo para demo
-      rol: "user",     // Por si después quieren distinguir admin / user
+      password, // ⚠️ Solo para demo
+      rol: "user", // Por si después quieren distinguir admin / user
       creadoEn: new Date().toISOString(),
     };
   };
@@ -94,7 +124,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if (!telefono || !esTelefonoValido(telefono)) {
-      errores.push("Ingresa un teléfono válido de 10 dígitos.");
+      errores.push(
+        "Ingresa un teléfono válido. Debe tener 10 dígitos y no ser una secuencia repetida."
+      );
     }
 
     if (!password || !esPasswordValido(password)) {

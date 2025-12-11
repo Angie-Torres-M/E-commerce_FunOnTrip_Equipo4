@@ -81,6 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Agregar el nuevo producto al array global
     window.productos.push(nuevoProducto);
 
+    console.log("Se agrego");
+
     // Guardar en localStorage
     localStorage.setItem("productos", JSON.stringify(window.productos));
 
@@ -89,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
       renderizarProductos();
     }
 
-    // Mostrar mensaje de éxito
+    // Mostrar mensaje de éxito ...
     alertSuccess.classList.remove("d-none");
   });
 });
