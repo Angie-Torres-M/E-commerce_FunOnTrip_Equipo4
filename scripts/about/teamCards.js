@@ -19,10 +19,9 @@ function initTeamCards() {
     });
   });
 
-  // 🔸 IMPORTANTE:
-  // Ya no hay lógica de "ver más" ni ocultar tarjetas.
-  // Las 6 quedan visibles desde el inicio.
+ 
 }
 
 // La dejamos global para usarla desde main.js
 window.initTeamCards = initTeamCards;
+

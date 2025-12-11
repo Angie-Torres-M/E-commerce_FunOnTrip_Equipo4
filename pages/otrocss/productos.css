@@ -66,7 +66,8 @@
   font-weight: 700;
   margin-bottom: 0.5rem;
   line-height: 1.3;
-  min-height: 45px; /* Evita saltos bruscos entre cards */
+  min-height: 45px;
+  /* Evita saltos bruscos entre cards */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -79,7 +80,8 @@
   color: #6c757d;
   margin-bottom: 1rem;
   line-height: 1.4;
-  min-height: 48px; /* Mantiene alineación perfecta entre cards */
+  min-height: 48px;
+  /* Mantiene alineación perfecta entre cards */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -129,24 +131,135 @@
   font-size: 1rem;
 }
 
-/* ==== BOTONES DE FILTRO AMARILLOS ==== */
+
+/* ==== ESTILO GLOBAL PARA TODOS LOS BOTONES DE FILTRO ==== */
 .btn-filtro {
-  border: 1px solid #FEC74A;
-  color: #000000;
+  background-color: transparent;
+  border: 2px solid #FEC74A;
+  color: #000;
   font-weight: 600;
+  padding: 0.35rem 0.7rem;
+  border-radius: 6px;
+  transition: all 0.2s ease-in-out;
 }
 
+/* Hover y activo igual */
 .btn-filtro:hover,
 .btn-filtro.active {
   background-color: #FEC74A;
-  color: #1a1a1a; /* Negro para contraste */
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.subtitulo-centrado {
-  text-align: center;
-  max-width: 900px;
-  margin: 0 auto 2rem auto;
-  font-size: 1rem;
-  color: #555;
+/*panel filtro computadora*/
+.cart-header {
+  position: sticky;
+  top: 90px;
+  /* ajusta según tu header */
+  z-index: 1000;
+  background-color: #ffffff !important;
+  padding: 1rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
 }
 
+/* PANEL FLOTANTE DE FILTROS */
+.container-filtro-float {
+  position: fixed;
+  top: 90px;
+  /* ajusta según tu header */
+  left: 16px;
+  z-index: 1050;
+  background-color: #ffffff !important;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  max-width: 280px;
+}
+
+/* BOTÓN DE ÍCONO (oculto por defecto, solo se ve en md y abajo) */
+.toggle-filtros-btn {
+  position: fixed;
+  top: 50px;        /* debajo del header */
+  left: 16px;
+  z-index: 2000;
+  background-color: #FEC74A;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  display: none;    /* se activa en el media query */
+}
+
+/* A partir de 1549px hacia abajo aparece el icono y se hace pequeño el panel */
+@media (max-width: 1549.98px) {
+
+  /* --- PANEL MÁS PEQUEÑO EN MÓVIL --- */
+  .container-filtro-float {
+    padding: 0.5rem 0.75rem; /* reduce espacio interno */
+    border-radius: 8px;
+    display: none;
+    margin-top: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92vw;
+    max-width: none;
+    max-width: 240px;        /* menos ancho general */
+  }
+
+  .container-filtro-float h5 {
+    font-size: 0.9rem;
+    margin-bottom: 4px;
+  }
+
+  .container-filtro-float button {
+    font-size: 0.75rem;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .container-filtro-float p,
+  .container-filtro-float span,
+  .container-filtro-float label {
+    font-size: 0.8rem;
+  }
+
+  /* --- BOTÓN DE FILTROS REDUCIDO --- */
+  .toggle-filtros-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: auto;
+    left: 20px;
+    width: 36px;
+    height: 36px;
+    border-radius: 999px; /* más redondito */
+  }
+}
+
+/* cuando tiene la clase show, se muestra */
+.container-filtro-float.show {
+  display: block;
+}
+/* =============================
+   PANEL NORMAL — PANTALLAS GRANDES
+   Se expande automáticamente en monitores amplios
+============================= */
+
+@media (min-width: 2100px) {
+  .cart-header {
+    max-width: 420px;          /* más ancho que el default */
+    padding: 1.5rem 2rem;      /* más respiración */
+    border-radius: 14px;
+    font-size: 1rem;           /* texto ligeramente más grande */
+    margin-top: 100px;
+  }
+
+  .cart-header .btn-filtro {
+    padding: 0.5rem 1rem;      /* botones más cómodos en desktop */
+    font-size: 0.95rem;
+  }
+}
