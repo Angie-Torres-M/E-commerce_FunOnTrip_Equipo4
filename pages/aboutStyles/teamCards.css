@@ -182,25 +182,55 @@
   }
 }
 
+
 @media (max-width: 420px) {
+
   .card {
-       width: 280px;
-      height: 450px;
+    width: 280px;
+    height: 450px;
   }
 
+  /* Imagen FRONT (solo una versión) */
   .card-front img {
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 240px;
     object-position: top center;
-
-    }
-
-    .card-front img {
-      width: 180px;
-      height: 240px;
-      object-position: top center;
-    }
   }
+}
+
+/* --- REVERSO DE LA TARJETA (ajuste de espacio) --- */
+
+.card-back {
+  background-color: #222;
+  color: #fff;
+  transform: rotateY(180deg);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;  /* antes: center */
+  align-items: center;
+
+  text-align: center;
+  padding: 24px 20px;
+  height: 100%;
+  box-sizing: border-box;
+}
+ 
+.card-back h3 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: #ffffffd9;
+}
+
+.card-back p {
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  color: #ffffffeb;
+  max-width: 90%;
+}
+
 
   /* --- BOTÓN "VER MÁS" --- */
   #verMasBtn {
