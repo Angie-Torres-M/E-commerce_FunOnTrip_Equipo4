@@ -780,7 +780,7 @@ main {
     height: 100%;
     max-height: 100%;
 
-    display: flex;          /* IMPORTANTE */
+    display: none;          /* IMPORTANTE */
     flex-direction: column; /* header + body + footer en columna */
   }
 
