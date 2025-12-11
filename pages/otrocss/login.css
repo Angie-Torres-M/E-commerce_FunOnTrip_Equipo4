@@ -163,20 +163,19 @@
   color: white;
 }
 
-.password-container {
+.password-container-login {
   position: relative;
 }
 
-.password-container input {
+.password-container-login input {
   width: 100%;
   padding-right: 40px; /* espacio para el ícono */
 }
 
-.password-container .toggle-password {
+.password-container .toggle-password-login {
   position: absolute;
   right: 10px;
- 
-  top: 50%;
+   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
   color: #666;
