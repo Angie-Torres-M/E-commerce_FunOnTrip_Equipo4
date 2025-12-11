@@ -1,7 +1,5 @@
 // ========================================================================
-// INICIO: Simulación de inicio de sesión con localStorage
-// Actualizado para usar los usuarios registrados en localStorage
-// y mantener el redireccionamiento a perfil.html
+// LOGIN CON LOCALSTORAGE + VALIDACIÓN + ROLES + SUPERADMIN
 // ========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
 
-  const LS_KEY_USUARIOS = "funontrip_usuarios"; // misma clave que en registro.js
+  const LS_KEY_USUARIOS = "funontrip_usuarios";
 
   if (!loginBtn || !emailInput || !passwordInput) return;
 
@@ -24,25 +22,45 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  // 🟣 Lista de superusuarios reales (los que tú definiste en auth.js)
+  const ADMIN_EMAILS = [
+    "danaero25@gmail.com",
+    "david_carranco1111@outlook.es",
+    "barrancojared577@gmail.com",
+    "jorfernandofo@gmail.com",
+    "anguietorres.92@gmail.com",
+  ];
+
+  const MASTER_PASSWORD = "Fun2024*";
+
+  const isAdminEmail = (email) => ADMIN_EMAILS.includes(email.toLowerCase());
+
+  // -------------------------------------------------------------------
+  // ⭐ FUNCIÓN QUE PERMITE ACCESO DIRECTO A SUPERADMIN
+  // -------------------------------------------------------------------
+  function validarAdminAcceso(email, password) {
+    return isAdminEmail(email) && password === MASTER_PASSWORD;
   }
 
-  // ---- Evento click login ----
+  // -------------------------
+  // EVENTO LOGIN
+  // -------------------------
   loginBtn.addEventListener("click", () => {
-    const emailValue = emailInput.value.trim();
+    const emailValue = emailInput.value.trim().toLowerCase();
     const passwordValue = passwordInput.value.trim();
 
-    // Validar correo
-    if (emailValue === "") {
+    // VALIDACIÓN EMAIL
+    if (!emailValue) {
       Swal.fire({
         icon: "error",
         title: "Error",
         text: "El correo es obligatorio.",
       });
       return;
-    } else if (!validateEmail(emailValue)) {
+    }
+    if (!validateEmail(emailValue)) {
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -51,15 +69,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Validar contraseña (longitud mínima, la fuerza ya se validó en registro)
-    if (passwordValue === "") {
+    // VALIDACIÓN PASSWORD
+    if (!passwordValue) {
       Swal.fire({
         icon: "error",
         title: "Error",
         text: "La contraseña es obligatoria.",
       });
       return;
-    } else if (passwordValue.length < 6) {
+    }
+    if (passwordValue.length < 6) {
       Swal.fire({
         icon: "error",
         title: "Error",
@@ -68,23 +87,68 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Buscar usuario en localStorage
+    // =====================================================
+    // ⭐ ACCESO DIRECTO SUPERADMIN (NO NECESITA REGISTRO)
+    // =====================================================
+    if (validarAdminAcceso(emailValue, passwordValue)) {
+      const adminUser = {
+        nombre: "Super Administrador",
+        email: emailValue,
+        rol: "admin",
+      };
+
+      localStorage.setItem(
+        "funontrip_usuario_activo",
+        JSON.stringify(adminUser)
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Bienvenido",
+        text: "Acceso concedido como Super Administrador.",
+        timer: 1500,
+        showConfirmButton: false,
+      }).then(() => {
+        window.location.href = "perfil.html";
+      });
+
+      return; // ⛔ detiene login normal
+    }
+
+    // =====================================================
+    // LOGIN NORMAL (BUSCAR EN LOCALSTORAGE)
+    // =====================================================
     const usuarios = obtenerUsuariosLS();
     const usuarioEncontrado = usuarios.find(
       (usuario) =>
-        usuario.email === emailValue && usuario.password === passwordValue
+        usuario.email.toLowerCase() === emailValue &&
+        usuario.password === passwordValue
     );
 
     if (!usuarioEncontrado) {
       Swal.fire({
         icon: "error",
         title: "Credenciales inválidas",
-        text: "Correo o contraseña incorrectos. Si aún no tienes cuenta, regístrate.",
+        text: "Correo o contraseña incorrectos.",
       });
       return;
     }
 
-    // LOGIN OK
+    // Rol basado en correo
+    const rol = isAdminEmail(usuarioEncontrado.email) ? "admin" : "user";
+
+    // Guardar sesión
+    localStorage.setItem(
+      "funontrip_usuario_activo",
+      JSON.stringify({
+        id: usuarioEncontrado.id,
+        nombre: usuarioEncontrado.nombre,
+        email: usuarioEncontrado.email,
+        rol,
+      })
+    );
+
+    // ÉXITO NORMAL
     Swal.fire({
       icon: "success",
       title: "Bienvenido",
@@ -92,47 +156,28 @@ document.addEventListener("DOMContentLoaded", () => {
       timer: 1500,
       showConfirmButton: false,
     }).then(() => {
-      // Usa la función de auth.js para guardar el usuario actual
-      if (typeof setCurrentUser === "function") {
-        // si tu auth.js espera solo el correo, dejamos el email
-        setCurrentUser(usuarioEncontrado.email);
-      } else {
-        // fallback por si acaso, para no romper nada
-        localStorage.setItem(
-          "funontrip_usuario_activo",
-          JSON.stringify(usuarioEncontrado)
-        );
-      }
-
-      // Redirige al perfil (lo que querías conservar)
-      window.location.href = "perfil.html";
+      window.location.href = rol === "admin" ? "dashboard.html" : "perfil.html";
     });
   });
 });
 
 // ========================================================================
-// FIN: Simulación de inicio de sesión con localStorage
+// TOGGLE PASSWORD
 // ========================================================================
-
-// Ver / Ocultar Contraseña
 document.addEventListener("DOMContentLoaded", () => {
   const toggles = document.querySelectorAll(".toggle-password");
 
   toggles.forEach((icon) => {
     icon.addEventListener("click", () => {
-      const inputId = icon.getAttribute("data-target");
-      const input = document.getElementById(inputId);
-
+      const input = document.getElementById(icon.getAttribute("data-target"));
       if (!input) return;
 
       if (input.type === "password") {
         input.type = "text";
-        icon.classList.remove("fa-eye");
-        icon.classList.add("fa-eye-slash");
+        icon.classList.replace("fa-eye", "fa-eye-slash");
       } else {
         input.type = "password";
-        icon.classList.remove("fa-eye-slash");
-        icon.classList.add("fa-eye");
+        icon.classList.replace("fa-eye-slash", "fa-eye");
       }
     });
   });
