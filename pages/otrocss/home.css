@@ -1,9 +1,10 @@
 body {
-    padding-top: 50px;
+  padding-top: 50px;
 }
 
 /* ============================
    CARRUSEL
+   (DEJADO IGUAL)
 ============================ */
 
 .carrusel-section h2 {
@@ -13,7 +14,7 @@ body {
 
 /* Imagen del carrusel */
 .carrusel-img {
-  height: 350px;
+  height: 550px;
   object-fit: cover;
   border-radius: 15px;
 }
@@ -25,7 +26,7 @@ body {
   background-size: 60%;
   border-radius: 50%;
   padding: 20px;
-  transition: background-color 0.3s;
+  transition: background-color 0.2s;
 }
 
 .carousel-control-prev-icon:hover,
@@ -39,19 +40,18 @@ body {
 
 .destino-card,
 .promo-card {
-  border: none;                 /* ❌ Quita el borde que crea el doble contenedor */
+  border: none;                 /* Quita el borde que crea el doble contenedor */
   border-radius: 15px;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 4px 15px rgba(0,0,0,0.08);  /* sombra limpia */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 100%;
-  display: block;        /* ❗ quita espacios fantasmas */
+  width: 100%;
+  display: block;        /* quita espacios fantasmas */
   border-bottom: none;   /* evita doble borde */
 }
 
-
-/* Tarjetas separadas */    
+/* Tarjetas separadas */
 .card-sep {
   border-radius: 15px;
   overflow: hidden;
@@ -86,53 +86,58 @@ body {
 }
 
 /* ============================
-   BOTONES
+   BOTONES – VER MÁS / PROMO
 ============================ */
 
-/* Botón rojo (detalles normales) */
+/* Botón principal "Ver más" (amarillo limpio) */
 .btn-fun-primary {
-  background-color: #ffc107c5;
-  border-color: #ffc107f3;
-  color: #000000;
+  background-color: #FFD460;
+  border-color: #FFD460;
+  color: #1C1C1C;
   font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-fun-primary:hover {
-  background-color: #ff9b7f;
-  border-color: #ff9b7f;
-  color: #000;
+  background-color: #ffcd33;
+  border-color: #ffcd33;
+  color: #1C1C1C;
   transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-/* Botón amarillo (promoción) */
+/* Botón amarillo de promoción */
 .btn-fun-promo {
-  background-color: #fec74a;
-  border-color: #fec74a;
-  color: #000;
+  background-color: #FFD460; 
+  border-color: #ffbb00;
+  color: #000000;
   font-weight: 600;
+  transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-fun-promo:hover {
-  background-color: #ffdd7a;
-  border-color: #ffdd7a;
-  color: #000;
+  background-color: #009f80;
+  border-color: #009f80;
+  color: #ffffff;
   transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
+/* Estado activo (si lo sigues usando para filtros o tabs) */
 .btn-active {
-    background-color: #ffc107 !important;
-    border-color: #ffc107 !important;
-    color: black !important;
-    transform: scale(1.05);
+  background-color: #FFD460 !important;
+  border-color: #FFD460 !important;
+  color: #000 !important;
+  transform: scale(1.05);
 }
- 
+
 /* ============================
    PROMO ESPECIAL
 ============================ */
 
 .promo-card {
-  background-color: #ffe29b;
-  border-color: #f1c96b;
+  background-color: #ffe9bbc8;  /* un amarillo pastel más suave */
+  border-color: #F1C96B;
   position: relative;
 }
 
@@ -140,7 +145,7 @@ body {
   position: absolute;
   top: 10px;
   left: 12px;
-  background-color: #ff8360;
+  background-color: #FF6F61;   /* coral para destacar */
   color: #fff;
   padding: 4px 10px;
   border-radius: 999px;
@@ -151,60 +156,65 @@ body {
 
 /* ===== Texto de dudas dentro de las cards ===== */
 .card-dudas {
-    color: #555;
-    font-family: "Nunito Sans", sans-serif;
+  color: #555;
+  font-family: "Nunito Sans", sans-serif;
 }
 
 .link-escribenos {
-    color: #ff7575 !important;          /* Amarillo FunOnTrip */
-    font-weight: 700;
-    text-decoration: underline;
+  color: #FF6F61 !important;          /* coral */
+  font-weight: 700;
+  text-decoration: underline;
 }
 
+.link-escribenos:hover {
+  color: #e65a50 !important;
+  text-decoration-color: #e65a50;
+}
 
-/* ===== Enlace "Ver todos los productos" ===== */
+/* ===== Enlace "Ver todos los productos" =====
+   (DEJADO IGUAL COMO PEDISTE)
+================================================ */
 .link-ver-productos {
-    display: inline-block;
-    font-family: "Montserrat", sans-serif;
-    font-weight: 600;
-    color: #ff8360;
-    text-decoration: none;
-    border-bottom: 2px solid rgba(255, 131, 96, 0.4);
-    padding-bottom: 2px;
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  color: #ff8360;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(255, 131, 96, 0.4);
+  padding-bottom: 2px;
 }
 
 .link-ver-productos:hover {
-    color: #e36947;
-    border-bottom-color: #e36947;
+  color: #e36947;
+  border-bottom-color: #e36947;
 }
-
 
 /* ===== Botón icono para agregar al carrito ===== */
 .btn-add-cart-icon {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background-color: #37d344; /* Coral FunOnTrip */
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: all .2s ease-in-out;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #00B894;      /* turquesa consistente con promos */
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all .2s ease-in-out;
 }
 
 .btn-add-cart-icon:hover {
-    background-color: #ffa68a;
-    transform: scale(1.12);
+  background-color: #009f80;
+  transform: scale(1.12);
+  color: #fff;
 }
 
 /* Ícono */
 .btn-add-cart-icon i {
-    pointer-events: none; /* evita que el click se quede en el icono */
+  pointer-events: none; /* evita que el click se quede en el icono */
 }
-
 
 /* ============================
    RESPONSIVE
