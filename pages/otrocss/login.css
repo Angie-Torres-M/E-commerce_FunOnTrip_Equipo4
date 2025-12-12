@@ -43,21 +43,32 @@
   font-size: 0.95rem;
 }
 
+
+
+/*nuevo*/
+
 .btn-login {
-  padding: 0.875rem;
-  background: #ffd275;
-  border: none;
-  border-radius: 8px;
+    cursor: pointer;
+    margin-top: 12px;
+  margin-bottom: 12px;
+  margin: auto;
+  width: 100%;
+  background-color: #ffd275 !important;
+  color: #000 !important;
+  border: 2px solid #ffd275 !important;
+  border-radius: 6px !important;
   font-weight: 600;
+  padding: 0.875rem;
   cursor: pointer;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  &:hover {
-    transform: scale(1.05);
-  }
-  &:active {
-    transform: scale(0.9);
-  }
+  
+  transition: all 0.2s ease-in-out;
+
+}
+.btn-login:hover {
+  transform: scale(1.01);
+  border: 2px solid #ffd275 !important;
+  color: #000000 !important;
+  background-color: #ffd275 !important;
 }
 /* AGREGAR AL FINAL DE TU CSS EXISTENTE */
 
