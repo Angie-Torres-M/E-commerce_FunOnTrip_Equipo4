@@ -11,6 +11,7 @@ async function includeHTML(selector, url) {
   }
 
   host.innerHTML = await res.text();
+  document.dispatchEvent(new Event("headerLoaded"));
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
