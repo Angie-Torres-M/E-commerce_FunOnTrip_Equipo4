@@ -29,8 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ============================
   // Validaciones base
-  // (tu compa puede mejorarlas)
-  // ============================
+   // ============================
   const esEmailValido = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);

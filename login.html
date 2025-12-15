@@ -23,6 +23,7 @@
   <!-- Estilos -->
   <link rel="stylesheet" href="./pages/otrocss/style.css" />
   <link rel="stylesheet" href="./pages/global.css" />
+  <link rel="stylesheet" href="./pages/otrocss/login.css" />
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                     <label for="password">Contraseña</label>
                     <div class="password-container">
                       <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" />
-                      <i class="fa-solid fa-eye toggle-password" data-target="password"></i>
+                      <i class="fa-solid fa-eye toggle-password-login" data-target="password"></i>
                     </div>
                   </div>
 
@@ -68,7 +69,7 @@
 
                 <div class="register-link">
                   ¿No tienes una cuenta?
-                  <a href="./registro.html">Regístrate</a>
+                  <a href="./registro.html" class="text-primary">Regístrate</a>
                 </div>
               </div>
             </div>
@@ -109,6 +110,7 @@
          creación de productos mientras se desarrolla el backend real. -->
   <!-- ====================================================================== -->
 
+  <script src="./scripts/auth-login.js"></script>
   <script src="./scripts/auth.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="./scripts/login.js"></script>

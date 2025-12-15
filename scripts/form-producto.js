@@ -2,6 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("formProducto");
   const alertError = document.getElementById("alertError");
   const alertSuccess = document.getElementById("alertSuccess");
+  const btnLimpiar = document.getElementById("btnLimpiar");
+
+
+      btnLimpiar.addEventListener("click", () => {
+      form.reset(); // limpia todos los campos
+
+      // Ocultar alertas
+      alertError.classList.add("d-none");
+      alertSuccess.classList.add("d-none");
+
+      // Limpia lista de errores visuales
+      alertError.innerHTML = "";
+    });
 
   // crear/obtener feedback node
   function ensureFeedback(el) {
@@ -146,6 +159,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Mostrar mensaje de éxito ...
     alertSuccess.classList.remove("d-none");
-    // clearValidationStates();
+
+
   });
 });

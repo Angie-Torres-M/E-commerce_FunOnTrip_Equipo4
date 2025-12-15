@@ -1,4 +1,4 @@
-.btn-guardar {
+.btn {
   background-color: #FEC74A !important;   /* Amarillo dorado */
   border: 2px solid #e5a309 !important;    /* Borde más oscuro */
   color: #000 !important;                  /* Texto negro */
@@ -9,7 +9,7 @@
 }
 
 /* Hover */
-.btn-guardar:hover {
+.btn:hover {
   background-color: #e5a309 !important;   /* Dorado más fuerte */
   color: #000 !important;
 }

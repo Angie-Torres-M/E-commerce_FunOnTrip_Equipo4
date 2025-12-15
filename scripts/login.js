@@ -24,7 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-  // 🟣 Lista de superusuarios reales (los que tú definiste en auth.js)
   const ADMIN_EMAILS = [
     "danaero25@gmail.com",
     "david_carranco1111@outlook.es",
@@ -37,9 +36,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const isAdminEmail = (email) => ADMIN_EMAILS.includes(email.toLowerCase());
 
-  // -------------------------------------------------------------------
-  // ⭐ FUNCIÓN QUE PERMITE ACCESO DIRECTO A SUPERADMIN
-  // -------------------------------------------------------------------
   function validarAdminAcceso(email, password) {
     return isAdminEmail(email) && password === MASTER_PASSWORD;
   }
@@ -88,19 +84,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =====================================================
-    // ⭐ ACCESO DIRECTO SUPERADMIN (NO NECESITA REGISTRO)
+    // ACCESO DIRECTO SUPERADMIN (NO NECESITA REGISTRO)
     // =====================================================
     if (validarAdminAcceso(emailValue, passwordValue)) {
       const adminUser = {
+        id: null,
         nombre: "Super Administrador",
         email: emailValue,
-        rol: "admin",
       };
 
-      localStorage.setItem(
-        "funontrip_usuario_activo",
-        JSON.stringify(adminUser)
-      );
+      // Aquí usamos el auth.js
+      setCurrentUser(adminUser);
 
       Swal.fire({
         icon: "success",
@@ -112,7 +106,7 @@ document.addEventListener("DOMContentLoaded", () => {
         window.location.href = "perfil.html";
       });
 
-      return; // ⛔ detiene login normal
+      return; // detiene login normal
     }
 
     // =====================================================
@@ -134,21 +128,9 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Rol basado en correo
-    const rol = isAdminEmail(usuarioEncontrado.email) ? "admin" : "user";
+    //  Usamos directamente setCurrentUser con el usuario del registro
+    setCurrentUser(usuarioEncontrado);
 
-    // Guardar sesión
-    localStorage.setItem(
-      "funontrip_usuario_activo",
-      JSON.stringify({
-        id: usuarioEncontrado.id,
-        nombre: usuarioEncontrado.nombre,
-        email: usuarioEncontrado.email,
-        rol,
-      })
-    );
-
-    // ÉXITO NORMAL
     Swal.fire({
       icon: "success",
       title: "Bienvenido",
@@ -156,7 +138,8 @@ document.addEventListener("DOMContentLoaded", () => {
       timer: 1500,
       showConfirmButton: false,
     }).then(() => {
-      window.location.href = rol === "admin" ? "dashboard.html" : "perfil.html";
+      const esAdmin = isAdminEmail(usuarioEncontrado.email);
+      window.location.href = esAdmin ? "dashboard.html" : "perfil.html";
     });
   });
 });
@@ -165,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // TOGGLE PASSWORD
 // ========================================================================
 document.addEventListener("DOMContentLoaded", () => {
-  const toggles = document.querySelectorAll(".toggle-password");
+  const toggles = document.querySelectorAll(".toggle-password-login");
 
   toggles.forEach((icon) => {
     icon.addEventListener("click", () => {
