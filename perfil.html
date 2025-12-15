@@ -44,7 +44,7 @@
 
 
       <section class="perfil-card">
-        <p><strong>Correo:</strong> <span id="perfil-email"></span></p>
+        <p><strong>Correo:</strong> <span id="perfil-email-resumen"></span></p>
         <p><strong>Rol:</strong> <span id="perfil-rol"></span></p>
 
         <!-- Botón solo para admins -->
@@ -74,7 +74,7 @@
               <div class="d-flex flex-column align-items-center text-center mb-3">
                 <div class="avatar-circle mb-3">AT</div>
 
-                <h2 class="h5 mb-0">Angie Torres</h2>
+                <h2 id="perfil-nombre" class="h5 mb-0"></h2>
                 <p class="text-muted mb-1">Viajera FunOnTrip</p>
 
                 <div class="pill-stat mt-2">
@@ -86,8 +86,14 @@
               <hr>
 
               <h3 class="h6 text-uppercase text-muted mb-2">Datos de contacto</h3>
-              <p><i class="fa-solid fa-envelope me-2 text-warning"></i> angie.torres@gmail.com</p>
-              <p><i class="fa-solid fa-phone me-2 text-warning"></i> +52 55 1234 5678</p>
+              <p id="perfil-email">
+  <i class="fa-solid fa-envelope me-2 text-warning"></i>
+  <span></span>
+</p>
+<p id="perfil-telefono">
+  <i class="fa-solid fa-phone me-2 text-warning"></i>
+  <span></span>
+</p>
               <p><i class="fa-solid fa-location-dot me-2 text-warning"></i> Ciudad de México, MX</p>
 
               <hr>
