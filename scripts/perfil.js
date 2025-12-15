@@ -1,63 +1,59 @@
-// scripts/perfil.js
-
 document.addEventListener("DOMContentLoaded", () => {
   console.log("perfil.js cargado");
 
+  const user = getCurrentUser(); // auth.js
 
-  // 1. LÓGICA DE COLLAPSE
-
-  const botones = document.querySelectorAll('[data-bs-toggle="collapse"]');
-
-  botones.forEach((boton) => {
-    const target = boton.getAttribute("data-bs-target");
-    const collapseEl = document.querySelector(target);
-
-    if (!collapseEl) return;
-
-    collapseEl.addEventListener("shown.bs.collapse", () => {
-      boton.textContent = "Ver menos";
-    });
-
-    collapseEl.addEventListener("hidden.bs.collapse", () => {
-      boton.textContent = "Ver más";
-    });
-  });
-
-
-  // ========================================================================
-  // INICIO: Simulación de perfil y roles usando localStorage
-  // Este bloque permite mostrar datos del usuario, gestionar permisos
-  // y habilitar funciones administrativas (como crear productos) de forma
-  // temporal para fines de demostración, mientras se implementa el backend real.
-  // ========================================================================
-
-
-  // 2. LÓGICA DE PERFIL / ROLES
-
-  const user = getCurrentUser(); // viene de auth.js
-
-  // Si no hay usuario → mandamos a login
+  // ====== SIN SESIÓN ======
   if (!user) {
-    alert("Debes iniciar sesión para ver tu perfil.");
-    window.location.href = "login.html";
+    Swal.fire({
+      icon: "warning",
+      title: "Acceso restringido",
+      text: "Debes iniciar sesión para ver tu perfil",
+    }).then(() => {
+      window.location.href = "login.html";
+    });
     return;
   }
 
-  const emailSpan = document.getElementById("perfil-email");
+  // ====== ELEMENTOS ======
+  const emailResumen = document.getElementById("perfil-email-resumen");
   const rolSpan = document.getElementById("perfil-rol");
+  const nombreTitulo = document.getElementById("perfil-nombre");
+  const emailContacto = document.querySelector("#perfil-email span");
+  const telefonoContacto = document.querySelector("#perfil-telefono span");
   const btnAgregar = document.getElementById("btn-agregar-destino");
   const btnLogout = document.getElementById("btn-logout");
+  const tituloPrincipal = document.getElementById("titulo-principal");
+  const avatar = document.querySelector(".avatar-circle");
 
-  if (emailSpan) {
-    emailSpan.textContent = user.email;
+  if (avatar && user.nombre) {
+    const iniciales = user.nombre
+      .trim()
+      .split(" ")
+      .filter((p) => p.length > 0)
+      .map((p) => p[0].toUpperCase())
+      .slice(0, 2)
+      .join("");
+
+    avatar.textContent = iniciales;
   }
 
-  if (rolSpan) {
-    rolSpan.textContent =
-      user.role === "admin" ? "Administrador" : "Usuario";
+  // ====== PINTAR DATOS ======
+  if (emailResumen) emailResumen.textContent = user.email;
+  if (rolSpan)
+    rolSpan.textContent = user.role === "admin" ? "Administrador" : "Usuario";
+  if (nombreTitulo) nombreTitulo.textContent = user.nombre;
+  if (emailContacto) emailContacto.textContent = user.email;
+  if (telefonoContacto) telefonoContacto.textContent = user.telefono;
+
+  // ====== TÍTULO SEGÚN ROL ======
+  if (user.role === "admin") {
+    tituloPrincipal.innerHTML = `Perfil <span>super usuario</span>`;
+  } else {
+    tituloPrincipal.textContent = "Mi perfil";
   }
 
-  // Mostrar botón para crear paquete SOLO si es admin
+  // ====== BOTÓN ADMIN ======
   if (user.role === "admin" && btnAgregar) {
     btnAgregar.style.display = "inline-block";
     btnAgregar.addEventListener("click", () => {
@@ -65,27 +61,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Cerrar sesión
+  // ====== LOGOUT ======
   if (btnLogout) {
-    btnLogout.addEventListener("click", () => {
-      logoutUser(); // función de auth.js
-      window.location.href = "login.html";
-    });
+    btnLogout.addEventListener("click", logoutUser);
   }
-
-  //mi perfil y perfil super usuario
-  const tituloPrincipal = document.getElementById("titulo-principal");
-
-// Cambiar título según rol
-if (user.role === "admin") {
-  tituloPrincipal.innerHTML = `Perfil <span>super usuario</span> `;
-} else {
-  tituloPrincipal.textContent = "Mi perfil";
-}
-
-
-  // ========================================================================
-  // FIN: Simulación de perfil y roles usando localStorage
-  // ========================================================================
-
 });

@@ -1,5 +1,5 @@
 // ========================================================================
-// LOGIN CON LOCALSTORAGE + VALIDACIÓN + ROLES + SUPERADMIN
+// LOGIN CON LOCALSTORAGE + ROLES + REDIRECCIÓN
 // ========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -11,13 +11,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!loginBtn || !emailInput || !passwordInput) return;
 
-  // ---- Helpers ----
+  // -------------------------
+  // HELPERS
+  // -------------------------
   const obtenerUsuariosLS = () => {
     try {
       const data = localStorage.getItem(LS_KEY_USUARIOS);
       return data ? JSON.parse(data) : [];
     } catch (error) {
-      console.error("Error al leer usuarios de LS:", error);
+      console.error("Error al leer usuarios:", error);
       return [];
     }
   };
@@ -41,50 +43,25 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // -------------------------
-  // EVENTO LOGIN
+  // LOGIN
   // -------------------------
   loginBtn.addEventListener("click", () => {
     const emailValue = emailInput.value.trim().toLowerCase();
     const passwordValue = passwordInput.value.trim();
 
-    // VALIDACIÓN EMAIL
-    if (!emailValue) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "El correo es obligatorio.",
-      });
-      return;
-    }
-    if (!validateEmail(emailValue)) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "Ingresa un correo válido.",
-      });
+    // VALIDACIONES
+    if (!emailValue || !validateEmail(emailValue)) {
+      Swal.fire("Error", "Correo inválido", "error");
       return;
     }
 
-    // VALIDACIÓN PASSWORD
-    if (!passwordValue) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "La contraseña es obligatoria.",
-      });
-      return;
-    }
-    if (passwordValue.length < 6) {
-      Swal.fire({
-        icon: "error",
-        title: "Error",
-        text: "La contraseña debe tener al menos 6 caracteres.",
-      });
+    if (!passwordValue || passwordValue.length < 6) {
+      Swal.fire("Error", "Contraseña inválida", "error");
       return;
     }
 
     // =====================================================
-    // ACCESO DIRECTO SUPERADMIN (NO NECESITA REGISTRO)
+    // SUPERADMIN
     // =====================================================
     if (validarAdminAcceso(emailValue, passwordValue)) {
       const adminUser = {
@@ -93,75 +70,77 @@ document.addEventListener("DOMContentLoaded", () => {
         email: emailValue,
       };
 
-      // Aquí usamos el auth.js
       setCurrentUser(adminUser);
 
       Swal.fire({
         icon: "success",
         title: "Bienvenido",
-        text: "Acceso concedido como Super Administrador.",
+        text: "Acceso como Super Administrador",
         timer: 1500,
         showConfirmButton: false,
-      }).then(() => {
-        window.location.href = "perfil.html";
-      });
+      }).then(redirigirDespuesLogin);
 
-      return; // detiene login normal
-    }
-
-    // =====================================================
-    // LOGIN NORMAL (BUSCAR EN LOCALSTORAGE)
-    // =====================================================
-    const usuarios = obtenerUsuariosLS();
-    const usuarioEncontrado = usuarios.find(
-      (usuario) =>
-        usuario.email.toLowerCase() === emailValue &&
-        usuario.password === passwordValue
-    );
-
-    if (!usuarioEncontrado) {
-      Swal.fire({
-        icon: "error",
-        title: "Credenciales inválidas",
-        text: "Correo o contraseña incorrectos.",
-      });
       return;
     }
 
-    //  Usamos directamente setCurrentUser con el usuario del registro
+    // =====================================================
+    // LOGIN NORMAL
+    // =====================================================
+    const usuarios = obtenerUsuariosLS();
+    const usuarioEncontrado = usuarios.find(
+      (u) =>
+        u.email.toLowerCase() === emailValue && u.password === passwordValue
+    );
+
+    if (!usuarioEncontrado) {
+      Swal.fire("Error", "Credenciales incorrectas", "error");
+      return;
+    }
+
     setCurrentUser(usuarioEncontrado);
 
     Swal.fire({
       icon: "success",
       title: "Bienvenido",
-      text: `Has iniciado sesión correctamente, ${usuarioEncontrado.nombre}.`,
+      text: `Hola ${usuarioEncontrado.nombre}`,
       timer: 1500,
       showConfirmButton: false,
-    }).then(() => {
-      const esAdmin = isAdminEmail(usuarioEncontrado.email);
-      window.location.href = esAdmin ? "dashboard.html" : "perfil.html";
-    });
+    }).then(redirigirDespuesLogin);
   });
+
+  // -------------------------
+  // REDIRECCIÓN CENTRALIZADA
+  // -------------------------
+  function redirigirDespuesLogin() {
+    const redirect = localStorage.getItem("redirectAfterLogin");
+
+    localStorage.removeItem("redirectAfterLogin");
+
+    if (redirect) {
+      window.location.href = redirect;
+      return;
+    }
+
+    const user = getCurrentUser();
+    window.location.href =
+      user.role === "admin" ? "dashboard.html" : "perfil.html";
+  }
 });
 
 // ========================================================================
 // TOGGLE PASSWORD
 // ========================================================================
 document.addEventListener("DOMContentLoaded", () => {
-  const toggles = document.querySelectorAll(".toggle-password-login");
-
-  toggles.forEach((icon) => {
+  document.querySelectorAll(".toggle-password-login").forEach((icon) => {
     icon.addEventListener("click", () => {
       const input = document.getElementById(icon.getAttribute("data-target"));
+
       if (!input) return;
 
-      if (input.type === "password") {
-        input.type = "text";
-        icon.classList.replace("fa-eye", "fa-eye-slash");
-      } else {
-        input.type = "password";
-        icon.classList.replace("fa-eye-slash", "fa-eye");
-      }
+      const isPassword = input.type === "password";
+      input.type = isPassword ? "text" : "password";
+      icon.classList.toggle("fa-eye");
+      icon.classList.toggle("fa-eye-slash");
     });
   });
 });

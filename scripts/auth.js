@@ -3,6 +3,8 @@
 // ========================================================================
 
 // LISTA DE SUPERUSUARIOS
+console.log("auth.js cargado");
+
 const ADMIN_EMAILS = [
   "danaero25@gmail.com",
   "david_carranco1111@outlook.es",
@@ -23,13 +25,12 @@ function isAdminEmail(email) {
 // GUARDAR USUARIO ACTIVO (AL HACER LOGIN)
 // ========================================================================
 function setCurrentUser(usuario) {
-  if (!usuario) return;
-
   const user = {
     id: usuario.id || null,
     nombre: usuario.nombre,
     email: usuario.email.toLowerCase(),
-    role: isAdminEmail(usuario.email) ? "admin" : "user",
+    telefono: usuario.telefono || "",
+    rol: isAdminEmail(usuario.email) ? "admin" : "user",
   };
 
   localStorage.setItem("currentUser", JSON.stringify(user));
@@ -64,7 +65,12 @@ function logoutUser() {
 // Bloquea páginas si no hay login
 function requireLogin() {
   const user = getCurrentUser();
-  if (!user) window.location.href = "login.html";
+
+  if (!user) {
+    // Guardamos a dónde quería ir
+    localStorage.setItem("redirectAfterLogin", window.location.href);
+    window.location.href = "login.html";
+  }
 }
 
 // Bloquea páginas solo para admins
@@ -87,4 +93,35 @@ function requireAdmin() {
 // ========================================================================
 function validarAdminAcceso(email, password) {
   return isAdminEmail(email) && password === ADMIN_MASTER_PASSWORD;
+}
+
+function renderUserAvatar() {
+  const user = getCurrentUser();
+  if (!user || !user.nombre) return;
+
+  const iniciales = obtenerIniciales(user.nombre);
+
+  document.querySelectorAll(".header-avatar").forEach((avatar) => {
+    avatar.textContent = iniciales;
+  });
+}
+
+// Espera a que el header exista
+const headerObserver = new MutationObserver(() => {
+  const avatars = document.querySelectorAll(".header-avatar");
+  if (avatars.length > 0) {
+    renderUserAvatar();
+    headerObserver.disconnect();
+  }
+});
+
+headerObserver.observe(document.body, {
+  childList: true,
+  subtree: true,
+});
+
+function obtenerIniciales(nombreCompleto) {
+  const partes = nombreCompleto.trim().split(" ");
+  if (partes.length === 1) return partes[0][0];
+  return partes[0][0] + partes[partes.length - 1][0];
 }
