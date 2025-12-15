@@ -38,128 +38,96 @@
       <div id="site-header"></div>
     </section>
 
-    <main
-      id="contenido-principal"
-      aria-labelledby="titulo-home"
-      class="main container mt-5"
-    >
-      <section class="contact-card container my-5 g-4">
-        <div>
-          <h2 class="mb-2">Crear<span> nuevo paquete</span></h2>
-          <p class="text-muted text-center mb-4">
-            Llena los campos para registrar un nuevo destino en FunOnTrip.
-          </p>
-        </div>
-        <!-- Alertas Bootstrap -->
-        <div
-          id="alertError"
-          class="alert alert-danger d-none"
-          role="alert"
-        ></div>
-        <div id="alertSuccess" class="alert alert-success d-none" role="alert">
-          Paquete creado correctamente.
-        </div>
+    <main id="contenido-principal" aria-labelledby="titulo-home" class="main container mt-5">
 
-        <!-- FORMULARIO -->
-        <form id="formProducto" class="row g-3" novalidate>
-          <!-- Nombre -->
-          <div class="col-12 col-md-6">
-            <label for="nombre" class="form-label">Nombre del paquete</label>
-            <input
-              type="text"
-              id="nombre"
-              name="nombre"
-              class="form-control"
-              placeholder="Escapada romántica en Cancún"
-              required
-            />
-          </div>
+        <section class="contact-card container my-5 g-4">
+            <div>
+                <h2 class="mb-2">Crear<span> nuevo paquete</span></h2>
+                <p class="text-muted text-center mb-4">
+                    Llena los campos para registrar un nuevo destino en FunOnTrip.
+                </p>
+            </div>
+            <!-- Alertas Bootstrap -->
+            <div id="alertError" class="alert alert-danger d-none" role="alert"></div>
+            <div id="alertSuccess" class="alert alert-success d-none" role="alert">
+                Paquete creado correctamente.
+            </div>
 
-          <!-- Precio -->
-          <div class="col-12 col-md-3">
-            <label for="precio" class="form-label">Precio (MXN)</label>
-            <input
-              type="number"
-              id="precio"
-              name="precio"
-              class="form-control"
-              min="0"
-              step="0.01"
-              required
-            />
-          </div>
+            <!-- FORMULARIO -->
+            <form id="formProducto" class="row g-3" novalidate>
+                <!-- Nombre -->
+                <div class="col-12 col-md-6">
+                    <label for="nombre" class="form-label">Nombre del paquete</label>
+                    <input type="text" id="nombre" name="nombre" class="form-control"
+                        placeholder="Escapada romántica en Cancún" required />
+                </div>
 
-          <!-- Ubicación -->
-          <div class="col-12 col-md-3">
-            <label for="ubicacion" class="form-label">Ubicación</label>
-            <select
-              id="ubicacion"
-              name="ubicacion"
-              class="form-select"
-              required
-            >
-              <option value="">Selecciona una opción</option>
-              <option value="nacional">Nacional</option>
-              <option value="internacional">Internacional</option>
-              <option value="petfriendly">Pet friendly</option>
-            </select>
-          </div>
+                <!-- Precio -->
+                <div class="col-12 col-md-3">
+                    <label for="precio" class="form-label">Precio (MXN)</label>
+                    <input type="number" id="precio" name="precio" class="form-control" min="0" step="0.01" required />
+                </div>
 
-          <!-- Tipo -->
-          <div class="col-12 col-md-4">
-            <label for="tipo" class="form-label">Tipo de experiencia</label>
-            <select id="tipo" name="tipo" class="form-select" required>
-              <option value="">Selecciona una opción</option>
-              <option value="romantico">Romántico</option>
-              <option value="aventura">Aventura</option>
-              <option value="familiar">Familiar</option>
-              <option value="gastronomico">Gastronómico</option>
-              <option value="relax">Relax & Spa</option>
-            </select>
-          </div>
+                <!-- Ubicación -->
+                <div class="col-12 col-md-3">
+                    <label for="ubicacion" class="form-label">Ubicación</label>
+                    <select id="ubicacion" name="ubicacion" class="form-select" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="nacional">Nacional</option>
+                        <option value="internacional">Internacional</option>
+                        <option value="petfriendly">Pet friendly</option>
+                    </select>
+                </div>
 
-          <!-- Imagen -->
-          <div class="col-12 col-md-8">
-            <label for="imagen" class="form-label">URL de imagen</label>
-            <input
-              type="url"
-              id="imagen"
-              name="imagen"
-              class="form-control"
-              placeholder="https://"
-              required
-            />
-          </div>
+                <!-- Tipo -->
+                <div class="col-12 col-md-4">
+                    <label for="tipo" class="form-label">Tipo de experiencia</label>
+                    <select id="tipo" name="tipo" class="form-select" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="romantico">Romántico</option>
+                        <option value="aventura">Aventura</option>
+                        <option value="familiar">Familiar</option>
+                        <option value="gastronomico">Gastronómico</option>
+                        <option value="relax">Relax & Spa</option>
+                    </select>
+                </div>
 
-          <!-- Descripción -->
-          <div class="col-12">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea
-              id="descripcion"
-              name="descripcion"
-              class="form-control"
-              rows="3"
-              placeholder="4 días, 3 noches · actividades · hospedaje · extras"
-              required
-            ></textarea>
-          </div>
+                <!-- Imagen -->
+                <div class="col-12 col-md-8">
+                    <label class="form-label">Imagen del paquete</label>
 
-          <!-- Botón -->
-          <div class="col-12 d-flex justify-content-center mt-3">
-            <button type="submit" class="btn btn-guardar px-4">
-              Guardar paquete
-            </button>
+                    <div class="border rounded p-4 text-center" id="uploadBox" style="cursor: pointer;">
+                        <i class="fa-solid fa-cloud-arrow-up fa-2x mb-2"></i>
+                        <p class="mb-1">Haz clic para seleccionar una imagen</p>
+                        <small class="text-muted">
+                            JPG, PNG o WEBP · Máx 2MB
+                        </small>
 
-            <button
-              type="button"
-              id="btnLimpiar"
-              class="btn btn-secondary px-4 ms-4"
-            >
-              Limpiar
-            </button>
-          </div>
-        </form>
-      </section>
+                        <input type="file" id="imagen" name="imagen" accept="image/*" hidden required />
+                    </div>
+
+                    <img id="previewImagen" class="img-fluid rounded mt-3 d-none" alt="Vista previa de la imagen" />
+                </div>
+
+                <!-- Descripción -->
+                <div class="col-12">
+                    <label for="descripcion" class="form-label">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" class="form-control" rows="3"
+                        placeholder="4 días, 3 noches · actividades · hospedaje · extras" required></textarea>
+                </div>
+
+                <!-- Botón -->
+                <div class="col-12 d-flex justify-content-center mt-3">
+                    <button type="submit" class="btn btn-guardar px-4">
+                        Guardar paquete
+                    </button>
+
+                    <button type="button" id="btnLimpiar" class="btn btn-secondary px-4 ms-4">
+                        Limpiar
+                    </button>
+                </div>
+            </form>
+        </section>
     </main>
 
     <!-- Footer reutilizable -->
