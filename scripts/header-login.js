@@ -1,36 +1,29 @@
-// Función para saber si hay usuario logueado
-function getCurrentUser() {
- 
-  // Retorna true si hay usuario logueado, null si no
-  return localStorage.getItem("usuarioLogueado") === "true" ? true : null;
-}
+const observer = new MutationObserver(() => {
+  const loginDesktop = document.querySelector("#loginLinkDesktop");
+  const loginMobile = document.querySelector("#loginLinkMobile");
 
-// Función para cerrar sesión
-function logoutUser() {
-  localStorage.removeItem("usuarioLogueado"); // Borra info del login
-  location.reload(); // Recarga la página para reflejar cambios
-}
+  // esperar a que el header exista
+  if (loginDesktop && loginMobile) {
+    observer.disconnect();
 
-document.addEventListener("DOMContentLoaded", () => {
-  const loginDesktop = document.getElementById("loginLinkDesktop");
-  const loginMobile = document.getElementById("loginLinkMobile");
+    const user = JSON.parse(localStorage.getItem("currentUser"));
 
-  const currentUser = getCurrentUser();
+    if (user) {
+      [loginDesktop, loginMobile].forEach(link => {
+        link.textContent = "Cerrar sesión";
+        link.href = "#";
 
-  if (currentUser) {
-    // Cambiar a "Cerrar sesión"
-    loginDesktop.textContent = "Cerrar sesión";
-    loginMobile.textContent = "Cerrar sesión";
-
-    // Función de logout al hacer clic
-    loginDesktop.addEventListener("click", (e) => {
-      e.preventDefault();
-      logoutUser();
-    });
-
-    loginMobile.addEventListener("click", (e) => {
-      e.preventDefault();
-      logoutUser();
-    });
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          localStorage.removeItem("currentUser");
+          window.location.href = "./index.html";
+        });
+      });
+    }
   }
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
 });
