@@ -3,6 +3,43 @@
 // Template notificación: template_lnoju47
 // Template auto-reply:  template_xnenq1c
 
+const esTelefonoValido = (tel) => {
+  // Quitar todo lo que no sea número
+  const telefono = tel.replace(/\D/g, "");
+
+  // 1. Exactamente 10 dígitos
+  if (!/^\d{10}$/.test(telefono)) return false;
+
+  // 2. No todos los dígitos iguales
+  if (/^(\d)\1{9}$/.test(telefono)) return false;
+
+  // 3. Secuencias obvias o inválidas
+  const secuenciasInvalidas = [
+    "1234567890",
+    "0123456789",
+    "2345678901",
+    "3456789012",
+    "4567890123",
+    "5678901234",
+    "6789012345",
+    "7890123456",
+    "8901234567",
+    "0987654321",
+    "9876543210",
+    "8765432109",
+    "7654321098",
+    "6543210987",
+    "5432109876",
+    "4321098765",
+    "3210987654",
+    "0000000009"
+  ];
+
+  if (secuenciasInvalidas.includes(telefono)) return false;
+
+  return true;
+};
+
 document.addEventListener("DOMContentLoaded", function () {
   console.log("JS de contacto cargado");
 
@@ -60,17 +97,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const telefonoInput = document.getElementById("telefono");
     const errorTelefono = document.getElementById("error-telefono");
-    const telRegex = /^(?!0{10})(?![01])[0-9]{10}$/;
 
-    if (!telRegex.test(telefono)) {
+    if (!esTelefonoValido(telefono)) {
       errorTelefono.textContent =
-        "Ingresa un número válido de 10 dígitos. No uses ceros repetidos.";
+        "Ingresa un número válido de 10 dígitos. Evita secuencias o números repetidos.";
       telefonoInput.classList.add("is-invalid");
       errores = true;
     } else {
       errorTelefono.textContent = "";
       telefonoInput.classList.remove("is-invalid");
     }
+
 
     const mensajeInput = document.getElementById("mensaje");
     const errorMensaje = document.getElementById("error-mensaje");
