@@ -1,5 +1,5 @@
 // ========================================================================
-// LOGIN CON LOCALSTORAGE + ROLES + REDIRECCIÓN
+// LOGIN CON LOCALSTORAGE + ROLES + REDIRECCIÓN (SIEMPRE A INDEX)
 // ========================================================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -61,13 +61,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // =====================================================
-    // SUPERADMIN
+    // SUPERADMIN (email admin + master password)
     // =====================================================
     if (validarAdminAcceso(emailValue, passwordValue)) {
       const adminUser = {
         id: null,
         nombre: "Super Administrador",
         email: emailValue,
+        telefono: "",
+        // IMPORTANTÍSIMO: que el core lo entienda siempre
+        rol: "admin",
+        role: "admin", // compat por si alguna pantalla vieja lee role
       };
 
       setCurrentUser(adminUser);
@@ -88,8 +92,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // =====================================================
     const usuarios = obtenerUsuariosLS();
     const usuarioEncontrado = usuarios.find(
-      (u) =>
-        u.email.toLowerCase() === emailValue && u.password === passwordValue
+      (u) => u.email.toLowerCase() === emailValue && u.password === passwordValue
     );
 
     if (!usuarioEncontrado) {
@@ -97,7 +100,14 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    setCurrentUser(usuarioEncontrado);
+    // Si el usuario normal resulta ser admin por email, lo forzamos a admin
+    const userToSave = {
+      ...usuarioEncontrado,
+      rol: isAdminEmail(emailValue) ? "admin" : (usuarioEncontrado.rol || "user"),
+      role: isAdminEmail(emailValue) ? "admin" : (usuarioEncontrado.role || usuarioEncontrado.rol || "user"),
+    };
+
+    setCurrentUser(userToSave);
 
     Swal.fire({
       icon: "success",
@@ -109,21 +119,12 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // -------------------------
-  // REDIRECCIÓN CENTRALIZADA
+  // REDIRECCIÓN CENTRALIZADA (SIEMPRE INDEX)
   // -------------------------
   function redirigirDespuesLogin() {
-    const redirect = localStorage.getItem("redirectAfterLogin");
-
+    // aunque exista redirectAfterLogin, tu regla nueva dice: siempre index
     localStorage.removeItem("redirectAfterLogin");
-
-    if (redirect) {
-      window.location.href = redirect;
-      return;
-    }
-
-    const user = getCurrentUser();
-    window.location.href =
-      user.role === "admin" ? "dashboard.html" : "perfil.html";
+    window.location.href = "index.html";
   }
 });
 
@@ -134,7 +135,6 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".toggle-password-login").forEach((icon) => {
     icon.addEventListener("click", () => {
       const input = document.getElementById(icon.getAttribute("data-target"));
-
       if (!input) return;
 
       const isPassword = input.type === "password";

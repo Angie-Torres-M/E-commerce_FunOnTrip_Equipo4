@@ -1,4 +1,4 @@
-console.log("✅ header.auth.js cargado");
+/*console.log("header.auth.js cargado");
 
 function setAvatar(dropdownId, user) {
   const dropdown = document.getElementById(dropdownId);
@@ -45,10 +45,10 @@ function setAvatar(dropdownId, user) {
 }
 
 function initHeaderAuth() {
-  console.log("👤 initHeaderAuth ejecutado");
+  console.log(" initHeaderAuth ejecutado");
 
   const user = JSON.parse(localStorage.getItem("currentUser"));
 
   setAvatar("userDropdown", user);
   setAvatar("userDropdownMobile", user);
-}
+}*/

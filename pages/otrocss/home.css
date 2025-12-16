@@ -120,9 +120,9 @@ body {
 }
 
 .btn-fun-promo:hover {
-  background-color: #009f80;
-  border-color: #009f80;
-  color: #ffffff;
+  background-color: #ffcd33;
+  border-color: #ffcd33;
+  color: #000000;
   transform: scale(1.03);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }

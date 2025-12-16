@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
+  // compat: por si algún día llega con role en vez de rol
+  const userRole = user.rol || user.role;
+
   // ====== ELEMENTOS ======
   const emailResumen = document.getElementById("perfil-email-resumen");
   const rolSpan = document.getElementById("perfil-rol");
@@ -40,21 +43,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ====== PINTAR DATOS ======
   if (emailResumen) emailResumen.textContent = user.email;
-  if (rolSpan)
-    rolSpan.textContent = user.role === "admin" ? "Administrador" : "Usuario";
+  if (rolSpan) rolSpan.textContent = userRole === "admin" ? "Administrador" : "Usuario";
   if (nombreTitulo) nombreTitulo.textContent = user.nombre;
   if (emailContacto) emailContacto.textContent = user.email;
   if (telefonoContacto) telefonoContacto.textContent = user.telefono;
 
   // ====== TÍTULO SEGÚN ROL ======
-  if (user.role === "admin") {
+  if (userRole === "admin") {
     tituloPrincipal.innerHTML = `Perfil <span>super usuario</span>`;
   } else {
     tituloPrincipal.textContent = "Mi perfil";
   }
 
   // ====== BOTÓN ADMIN ======
-  if (user.role === "admin" && btnAgregar) {
+  if (userRole === "admin" && btnAgregar) {
     btnAgregar.style.display = "inline-block";
     btnAgregar.addEventListener("click", () => {
       window.location.href = "form-producto.html";
