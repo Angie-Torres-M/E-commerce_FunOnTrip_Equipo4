@@ -110,10 +110,19 @@ function requireLogin() {
   const user = getCurrentUser();
   if (!user) {
     localStorage.setItem("redirectAfterLogin", window.location.href);
-    showInfo("Debes iniciar sesión", { title: "Sesión requerida" });
-    window.location.href = "./login.html";
+
+    Swal.fire({
+      icon: "info",
+      title: "Sesión requerida",
+      text: "Debes iniciar sesión para acceder al carrito",
+      confirmButtonText: "Iniciar sesión",
+      allowOutsideClick: false,
+    }).then(() => {
+      window.location.href = "./login.html";
+    });
   }
 }
+
 
 function requireAdmin() {
   const user = getCurrentUser();
