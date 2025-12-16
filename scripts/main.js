@@ -11,6 +11,7 @@ async function includeHTML(selector, url) {
   }
 
   host.innerHTML = await res.text();
+  document.dispatchEvent(new Event("headerLoaded"));
 }
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -23,22 +24,29 @@ document.addEventListener("DOMContentLoaded", async () => {
   // =====================================================
   function actualizarCarritoHeader() {
     // buscamos todos los posibles badges que uses
-    const badgeDesktop = document.getElementById('cart-badge-desktop');
-    const badgeMobile = document.getElementById('cart-badge-mobile');
-    const badgeClass = document.querySelector('.cart-count');
+    const badgeDesktop = document.getElementById("cart-badge-desktop");
+    const badgeMobile = document.getElementById("cart-badge-mobile");
+    const badgeClass = document.querySelector(".cart-count");
 
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
 
     // tolerante: soporta quantity y qty
-    const totalItems = cart.reduce((sum, item) => sum + (item.quantity || item.qty || 0), 0);
+    const totalItems = cart.reduce(
+      (sum, item) => sum + (item.quantity || item.qty || 0),
+      0
+    );
 
     if (badgeDesktop) {
       badgeDesktop.textContent = totalItems;
-      totalItems === 0 ? badgeDesktop.classList.add('empty') : badgeDesktop.classList.remove('empty');
+      totalItems === 0
+        ? badgeDesktop.classList.add("empty")
+        : badgeDesktop.classList.remove("empty");
     }
     if (badgeMobile) {
       badgeMobile.textContent = totalItems;
-      totalItems === 0 ? badgeMobile.classList.add('empty') : badgeMobile.classList.remove('empty');
+      totalItems === 0
+        ? badgeMobile.classList.add("empty")
+        : badgeMobile.classList.remove("empty");
     }
     if (badgeClass) {
       badgeClass.textContent = totalItems;
@@ -52,7 +60,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // 2) Escuchar actualizaciones desde home-cart.js (o cualquier otro que dispare cartUpdated)
   document.addEventListener("cartUpdated", actualizarCarritoHeader);
-
 
   // 2) Secciones de about
   await includeHTML("#site-agencia", "./sections/about/agencia.html");
@@ -77,10 +84,11 @@ window.addEventListener("load", () => {
       const NAV_OFFSET = 100; // altura aprox de tu navbar en px
 
       setTimeout(() => {
-        const top = seccion.getBoundingClientRect().top + window.pageYOffset - NAV_OFFSET;
+        const top =
+          seccion.getBoundingClientRect().top + window.pageYOffset - NAV_OFFSET;
         window.scrollTo({
           top: top,
-          behavior: "smooth"
+          behavior: "smooth",
         });
       }, 150);
     }
@@ -94,7 +102,8 @@ function initHeader() {
     let lastScroll = 0;
 
     window.addEventListener("scroll", () => {
-      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+      const currentScroll =
+        window.pageYOffset || document.documentElement.scrollTop;
 
       if (currentScroll > lastScroll && currentScroll > 80) {
         header.classList.add("header-hidden");
@@ -115,4 +124,3 @@ function initHeader() {
     });
   }
 }
-

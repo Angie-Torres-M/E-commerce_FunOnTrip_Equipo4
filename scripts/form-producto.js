@@ -4,30 +4,40 @@ document.addEventListener("DOMContentLoaded", () => {
   const alertSuccess = document.getElementById("alertSuccess");
   const btnLimpiar = document.getElementById("btnLimpiar");
 
+  const uploadBox = document.getElementById("uploadBox");
+  const inputImagen = document.getElementById("imagen");
+  const preview = document.getElementById("previewImagen");
 
-      btnLimpiar.addEventListener("click", () => {
-      form.reset(); // limpia todos los campos
+  // Limpiar formulario
+  btnLimpiar.addEventListener("click", () => {
+    form.reset();
+    alertError.classList.add("d-none");
+    alertSuccess.classList.add("d-none");
+    alertError.innerHTML = "";
+    preview.classList.add("d-none");
+  });
 
-      // Ocultar alertas
-      alertError.classList.add("d-none");
-      alertSuccess.classList.add("d-none");
+  // Botón visual de imagen
+  uploadBox.addEventListener("click", () => {
+    inputImagen.click();
+  });
 
-      // Limpia lista de errores visuales
-      alertError.innerHTML = "";
-    });
+  inputImagen.addEventListener("change", () => {
+    const file = inputImagen.files[0];
+    if (!file) return;
 
-  // crear/obtener feedback node
-  function ensureFeedback(el) {
-    let fb = el.parentElement.querySelector(".invalid-feedback");
-    if (!fb) {
-      fb = document.createElement("div");
-      fb.className = "invalid-feedback";
-      el.parentElement.appendChild(fb);
-    }
-    return fb;
-  }
+    const reader = new FileReader();
+    reader.onload = () => {
+      preview.src = reader.result;
+      preview.classList.remove("d-none");
+    };
+    reader.readAsDataURL(file);
+  });
 
-  function clearValidationStates() {
+  // SUBMIT
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
     alertError.classList.add("d-none");
     alertSuccess.classList.add("d-none");
     alertError.innerHTML = "";
@@ -39,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (fb) fb.textContent = "";
     });
   }
+
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -122,6 +133,41 @@ document.addEventListener("DOMContentLoaded", () => {
     // Si hay errores, mostrar lista y enfocar el primero
     if (errores.length > 0) {
       const unique = [...new Set(errores)];
+    const nombre = data.get("nombre")?.trim();
+    const precioStr = data.get("precio")?.trim();
+    const precio = Number(precioStr);
+    const descripcion = data.get("descripcion")?.trim();
+    const imagen = data.get("imagen");
+    const ubicacion = data.get("ubicacion");
+    const tipo = data.get("tipo");
+
+    // Validaciones
+    if (!nombre) errors.push("El nombre del paquete es obligatorio.");
+    if (nombre === "00000" || /^0+$/.test(nombre))
+      errors.push("El nombre no puede ser solo ceros.");
+
+    if (!precioStr) {
+      errors.push("El precio es obligatorio.");
+    } else if (!/^\d+(\.\d{1,2})?$/.test(precioStr)) {
+      errors.push("El precio solo puede contener números y hasta 2 decimales.");
+    } else if (precio <= 0) {
+      errors.push("El precio debe ser mayor a 0.");
+    }
+
+    if (!imagen || imagen.size === 0) {
+      errors.push("Debes seleccionar una imagen.");
+    } else if (!imagen.type.startsWith("image/")) {
+      errors.push("El archivo debe ser una imagen válida.");
+    } else if (imagen.size > 2 * 1024 * 1024) {
+      errors.push("La imagen no debe pesar más de 2 MB.");
+    }
+
+    if (!descripcion) errors.push("La descripción es obligatoria.");
+    if (!ubicacion) errors.push("Selecciona una ubicación.");
+    if (!tipo) errors.push("Selecciona un tipo de experiencia.");
+
+    if (errors.length > 0) {
+ b00454db603a200cbf0758cbfa033dfda79257c0
       alertError.innerHTML =
         "<strong>Revisa los siguientes errores:</strong><ul>" +
         unique.map((m) => `<li>${m}</li>`).join("") +
@@ -136,30 +182,31 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    //Si no hay errores, proceder a crear el producto
-    const nuevoProducto = {
-      id: Date.now(),
-      nombre: nombreEl.value.trim(),
-      precio: Number(precioEl.value),
-      descripcion: descripcionEl.value.trim(),
-      imagen: imagenEl.value.trim(),
-      ubicacion: ubicacionEl.value,
-      tipo: tipoEl.value,
+    // Guardar producto
+    const reader = new FileReader();
+    reader.onload = function () {
+      const nuevoProducto = {
+        id: Date.now(),
+        nombre,
+        precio,
+        descripcion,
+        imagen: reader.result,
+        ubicacion,
+        tipo,
+      };
+
+      window.productos.push(nuevoProducto);
+      localStorage.setItem("productos", JSON.stringify(window.productos));
+
+      if (typeof renderizarProductos === "function") {
+        renderizarProductos();
+      }
+
+      alertSuccess.classList.remove("d-none");
+      form.reset();
+      preview.classList.add("d-none");
     };
 
-    window.productos = window.productos || [];
-    window.productos.push(nuevoProducto);
-
-    console.log("Se agrego");
-
-    // Guardar en localStorage
-    localStorage.setItem("productos", JSON.stringify(window.productos));
-
-    if (typeof renderizarProductos === "function") renderizarProductos();
-
-    // Mostrar mensaje de éxito ...
-    alertSuccess.classList.remove("d-none");
-
-
+    reader.readAsDataURL(imagen);
   });
 });
