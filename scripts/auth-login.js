@@ -9,7 +9,7 @@
  * Estructura: { email, password }
  * Clave usada: "usuarioPrueba"
  */
-
+/*
 function inicializarUsuarioDePrueba() {
   const KEY = "usuarioPrueba";
   
@@ -26,10 +26,10 @@ function inicializarUsuarioDePrueba() {
     // Guardar en localStorage (convertir a string JSON)
     localStorage.setItem(KEY, JSON.stringify(usuarioPrueba));
     
-    console.log("✅ Usuario de prueba creado");
-    console.log("📧 Email:", usuarioPrueba.email);
-    console.log("🔑 Password:", usuarioPrueba.password);
-    console.log("🗂️ Clave en LS:", KEY);
+    console.log(" Usuario de prueba creado");
+    console.log(" Email:", usuarioPrueba.email);
+    console.log(" Password:", usuarioPrueba.password);
+    console.log(" Clave en LS:", KEY);
   } else {
     console.log("Usuario de prueba ya existe");
     console.log("Datos:", JSON.parse(existente));
@@ -54,11 +54,11 @@ inicializarUsuarioDePrueba();
  * @param {string} password - Contraseña ingresada
  * @returns {boolean} - true si las credenciales coinciden, false si no
  */
-
+/*
 function validarLogin(email, password) {
   console.log("Iniciando validación de credenciales");
-  console.log("📧 Email recibido:", email);
-  console.log("🔑 Password recibido:", password);
+  console.log("Email recibido:", email);
+  console.log("Password recibido:", password);
   
   // PASO 1: Recuperar usuario de prueba desde localStorage
   const KEY = "usuarioPrueba";
@@ -66,7 +66,7 @@ function validarLogin(email, password) {
   
   // Validar que existe el usuario en localStorage
   if (!usuarioGuardado) {
-    console.error("❌ No hay usuario de prueba en localStorage");
+    console.error(" No hay usuario de prueba en localStorage");
     return false;
   }
   
@@ -74,9 +74,9 @@ function validarLogin(email, password) {
   let data;
   try {
     data = JSON.parse(usuarioGuardado);
-    console.log("✅ Usuario recuperado:", data);
+    console.log("Usuario recuperado:", data);
   } catch (error) {
-    console.error("❌ Error al parsear JSON:", error);
+    console.error(" Error al parsear JSON:", error);
     return false;
   }
   
@@ -85,16 +85,16 @@ function validarLogin(email, password) {
   const passwordCoincide = data.password === password;
   
   console.log("Resultados de comparación:");
-  console.log("  • Email coincide:", emailCoincide);
-  console.log("  • Password coincide:", passwordCoincide);
+  console.log(" Email coincide:", emailCoincide);
+  console.log(" Password coincide:", passwordCoincide);
   
   // PASO 4: Retornar true solo si AMBAS credenciales son correctas
   const resultado = emailCoincide && passwordCoincide;
   
   if (resultado) {
-    console.log("✅ Credenciales VÁLIDAS");
+    console.log("Credenciales VÁLIDAS");
   } else {
-    console.log("❌ Credenciales INVÁLIDAS");
+    console.log(" Credenciales INVÁLIDAS");
   }
   
   return resultado;
@@ -111,7 +111,7 @@ function validarLogin(email, password) {
  * Esta función ejecuta todas las pruebas necesarias para
  * verificar el comportamiento que se espera del programa
  */
-
+/*
 function ejecutarPruebas() {
   console.log("========================================");
   console.log("INICIANDO PRUEBAS");
@@ -131,10 +131,10 @@ function ejecutarPruebas() {
   const test1 = validarLogin("usuario@ejemplo.com", "123456");
   
   if (test1 === true) {
-    console.log("   ✅ RESULTADO: PASS - Retornó true como se esperaba");
+    console.log("  RESULTADO: PASS - Retornó true como se esperaba");
     pruebasPasadas++;
   } else {
-    console.log("   ❌ RESULTADO: FAIL - Debería retornar true");
+    console.log("  RESULTADO: FAIL - Debería retornar true");
     pruebasFalladas++;
   }
   console.log("");
@@ -149,10 +149,10 @@ function ejecutarPruebas() {
   const test2 = validarLogin("incorrecto@ejemplo.com", "123456");
   
   if (test2 === false) {
-    console.log("   ✅ RESULTADO: PASS - Retornó false como se esperaba");
+    console.log("RESULTADO: PASS - Retornó false como se esperaba");
     pruebasPasadas++;
   } else {
-    console.log("   ❌ RESULTADO: FAIL - Debería retornar false");
+    console.log("RESULTADO: FAIL - Debería retornar false");
     pruebasFalladas++;
   }
   console.log("");
@@ -167,10 +167,10 @@ function ejecutarPruebas() {
   const test3 = validarLogin("usuario@ejemplo.com", "wrongpassword");
   
   if (test3 === false) {
-    console.log("   ✅ RESULTADO: PASS - Retornó false como se esperaba");
+    console.log(" RESULTADO: PASS - Retornó false como se esperaba");
     pruebasPasadas++;
   } else {
-    console.log("   ❌ RESULTADO: FAIL - Debería retornar false");
+    console.log("RESULTADO: FAIL - Debería retornar false");
     pruebasFalladas++;
   }
   console.log("");
@@ -185,10 +185,10 @@ function ejecutarPruebas() {
   const test4 = validarLogin("wrong@email.com", "wrongpass");
   
   if (test4 === false) {
-    console.log("   ✅ RESULTADO: PASS - Retornó false como se esperaba");
+    console.log("RESULTADO: PASS - Retornó false como se esperaba");
     pruebasPasadas++;
   } else {
-    console.log("   ❌ RESULTADO: FAIL - Debería retornar false");
+    console.log(" RESULTADO: FAIL - Debería retornar false");
     pruebasFalladas++;
   }
   console.log("");
@@ -203,10 +203,10 @@ function ejecutarPruebas() {
   const test5 = validarLogin("", "");
   
   if (test5 === false) {
-    console.log("   ✅ RESULTADO: PASS - Retornó false como se esperaba");
+    console.log("RESULTADO: PASS - Retornó false como se esperaba");
     pruebasPasadas++;
   } else {
-    console.log("   ❌ RESULTADO: FAIL - Debería retornar false");
+    console.log(" RESULTADO: FAIL - Debería retornar false");
     pruebasFalladas++;
   }
   console.log("");
@@ -221,10 +221,10 @@ function ejecutarPruebas() {
   const test6 = validarLogin("USUARIO@EJEMPLO.COM", "123456");
   
   if (test6 === false) {
-    console.log("   ✅ RESULTADO: PASS - Case sensitive funciona correctamente");
+    console.log(" RESULTADO: PASS - Case sensitive funciona correctamente");
     pruebasPasadas++;
   } else {
-    console.log("   ⚠️ RESULTADO: PASS - Email NO es case sensitive (depende del diseño)");
+    console.log(" RESULTADO: PASS - Email NO es case sensitive (depende del diseño)");
     pruebasPasadas++;
   }
   console.log("");
@@ -235,9 +235,9 @@ function ejecutarPruebas() {
   console.log("========================================");
   console.log("RESUMEN DE PRUEBAS");
   console.log("========================================");
-  console.log(`✅ Pruebas PASADAS: ${pruebasPasadas}/6`);
-  console.log(`❌ Pruebas FALLADAS: ${pruebasFalladas}/6`);
-  console.log(`📊 Porcentaje de éxito: ${((pruebasPasadas/6)*100).toFixed(1)}%`);
+  console.log(`Pruebas PASADAS: ${pruebasPasadas}/6`);
+  console.log(`Pruebas FALLADAS: ${pruebasFalladas}/6`);
+  console.log(`Porcentaje de éxito: ${((pruebasPasadas/6)*100).toFixed(1)}%`);
   console.log("");
   
   if (pruebasFalladas === 0) {
@@ -263,6 +263,7 @@ function ejecutarPruebas() {
 /**
  * Muestra el contenido completo de localStorage relacionado con autenticación
  */
+/*
 function verEstadoLocalStorage() {
   console.log("========================================");
   console.log("ESTADO DE LOCALSTORAGE");
@@ -272,10 +273,10 @@ function verEstadoLocalStorage() {
   // Usuario de prueba
   const usuarioPrueba = localStorage.getItem("usuarioPrueba");
   if (usuarioPrueba) {
-    console.log("👤 Usuario de Prueba:");
+    console.log(" Usuario de Prueba:");
     console.log(JSON.parse(usuarioPrueba));
   } else {
-    console.log("❌ No existe 'usuarioPrueba' en localStorage");
+    console.log(" No existe 'usuarioPrueba' en localStorage");
   }
   console.log("");
   
@@ -308,8 +309,8 @@ function verEstadoLocalStorage() {
 /**
  * Limpia SOLO los datos de la tarea de la prueba
  */
-function limpiarDatosDePrueba() {
-  const confirmacion = confirm("⚠️ ¿Estás seguro de eliminar el usuario de prueba?\n\nEsto NO afectará a los usuarios registrados ni a la sesión actual.");
+/*function limpiarDatosDePrueba() {
+  const confirmacion = confirm(" ¿Estás seguro de eliminar el usuario de prueba?\n\nEsto NO afectará a los usuarios registrados ni a la sesión actual.");
   
   if (confirmacion) {
     localStorage.removeItem("usuarioPrueba");
@@ -338,7 +339,7 @@ function limpiarDatosDePrueba() {
  */
 
 // Hacer la función global para que login.js pueda usarla
-window.validarLogin = validarLogin;
+/*window.validarLogin = validarLogin;
 window.ejecutarPruebas = ejecutarPruebas;
 window.verEstadoLocalStorage = verEstadoLocalStorage;
 window.limpiarDatosDePrueba = limpiarDatosDePrueba;
@@ -354,17 +355,18 @@ console.log("========================================");
 console.log("");
 console.log("Ejecuta estas funciones en la consola del navegador:");
 console.log("");
-console.log("1️⃣ ejecutarPruebas()");
+console.log("1️ ejecutarPruebas()");
 console.log("   → Ejecuta todas las 6 pruebas de validación");
 console.log("");
-console.log("2️⃣ verEstadoLocalStorage()");
+console.log("2️verEstadoLocalStorage()");
 console.log("   → Muestra todos los datos guardados");
 console.log("");
-console.log("3️⃣ validarLogin(email, password)");
+console.log("3️validarLogin(email, password)");
 console.log("   → Prueba manualmente con tus credenciales");
 console.log("   Ejemplo: validarLogin('usuario@ejemplo.com', '123456')");
 console.log("");
-console.log("4️⃣ limpiarDatosDePrueba()");
+console.log("4️ limpiarDatosDePrueba()");
 console.log("   → Elimina el usuario de prueba (reset)");
 console.log("");
 console.log("========================================");
+*/

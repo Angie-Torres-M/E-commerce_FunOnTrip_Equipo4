@@ -59,7 +59,7 @@
         <div class="row">
           <div class="col-12 mb-4 text-center">
 
-            <p class="text-muted mb-0">Tus datos y r esumen de tus compras con FunOnTrip. FAKE hasta saber backendde</p>
+            <p class="text-muted mb-0">Tus datos y resumen de tus compras con FunOnTrip. FAKE hasta saber backendde</p>
           </div>
         </div>
       </section>
@@ -87,13 +87,13 @@
 
               <h3 class="h6 text-uppercase text-muted mb-2">Datos de contacto</h3>
               <p id="perfil-email">
-  <i class="fa-solid fa-envelope me-2 text-warning"></i>
-  <span></span>
-</p>
-<p id="perfil-telefono">
-  <i class="fa-solid fa-phone me-2 text-warning"></i>
-  <span></span>
-</p>
+                <i class="fa-solid fa-envelope me-2 text-warning"></i>
+                <span></span>
+              </p>
+              <p id="perfil-telefono">
+                <i class="fa-solid fa-phone me-2 text-warning"></i>
+                <span></span>
+              </p>
               <p><i class="fa-solid fa-location-dot me-2 text-warning"></i> Ciudad de México, MX</p>
 
               <hr>
@@ -162,28 +162,24 @@
 
   <div id="site-footer"></div>
 
-  <!-- Bootstrap -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script src="./scripts/main.js"></script>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- ====================================================================== -->
-  <!-- INICIO: Simulación de perfil y roles usando localStorage
-       Este bloque permite mostrar datos del usuario, gestionar su rol
-       y habilitar funciones administrativas (como crear productos) de forma
-       temporal para fines de demostración, hasta que el backend real esté
-       implementado. -->
-  <!-- ====================================================================== -->
-<script src="./scripts/session.js"></script>
-  <script src="./scripts/auth.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="./scripts/login.js"></script>
-  <script src="./scripts/perfil.js"></script>
-  <script src="./scripts/header-login.js"></script>
+<!-- SweetAlert2 (porque app-auth.js lo usa si existe) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- ====================================================================== -->
-  <!-- FIN: Simulación de perfil y roles usando localStorage -->
-  <!-- ====================================================================== -->
+
+<!-- Auth global (UNO SOLO) -->
+<script src="./scripts/app-auth.js"></script>
+
+<!-- Includes -->
+<script src="./scripts/main.js"></script>
+
+<!-- Lógica de la página -->
+<script src="./scripts/perfil.js"></script>
+
+
 
 </body>
 

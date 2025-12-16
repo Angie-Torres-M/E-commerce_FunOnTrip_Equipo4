@@ -7,7 +7,7 @@ console.log("auth.js cargado");
 // ------------------------------------------------------------------------
 // CONFIG ADMIN
 // ------------------------------------------------------------------------
-
+/*
 const ADMIN_EMAILS = [
   "danaero25@gmail.com",
   "david_carranco1111@outlook.es",
@@ -109,7 +109,7 @@ function renderUserAvatar() {
   });
 }
 
-// 🔥 OBSERVA CUANDO EL HEADER ENTRA AL DOM
+// OBSERVA CUANDO EL HEADER ENTRA AL DOM
 const headerObserver = new MutationObserver(() => {
   const avatars = document.querySelectorAll(".header-avatar");
   if (avatars.length > 0) {
@@ -133,3 +133,4 @@ document.addEventListener("DOMContentLoaded", renderUserAvatar);
 function validarAdminAcceso(email, password) {
   return isAdminEmail(email) && password === ADMIN_MASTER_PASSWORD;
 }
+*/

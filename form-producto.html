@@ -134,25 +134,21 @@
     <div id="site-footer"></div>
 
     <!-- Scripts -->
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="./scripts/main.js"></script>
-    <script src="./scripts/productos.js"></script>
+<!-- SweetAlert2 (app-auth.js lo usa si existe) -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- ====================================================================== -->
-    <!-- INICIO: Protección de página mediante sesión fake en localStorage
-     Estos scripts utilizan información almacenada en localStorage para
-     simular autenticación y restringir el acceso al formulario de creación
-     de productos únicamente a usuarios con rol de administrador, como parte
-     de una demostración temporal mientras se implementa el backend real. -->
-    <!-- ====================================================================== -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="./scripts/auth.js"></script>
-    <script src="./scripts/guard.js"></script>
-    <script src="./scripts/form-producto.js"></script>
+<!-- Auth global (UNO SOLO) -->
+<script src="./scripts/app-auth.js"></script>
 
-    <!-- ====================================================================== -->
-    <!-- FIN: Protección de página mediante sesión fake en localStorage -->
-    <!-- ====================================================================== -->
+<!-- Includes -->
+<script src="./scripts/main.js"></script>
+
+<!-- Scripts propios de la página -->
+<script src="./scripts/productos.js"></script>
+<script src="./scripts/form-producto.js"></script>
+
   </body>
 </html>
