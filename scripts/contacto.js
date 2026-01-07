@@ -95,10 +95,39 @@ document.addEventListener("DOMContentLoaded", function () {
       correoInput.classList.remove("is-invalid");
     }
 
+    function tieneSecuencia(numero) {
+      // Recorremos el número para encontrar secuencias de 3 o más dígitos
+      for (let i = 0; i < numero.length - 2; i++) {
+        const n1 = parseInt(numero[i]);
+        const n2 = parseInt(numero[i + 1]);
+        const n3 = parseInt(numero[i + 2]);
+
+        // Secuencia ascendente
+        if (n2 === n1 + 1 && n3 === n2 + 1) return true;
+
+        // Secuencia descendente
+        if (n2 === n1 - 1 && n3 === n2 - 1) return true;
+      }
+      return false;
+    }
+
+    function esTelefonoValido(telefono) {
+      // Regex para verificar solo dígitos y longitud exacta de 10
+      if (!/^\d{10}$/.test(telefono)) return false;
+
+      // Evitar todos los dígitos iguales
+      if (/^(\d)\1{9}$/.test(telefono)) return false;
+
+      // Evitar secuencias de 3 o más dígitos consecutivos
+      if (tieneSecuencia(telefono)) return false;
+
+      return true;
+    }
+
     const telefonoInput = document.getElementById("telefono");
     const errorTelefono = document.getElementById("error-telefono");
 
-    if (!esTelefonoValido(telefono)) {
+    if (!esTelefonoValido(telefonoInput.value)) {
       errorTelefono.textContent =
         "Ingresa un número válido de 10 dígitos. Evita secuencias o números repetidos.";
       telefonoInput.classList.add("is-invalid");
