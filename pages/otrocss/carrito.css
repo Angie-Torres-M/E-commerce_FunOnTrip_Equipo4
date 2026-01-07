@@ -41,8 +41,8 @@ body {
 body {
   /* Este padding-top se recalcula con JS según la altura real del header insertado */
   padding-top: 0;
-  font-family: "Montserrat Alternates", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
-  background: #fff;
+  /*font-family: "Montserrat Alternates", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Helvetica Neue", "Noto Sans", "Liberation Sans", sans-serif;
+  background: #fff;*/
 }
 
 main {
