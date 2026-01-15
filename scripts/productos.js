@@ -1,230 +1,118 @@
-// scripts/productos.js
+
+// ========================================================================
+// PRODUCTOS — FunOnTrip
+// - Carga productos desde backend
+// - Renderiza catálogo
+// - Aplica filtros
+// ========================================================================
 
 console.log("JS de productos cargado correctamente");
 
-// ===============================
-// 1. CATÁLOGO POR DEFECTO
-// ===============================
-const productosPorDefecto = [
-  {
-    id: 1,
-    nombre: "Escapada Romántica en Cancún",
-    precio: 8999,
-    descripcion: "4 días, 3 noches · Hotel frente al mar · Cena romántica incluida",
-    imagen: "./images/productos/cancun-romantico.webp",
-    ubicacion: "nacional",
-    tipo: "romantico"
-  },
-  {
-    id: 2,
-    nombre: "Aventura en San Miguel de Allende",
-    precio: 5499,
-    descripcion: "3 días, 2 noches · Tour gastronómico · Recorrido histórico",
-    imagen: "./images/productos/sanmiguel.webp",
-    ubicacion: "nacional",
-    tipo: "gastronomico"
-  },
-  {
-    id: 3,
-    nombre: "Relax en Playa del Carmen",
-    precio: 7299,
-    descripcion: "5 días, 4 noches · Spa incluido · Yoga frente al mar",
-    imagen: "./images/productos/relax-playa.webp",
-    ubicacion: "nacional",
-    tipo: "relax"
-  },
-  {
-    id: 4,
-    nombre: "Familia en Riviera Maya",
-    precio: 12999,
-    descripcion: "7 días, 6 noches · Todo incluido · Actividades para niños",
-    imagen: "./images/productos/familiar-riviera.webp",
-    ubicacion: "nacional",
-    tipo: "familiar"
-  },
-  {
-    id: 5,
-    nombre: "París Romántico",
-    precio: 24999,
-    descripcion: "6 días, 5 noches · Torre Eiffel · Crucero por el Sena",
-    imagen: "./images/productos/romantic-paris.webp",
-    ubicacion: "internacional",
-    tipo: "romantico"
-  },
-  {
-    id: 6,
-    nombre: "Aventura en Japón",
-    precio: 35999,
-    descripcion: "10 días, 9 noches · Tokio, Kyoto, Osaka · Guía incluido",
-    imagen: "./images/productos/japan-adventure.webp",
-    ubicacion: "internacional",
-    tipo: "aventura"
-  },
-  {
-    id: 7,
-    nombre: "Roma Gastronómica",
-    precio: 19999,
-    descripcion: "5 días, 4 noches · Clases de cocina · Tour de vinos",
-    imagen: "./images/productos/rome-gastronomy.webp",
-    ubicacion: "internacional",
-    tipo: "gastronomico"
-  },
-  {
-    id: 8,
-    nombre: "Santorini Relax",
-    precio: 28999,
-    descripcion: "7 días, 6 noches · Hotel con vista al mar · Spa de lujo",
-    imagen: "./images/productos/santorini-relax.webp",
-    ubicacion: "internacional",
-    tipo: "relax"
-  },
-  {
-    id: 9,
-    nombre: "Pet Friendly en Valle de Bravo",
-    precio: 4999,
-    descripcion: "3 días, 2 noches · Hotel pet friendly · Actividades con tu mascota",
-    imagen: "./images/productos/petfriendly-valle.webp",
-    ubicacion: "petfriendly",
-    tipo: "aventura"
-  },
-  {
-    id: 10,
-    nombre: "Pet Friendly en Puerto Vallarta",
-    precio: 8499,
-    descripcion: "5 días, 4 noches · Playa dog-friendly · Servicios veterinarios",
-    imagen: "./images/productos/petfriendly-vallarta.webp",
-    ubicacion: "petfriendly",
-    tipo: "relax"
-  },
-  {
-    id: 11,
-    nombre: "Aventura en Barrancas del Cobre",
-    precio: 6999,
-    descripcion: "4 días, 3 noches · Tren Chepe · Senderismo y tirolesa",
-    imagen: "./images/productos/barrancas-adventure.webp",
-    ubicacion: "nacional",
-    tipo: "aventura"
-  },
-  {
-    id: 12,
-    nombre: "Relax en Bacalar",
-    precio: 5799,
-    descripcion: "4 días, 3 noches · Laguna de 7 colores · Masajes incluidos",
-    imagen: "./images/productos/relax-bacalar.webp",
-    ubicacion: "nacional",
-    tipo: "relax"
-  },
-  {
-    id: 13,
-    nombre: "Gastronómico en Oaxaca",
-    precio: 4999,
-    descripcion: "3 días, 2 noches · Tour de mezcal · Clases de cocina tradicional",
-    imagen: "./images/productos/oaxaca-gastronomy.webp",
-    ubicacion: "nacional",
-    tipo: "gastronomico"
-  },
-  {
-    id: 14,
-    nombre: "Aventura en Nueva Zelanda",
-    precio: 42999,
-    descripcion: "12 días, 11 noches · Fiordos y glaciares · Deportes extremos",
-    imagen: "./images/productos/new-zealand-adventure.webp",
-    ubicacion: "internacional",
-    tipo: "aventura"
-  },
-  {
-    id: 15,
-    nombre: "Familiar en Disney Orlando",
-    precio: 28999,
-    descripcion: "7 días, 6 noches · 4 parques incluidos · Hotel resort",
-    imagen: "./images/productos/disney-orlando.webp",
-    ubicacion: "internacional",
-    tipo: "familiar"
-  },
-  {
-    id: 16,
-    nombre: "Romántico en Venecia",
-    precio: 26999,
-    descripcion: "5 días, 4 noches · Paseo en góndola · Cena en el Gran Canal",
-    imagen: "./images/productos/venecia-romantic.webp",
-    ubicacion: "internacional",
-    tipo: "romantico"
-  },
-  {
-    id: 17,
-    nombre: "Gastronómico en Barcelona",
-    precio: 22999,
-    descripcion: "6 días, 5 noches · Tour tapas · Visita a mercado La Boquería",
-    imagen: "./images/productos/barcelona-gastronomy.webp",
-    ubicacion: "internacional",
-    tipo: "gastronomico"
-  },
-  {
-    id: 18,
-    nombre: "Familiar en Costa Rica",
-    precio: 18999,
-    descripcion: "8 días, 7 noches · Volcanes y playas · Actividades para niños",
-    imagen: "./images/productos/costarica-family.webp",
-    ubicacion: "internacional",
-    tipo: "familiar"
-  },
-  {
-    id: 19,
-    nombre: "Pet Friendly en Tequisquiapan",
-    precio: 3999,
-    descripcion: "2 días, 1 noche · Viñedos pet friendly · Parque canino",
-    imagen: "./images/productos/petfriendly-tequis.webp",
-    ubicacion: "petfriendly",
-    tipo: "relax"
-  },
-  {
-    id: 20,
-    nombre: "Pet Friendly en Tulum",
-    precio: 9999,
-    descripcion: "5 días, 4 noches · Playas dog-friendly · Spa pet friendly",
-    imagen: "./images/productos/petfriendly-tulum.webp",
-    ubicacion: "petfriendly",
-    tipo: "aventura"
-  }
-];
+const API_URL = "http://localhost:8080/api"; // cambia en deploy
+
+let productos = [];
 
 // ===============================
-// 2. CARGAR DESDE LOCALSTORAGE
+// 1. FETCH PRODUCTOS
 // ===============================
-const guardados = localStorage.getItem("productos");
+async function cargarProductos() {
+  const contenedorN = document.getElementById("productos-nacionales");
+  const contenedorI = document.getElementById("productos-internacionales");
+  const contenedorP = document.getElementById("productos-petfriendly");
 
-if (guardados) {
+  // Mostrar loading
+  const loading = `
+    <div class="col-12 text-center py-5">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+      <p class="mt-2 text-muted">Cargando productos...</p>
+    </div>
+  `;
+  
+  if (contenedorN) contenedorN.innerHTML = loading;
+  if (contenedorI) contenedorI.innerHTML = "";
+  if (contenedorP) contenedorP.innerHTML = "";
+
   try {
-    window.productos = JSON.parse(guardados);
-    console.log("Productos cargados desde localStorage");
-  } catch (e) {
-    console.error("Error al parsear productos de localStorage, usando por defecto", e);
-    window.productos = productosPorDefecto;
+    const res = await fetch(`${API_URL}/productos`);
+
+    if (!res.ok) {
+      throw new Error(`Error ${res.status}: No se pudieron cargar los productos`);
+    }
+
+    productos = await res.json();
+    
+    console.log("Productos cargados:", productos);
+    renderizarProductos();
+    
+  } catch (error) {
+    console.error("Error al cargar productos:", error);
+    
+    // Mostrar error en UI
+    const errorHTML = `
+      <div class="col-12 text-center py-5">
+        <i class="fas fa-exclamation-triangle fa-3x text-danger mb-3"></i>
+        <p class="text-danger">No fue posible cargar los productos</p>
+        <button class="btn btn-primary btn-sm mt-3" onclick="cargarProductos()">
+          <i class="fas fa-redo me-2"></i>Reintentar
+        </button>
+      </div>
+    `;
+    
+    if (contenedorN) contenedorN.innerHTML = errorHTML;
+    if (contenedorI) contenedorI.innerHTML = "";
+    if (contenedorP) contenedorP.innerHTML = "";
+    
+    Swal.fire({
+      icon: "error",
+      title: "Error de conexión",
+      text: "No fue posible cargar los productos. Verifica tu conexión e intenta de nuevo.",
+      confirmButtonText: "Reintentar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        cargarProductos();
+      }
+    });
   }
-} else {
-  window.productos = productosPorDefecto;
-  localStorage.setItem("productos", JSON.stringify(window.productos));
-  console.log("Productos por defecto guardados en localStorage");
 }
 
 // ===============================
-// 3. CREAR CARD
+// 2. CREAR CARD
 // ===============================
 function crearCardProducto(producto) {
+  const nombre = producto.nombre || "Sin nombre";
+  const descripcion = producto.descripcion || "Sin descripción";
+  const precio = producto.precio || 0;
+  const tipo = producto.tipo || "otro";
+  const ubicacion = producto.ubicacion || "nacional";
+  
+  // Manejo inteligente de imágenes
+  let imagen = producto.imagen || "./assets/images/default-producto.jpg";
+  if (imagen && !imagen.startsWith('http')) {
+    imagen = `./assets/images/productos/${imagen}`;
+  }
+
   return `
-    <article class="col-12 col-sm-6 col-md-4 col-lg-3 producto-card" 
-             data-tipo="${producto.tipo}"
-             data-ubicacion="${producto.ubicacion}"
-             data-precio="${producto.precio}">
+    <article class="col-12 col-sm-6 col-md-4 col-lg-3 producto-card"
+             data-tipo="${tipo}"
+             data-ubicacion="${ubicacion}"
+             data-precio="${precio}">
       
       <div class="producto-img-wrapper">
-        <img src="${producto.imagen}" class="producto-img" alt="${producto.nombre}">
+        <img src="${imagen}" 
+             class="producto-img" 
+             alt="${nombre}"
+             onerror="this.src='./assets/images/default-producto.jpg'"
+             loading="lazy">
       </div>
 
       <div class="producto-content">
-        <h3 class="producto-titulo">${producto.nombre}</h3>
-        <p class="producto-descripcion">${producto.descripcion}</p>
-        <p class="producto-precio">$${producto.precio.toLocaleString('es-MX')} MXN</p>
+        <h3 class="producto-titulo">${nombre}</h3>
+        <p class="producto-descripcion">${descripcion}</p>
+        <p class="producto-precio">
+          $${precio.toLocaleString("es-MX")} MXN
+        </p>
 
         <button class="btn-agregar" data-id="${producto.id}">
           <i class="fas fa-shopping-cart"></i> Agregar al carrito
@@ -235,106 +123,158 @@ function crearCardProducto(producto) {
 }
 
 // ===============================
-// 4. RENDERIZAR PRODUCTOS
+// 3. RENDERIZAR PRODUCTOS
 // ===============================
 function renderizarProductos() {
   const contenedorN = document.getElementById("productos-nacionales");
   const contenedorI = document.getElementById("productos-internacionales");
   const contenedorP = document.getElementById("productos-petfriendly");
 
-  if (!contenedorN || !contenedorI || !contenedorP) return;
+  if (!contenedorN || !contenedorI || !contenedorP) {
+    console.warn("Contenedores de productos no encontrados");
+    return;
+  }
 
   contenedorN.innerHTML = "";
   contenedorI.innerHTML = "";
   contenedorP.innerHTML = "";
 
-  window.productos.forEach(p => {
-    const card = crearCardProducto(p);
+  // Si no hay productos
+  if (productos.length === 0) {
+    const mensajeVacio = `
+      <div class="col-12 text-center py-5">
+        <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
+        <p class="text-muted fs-5">No hay productos disponibles</p>
+        <p class="text-muted small">Vuelve más tarde para ver nuestras ofertas</p>
+      </div>
+    `;
+    contenedorN.innerHTML = mensajeVacio;
+    return;
+  }
 
-    if (p.ubicacion === "nacional") contenedorN.innerHTML += card;
-    if (p.ubicacion === "internacional") contenedorI.innerHTML += card;
-    if (p.ubicacion === "petfriendly") contenedorP.innerHTML += card;
-  });
+  // Renderizar productos por ubicación
+  const nacionales = productos.filter(p => p.ubicacion === "nacional");
+  const internacionales = productos.filter(p => p.ubicacion === "internacional");
+  const petfriendly = productos.filter(p => p.ubicacion === "petfriendly");
+
+  // Nacional
+  if (nacionales.length > 0) {
+    contenedorN.innerHTML = nacionales.map(p => crearCardProducto(p)).join("");
+  } else {
+    contenedorN.innerHTML = `
+      <div class="col-12 text-center py-4">
+        <p class="text-muted">No hay productos nacionales disponibles</p>
+      </div>
+    `;
+  }
+
+  // Internacional
+  if (internacionales.length > 0) {
+    contenedorI.innerHTML = internacionales.map(p => crearCardProducto(p)).join("");
+  } else {
+    contenedorI.innerHTML = `
+      <div class="col-12 text-center py-4">
+        <p class="text-muted">No hay productos internacionales disponibles</p>
+      </div>
+    `;
+  }
+
+  // Pet Friendly
+  if (petfriendly.length > 0) {
+    contenedorP.innerHTML = petfriendly.map(p => crearCardProducto(p)).join("");
+  } else {
+    contenedorP.innerHTML = `
+      <div class="col-12 text-center py-4">
+        <p class="text-muted">No hay productos pet-friendly disponibles</p>
+      </div>
+    `;
+  }
+
+  console.log(`Productos renderizados: ${productos.length} total`);
 }
 
 // ===============================
-// 5. FILTROS + TOGGLE (DOM READY)
+// 4. FILTROS
 // ===============================
-document.addEventListener("DOMContentLoaded", function () {
-  // Render inicial
-  renderizarProductos();
+document.addEventListener("DOMContentLoaded", () => {
+  cargarProductos();
 
-  // ---------- ESTADO DE LOS FILTROS ----------
-  let filtroUbicacion = "todos"; // nacional / internacional / petfriendly / todos
-  let filtroTipo = "todos";      // romantico / aventura / etc / todos
-  let maxPrecio = null;          // null = todos, 10000, 20000, 20001 (>20000)
+  let filtroUbicacion = "todos";
+  let filtroTipo = "todos";
+  let maxPrecio = null;
 
   function aplicarFiltros() {
-    document.querySelectorAll(".producto-card").forEach(card => {
+    const cards = document.querySelectorAll(".producto-card");
+    let visibles = 0;
+
+    cards.forEach((card) => {
       const ubicacion = card.dataset.ubicacion;
       const tipo = card.dataset.tipo;
       const precio = parseInt(card.dataset.precio, 10);
 
       const coincideUbicacion =
-        (filtroUbicacion === "todos" || filtroUbicacion === ubicacion);
+        filtroUbicacion === "todos" || filtroUbicacion === ubicacion;
 
       const coincideTipo =
-        (filtroTipo === "todos" || filtroTipo === tipo);
+        filtroTipo === "todos" || filtroTipo === tipo;
 
       const coincidePrecio =
-        (maxPrecio === null ||
-         (maxPrecio === 20001 && precio > 20000) ||  // botón "> 20,000"
-         (maxPrecio !== 20001 && precio <= maxPrecio));
+        maxPrecio === null ||
+        (maxPrecio === 20001 && precio > 20000) ||
+        (maxPrecio !== 20001 && precio <= maxPrecio);
 
-      if (coincideUbicacion && coincideTipo && coincidePrecio) {
-        card.style.display = "block";
-      } else {
-        card.style.display = "none";
-      }
+      const mostrar = coincideUbicacion && coincideTipo && coincidePrecio;
+      
+      card.style.display = mostrar ? "block" : "none";
+      if (mostrar) visibles++;
     });
+
+    console.log(`Filtros aplicados: ${visibles} productos visibles`);
   }
 
   function activarBoton(boton, selectorGrupo) {
     document
       .querySelectorAll(selectorGrupo)
-      .forEach(b => b.classList.remove("active"));
+      .forEach((b) => b.classList.remove("active"));
     boton.classList.add("active");
   }
 
-  // ---- Filtros de ubicación (Ubicación / Destino) ----
-  const botonesUbicacion = document.querySelectorAll("#filtros-ubicacion .filtro-destino");
-  botonesUbicacion.forEach(btn => {
-    btn.addEventListener("click", () => {
-      filtroUbicacion = btn.dataset.dest; // "todos", "nacional", "internacional", "petfriendly"
-      activarBoton(btn, "#filtros-ubicacion .filtro-destino");
-      aplicarFiltros();
+  // Filtros de ubicación
+  document
+    .querySelectorAll("#filtros-ubicacion .filtro-destino")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filtroUbicacion = btn.dataset.dest;
+        activarBoton(btn, "#filtros-ubicacion .filtro-destino");
+        aplicarFiltros();
+      });
     });
-  });
 
-  // ---- Filtros de experiencia (tipo) ----
-  const botonesExperiencia = document.querySelectorAll("#filtros-experiencia .filtro-experiencia");
-  botonesExperiencia.forEach(btn => {
-    btn.addEventListener("click", () => {
-      filtroTipo = btn.dataset.exp; // "todos", "romantico", "aventura", etc.
-      activarBoton(btn, "#filtros-experiencia .filtro-experiencia");
-      aplicarFiltros();
+  // Filtros de experiencia
+  document
+    .querySelectorAll("#filtros-experiencia .filtro-experiencia")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        filtroTipo = btn.dataset.exp;
+        activarBoton(btn, "#filtros-experiencia .filtro-experiencia");
+        aplicarFiltros();
+      });
     });
-  });
 
-  // ---- Filtros de precio ----
-  const botonesPrecio = document.querySelectorAll("#filtros-precio .filtro-precio");
-  botonesPrecio.forEach(btn => {
-    btn.addEventListener("click", () => {
-      maxPrecio = btn.dataset.maxprice
-        ? parseInt(btn.dataset.maxprice, 10)
-        : null; // vacío = todos
-
-      activarBoton(btn, "#filtros-precio .filtro-precio");
-      aplicarFiltros();
+  // Filtros de precio
+  document
+    .querySelectorAll("#filtros-precio .filtro-precio")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        maxPrecio = btn.dataset.maxprice
+          ? parseInt(btn.dataset.maxprice, 10)
+          : null;
+        activarBoton(btn, "#filtros-precio .filtro-precio");
+        aplicarFiltros();
+      });
     });
-  });
 
-  // ---- Botón para mostrar/ocultar panel flotante de filtros (móvil) ----
+  // Toggle panel de filtros (móvil)
   const toggleBtn = document.getElementById("toggle-filtros");
   const panelFiltros = document.querySelector(".container-filtro-float");
 
@@ -344,3 +284,4 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
