@@ -573,7 +573,6 @@ main {
   }
 
   #checkout-btn::after {
-    content: "Pagar";
     font-weight: 700;
      align-items: center;
         justify-content: center;
